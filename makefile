@@ -10,7 +10,7 @@ SMILEICXX ?= mpicxx
 HDF5_ROOT_DIR ?= $(HDF5_ROOT)
 BOOST_ROOT_DIR ?= $(BOOST_ROOT)
 BUILD_DIR ?= build
-PYTHONEXE ?= python
+PYTHONEXE ?= python3
 TABLES_BUILD_DIR ?= tools/tables/build
 
 #-----------------------------------------------------
