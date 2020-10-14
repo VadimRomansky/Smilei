@@ -17,7 +17,7 @@ n0 = 1
 #Plasma parameter
 beta = 0.25
 #sigma
-beta = 0.04
+sigma = 0.004
 # Debye length
 #Debye_length = 1. / np.sqrt( n0 / Te + Zi * n0 / Ti )
 #ion mass
@@ -25,11 +25,11 @@ mp = 100.0
 # Cell length
 cell_length = [0.1, 0.1]
 # Number of patches
-number_of_patches = [1, 1]
+number_of_patches = [128, 2]
 # Cells per patches (patch shape)
-cells_per_patch = [100., 100.]
+cells_per_patch = [1000., 100.]
 # Grid length
-grid_length = [10.,10.]
+grid_length = [12800.,20.]
 for i in range(2):
     grid_length[i] = number_of_patches[i] * cell_length[i] * cells_per_patch[i]
 # Number of particles per cell
@@ -39,13 +39,13 @@ position_initialization = 'random'
 # Timestep (Courant condition)
 timestep = 0.45/np.sqrt(1./ cell_length[0]**2 + 1./ cell_length[1]**2)
 # Total simulation timeremove
-simulation_time = 100          # duration of the simulation
+simulation_time = 10000          # duration of the simulation
 # Period of output for the diags
-xdiag = 1000
-vdiag = 1000
-diag_step = 1000
+xdiag = 20
+vdiag = 20
+diag_step = 10000
 #diag_step = 70 # after including the interrupt
-diag_every = int(simulation_time / (diag_step*timestep))
+diag_every = 1000
 
 Main(
     geometry = "2Dcartesian",
@@ -57,10 +57,13 @@ Main(
     timestep = timestep,
     simulation_time = simulation_time,
     EM_boundary_conditions = [
-        ['periodic'],
+        ['reflective','silver-muller'],
         ['periodic'],
     ],
     random_seed = smilei_mpi_rank,
+    solve_poisson = True,
+    poisson_max_iteration = 10000,
+    poisson_max_error = 1E-13
 )
 
 # Initial plasma shape
@@ -81,7 +84,7 @@ Species(
 	temperature = [Ti],
 	time_frozen = 0.0,
 	boundary_conditions = [
-		["periodic", "periodic"],
+		["reflective", "remove"],
 		["periodic", "periodic"],
 	],
 )
@@ -101,19 +104,24 @@ Species(
 	temperature = [Te],
 	time_frozen = 0.0,
 	boundary_conditions = [
-		["periodic", "periodic"],
+		["reflective", "remove"],
 		["periodic", "periodic"],
 	],
 )
 
 ExternalField(
+   field = "Bx",
+   profile = np.sqrt(sigma*mp*n0*1.5)
+)
+
+ExternalField(
    field = "By",
-   profile = np.sqrt(0.04*4*mp*n0*1.5*3.14)
+   profile = np.sqrt(sigma*mp*n0*1.5)
 )
 
 ExternalField(
    field = "Ez",
-   profile = np.sqrt(0.04*4*mp*n0*1.5*3.14)*mean_velocity
+   profile = np.sqrt(sigma*mp*n0*1.5)*mean_velocity
 )
 
 CurrentFilter(
@@ -122,20 +130,8 @@ CurrentFilter(
     kernelFIR = [0.25,0.5,0.25]
 )
 
-FieldFilter(
-    model = "Friedman",
-    theta = 0.,
-)
 
-DiagScalar(every=1)
-
-DiagFields(
-    #0,
-    every = diag_every,
-    time_average = 1,
-    fields = ["Ex", "Ey", "Ez", "Bx", "By", "Bz"],
-    #subgrid = None
-)
+DiagScalar(every=100)
 
 #number density via x coordinate distribution
 DiagParticleBinning( #0
@@ -144,7 +140,7 @@ DiagParticleBinning( #0
     time_average = 1,
     species = ["eon1"],
     axes = [
-        ["x", 0., grid_length[0], xdiag]#number_of_patches[0] * cell_length[0]], #128 is the number of x points 
+        ["x", 0., grid_length[0], number_of_patches[0] * cells_per_patch[0]]#number_of_patches[0] * cell_length[0]], #128 is the number of x points 
     ]
 )
 
@@ -155,7 +151,7 @@ DiagParticleBinning( #1
     time_average = 1,
     species = ["pon1"],
     axes = [
-        ["x", 0., grid_length[0], xdiag]#number_of_patches[0] * cell_length[0]], 
+        ["x", 0., grid_length[0], number_of_patches[0] * cells_per_patch[0]], 
     ]
 )
 
@@ -165,7 +161,7 @@ DiagParticleBinning( #2
     time_average = 1,
     species = ["eon1"],
     axes = [
-        ["ekin", 0.01, 10, 1000, "logscale"],
+        ["ekin", 0.01, 1000, 1000, "logscale"],
     ]
 )
 
@@ -200,3 +196,24 @@ DiagParticleBinning( #5
     ]
 )
 
+DiagParticleBinning(#6
+    deposited_quantity = "weight",
+    every = diag_every,
+    time_average = 1,
+    species = ["eon1"],
+    axes = [
+        ["x", 0., grid_length[0], number_of_patches[0] * cells_per_patch[0]/20],
+        ["ekin", 0.1, 1000, 200, "logscale", "edge_inclusive"]
+    ]
+)
+
+DiagParticleBinning(#7
+    deposited_quantity = "weight",
+    every = diag_every,
+    time_average = 1,
+    species = ["pon1"],
+    axes = [
+        ["x", 0., grid_length[0], number_of_patches[0] * cells_per_patch[0]/20],
+        ["ekin", 0.1, 1000, 200, "logscale", "edge_inclusive"]
+    ]
+)
