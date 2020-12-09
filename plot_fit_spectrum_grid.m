@@ -15,15 +15,15 @@ Nx=size(fp1,2);
 
 
 mp = 1.67*10^-24;
-mass_ratio = 64;
+mass_ratio = 100;
 me = mp/mass_ratio;
 gam = 1.5;
 beta = sqrt(1 - 1/(gam*gam));
 c = 2.99792458*10^10;
-Te = 2.6*10^9;
-Temin = 10^9;
+Te = 2.6*10^11;
+Temin = 10^10;
 Temax = 10^12;
-Tp = 2*10^9;
+Tp = 2*10^11;
 Tpmin = 10^8;
 Tpmax = 10^11;
 kB = 1.3806488*10^-16;
@@ -51,8 +51,8 @@ Fp2(1:Np)=0;
 
 samplingFactor = 20;
 
-startx = fix(10000/samplingFactor)+1;
-endx = fix(17000/samplingFactor);
+startx = fix(4000/samplingFactor)+1;
+endx = fix(8000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,
@@ -62,7 +62,7 @@ for i=1:Np,
 end;
 
 norm = 1.0;
-normp = 0;
+normp = 1.0;
 for i = 1:Np,
     normp = normp + Fp2(i)*de(i);
 end;
@@ -71,8 +71,8 @@ for i = 1:Np,
     Fp2(i) = Fp2(i)*norm/normp;
 end;
 
-index1 = 50;
-index2 = 110;
+index1 = 100;
+index2 = 180;
 
 Teleft = Temin;
 Teright = Temax;
