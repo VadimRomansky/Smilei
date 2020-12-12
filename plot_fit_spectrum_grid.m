@@ -51,8 +51,8 @@ Fp2(1:Np)=0;
 
 samplingFactor = 20;
 
-startx = fix(4000/samplingFactor)+1;
-endx = fix(8000/samplingFactor);
+startx = fix(10000/samplingFactor)+1;
+endx = fix(15000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,
@@ -124,3 +124,6 @@ xlabel('Ekin/me c^2');
 ylabel('F(E)');
 legend('Fe', 'maxwell-juttner','Location','southeast');
 grid;
+
+dlmwrite('Ee9.dat',energy,'delimiter','\n');
+dlmwrite('Fe9.dat',Fp2,'delimiter','\n');

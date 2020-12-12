@@ -1,5 +1,5 @@
 clear;
-directory_name = './output1/';
+directory_name = './output/';
 file_name = 'ParticleBinning6';
 file_ending = '.h5';
 
@@ -13,7 +13,7 @@ full_name = strcat(directory_name, file_name, num2str(fileNumber), file_ending);
 
 info = h5info(full_name);
 Ndata = size(info.Datasets,1);
-Ndata = 100;
+Ndata = 130;
 name = info.Datasets(Ndata).Name;
 fp= hdf5read(full_name, name);
 
@@ -37,8 +37,8 @@ Fp(1:Nd,1:Np)=0;
 samplingFactor = 20;
 
 for i = 1:Nd,
-    startx(i) = fix(2000/samplingFactor)+1;
-    endx(i) = fix(7000/samplingFactor);
+    startx(i) = fix(10000/samplingFactor)+1;
+    endx(i) = fix(15000/samplingFactor);
 end;
 
 for k = 1:Nd,
@@ -67,3 +67,23 @@ end;
 
 legend(LegendTitle{1}, LegendTitle{2}, LegendTitle{3}, LegendTitle{4}, LegendTitle{5}, LegendTitle{6}, LegendTitle{7}, LegendTitle{8}, LegendTitle{9}, LegendTitle{10},'Location','northwest');
 grid ;
+dlmwrite('Ee0.dat',energy,'delimiter','\n');
+dlmwrite('Fs0.dat',Fp(1),'delimiter','\n');
+dlmwrite('Ee1.dat',energy,'delimiter','\n');
+dlmwrite('Fs1.dat',Fp(2),'delimiter','\n');
+dlmwrite('Ee2.dat',energy,'delimiter','\n');
+dlmwrite('Fs2.dat',Fp(3),'delimiter','\n');
+dlmwrite('Ee3.dat',energy,'delimiter','\n');
+dlmwrite('Fs3.dat',Fp(4),'delimiter','\n');
+dlmwrite('Ee4.dat',energy,'delimiter','\n');
+dlmwrite('Fs4.dat',Fp(5),'delimiter','\n');
+dlmwrite('Ee5.dat',energy,'delimiter','\n');
+dlmwrite('Fs5.dat',Fp(6),'delimiter','\n');
+dlmwrite('Ee6.dat',energy,'delimiter','\n');
+dlmwrite('Fs6.dat',Fp(7),'delimiter','\n');
+dlmwrite('Ee7.dat',energy,'delimiter','\n');
+dlmwrite('Fs7.dat',Fp(8),'delimiter','\n');
+dlmwrite('Ee8.dat',energy,'delimiter','\n');
+dlmwrite('Fs8.dat',Fp(9),'delimiter','\n');
+dlmwrite('Ee9.dat',energy,'delimiter','\n');
+dlmwrite('Fs9.dat',Fp(10),'delimiter','\n');
