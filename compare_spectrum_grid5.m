@@ -26,9 +26,14 @@ maxE = 1000;
 factor = (maxE/minE)^(1.0/(Np-1));
 
 energy(1:Np) = 0;
+de(1:Np) = 0;
 energy(1) = minE;
 for i = 2:Np,
     energy(i) = energy(i-1)*factor;
+end;
+de(1) = energy(2) - energy(1);
+for i = 2:Np,
+    de(i) = energy(i) - energy(i-1);
 end;
 
 startx(1:Nd) = 0;
@@ -48,7 +53,7 @@ for k = 1:Nd,
     fp = hdf5read(full_name, name);
     for i=1:Np,
         for j=startx:endx,
-            Fp(k,i)=Fp(k, i)+fp(i,j);
+            Fp(k,i)=Fp(k, i)+fp(i,j)/de(i);
         end;
     end;
 end;

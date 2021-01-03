@@ -1,5 +1,5 @@
 clear;
-directory_name = './output1/';
+directory_name = './output/';
 file_name = 'ParticleBinning0';
 file_ending = '.h5';
 
@@ -8,7 +8,7 @@ LegendTitle = {'{\theta} = 0', '{\theta} = 10','{\theta} = 20', '{\theta} = 30',
 
 Nd = 10;
 start = 0;
-fileNumber = start;
+fileNumber = 6;
 full_name = strcat(directory_name, file_name, num2str(fileNumber), file_ending);
 
 info = h5info(full_name);

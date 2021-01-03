@@ -1,5 +1,5 @@
 clear;
-directory_name = './output1/';
+directory_name = './outputs/';
 file_name = 'ParticleBinning0';
 file_ending = '.h5';
 
