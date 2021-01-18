@@ -1,6 +1,6 @@
 clear;
 directory_name = './output/';
-file_name = 'ParticleBinning6';
+file_name = 'ParticleBinning7';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
@@ -25,22 +25,22 @@ startx(1:Ns) = 0;
 endx(1:Ns) = 0; 
 
 startx(1) = 1000/samplingFactor+1;
-endx(1) = startx(1) + 2000/samplingFactor;
+endx(1) = startx(1) + 5000/samplingFactor;
 
-startx(2) = endx(1) + 2000/samplingFactor;
-endx(2) = startx(2) + 2000/samplingFactor;
+startx(2) = 35000/samplingFactor;
+endx(2) = startx(2) + 5000/samplingFactor;
 
-startx(3) = endx(2) + 1000/samplingFactor;
-endx(3) = startx(3) + 2000/samplingFactor;
+startx(3) = 45000/samplingFactor;
+endx(3) = startx(3) + 5000/samplingFactor;
 
-startx(4) = endx(3) + 6000/samplingFactor;
-endx(4) = startx(4) + 2000/samplingFactor;
+startx(4) = 50000/samplingFactor;
+endx(4) = startx(4) + 5000/samplingFactor;
 
-startx(5) = endx(4) + 5000/samplingFactor;
-endx(5) = startx(5) + 2000/samplingFactor;
+startx(5) = 60000/samplingFactor;
+endx(5) = startx(5) + 5000/samplingFactor;
 
 startx(6) = fix(Nx/3);
-endx(6) = startx(6) + 2000/samplingFactor;
+endx(6) = startx(6) + 5000/samplingFactor;
 
 %startx(1)= 5000/samplingFactor;
 %endx(1) = fix(10000/samplingFactor);
@@ -67,7 +67,7 @@ end;
 for k=1:Ns,
     for i=1:Np,
         for j=startx(k):endx(k),
-            Fp(i,k)=Fp(i,k)+fp(i,j)/de(i);
+            Fp(i,k)=Fp(i,k)+fp(i,j)*energy(i)*energy(i)/de(i);
         end;
     end;
 end;
@@ -77,8 +77,8 @@ hold on;
 for k = 1:Ns,
     plot(energy(1:Np),Fp(1:Np,k),'color',Color{k});
 end;
-title('F(E)');
+title('F(E)E^2');
 xlabel('E/me c^2');
-ylabel('F(E)');
+ylabel('F(E)E^2');
 legend('far downstream', 'downstream', 'front', 'upstream', 'far upstream', 'far far upstream','Location','northwest');
 grid;

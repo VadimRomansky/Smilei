@@ -1,6 +1,6 @@
 clear;
 directory_name = './output/';
-file_name = 'ParticleBinning6';
+file_name = 'ParticleBinning7';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
@@ -33,13 +33,13 @@ Fp2(1:Np)=0;
 
 samplingFactor = 20;
 
-startx = fix(5000/samplingFactor)+1;
-endx = fix(20000/samplingFactor);
+startx = fix(20000/samplingFactor)+1;
+endx = fix(30000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,
-        Fp1(i)=Fp1(i)+fp1(i,j)*energy(i)*energy(i)/de(i);
-        Fp2(i)=Fp2(i)+fp2(i,j)*energy(i)*energy(i)/de(i);
+        Fp1(i)=Fp1(i)+fp1(i,j)/de(i);
+        Fp2(i)=Fp2(i)+fp2(i,j)/de(i);
     end;
 end;
 
@@ -63,10 +63,11 @@ end;
 
 
 figure(1);
-plot(energy(1:Np),Fp2(1:Np),'red', energy(startPowerP:endPowerP), Fpa(startPowerP:endPowerP),'blue');
-title('F(E)*E^2');
+%plot(energy(1:Np),Fp2(1:Np),'red', energy(startPowerP:endPowerP), Fpa(startPowerP:endPowerP),'blue');
+plot(energy(1:Np),Fp2(1:Np),'red');
+title('F(E)');
 xlabel('Ekin/me c^2');
-ylabel('F(E)*E^2');
+ylabel('F(E)');
 name = strcat('approximation gamma = ',num2str(gammap-2));
-legend('Fe', name,'Location','southeast');
+%legend('Fe', name,'Location','southeast');
 grid;

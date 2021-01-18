@@ -26,17 +26,17 @@ Nx=size(Bx,2);
 
 set(0,'DefaultFigureColormap',feval('jet'));
 
-figure(1);
-colormap Jet;
-[X, Y] = meshgrid(1:Nx, 1:Ny);
-surf(X, Y, Bx);
-shading interp;
-title ('Bx');
-xlabel ('x');
-ylabel ('y');
-zlabel ('Bx');
-grid ;
-
+% figure(1);
+% colormap Jet;
+% [X, Y] = meshgrid(1:Nx, 1:Ny);
+% surf(X, Y, Bx);
+% shading interp;
+% title ('Bx');
+% xlabel ('x');
+% ylabel ('y');
+% zlabel ('Bx');
+% grid ;
+% 
 figure(2);
 colormap Jet;
 [X, Y] = meshgrid(1:Nx, 1:Ny);
@@ -48,13 +48,13 @@ ylabel ('y');
 zlabel ('By');
 grid ;
 
-figure(3);
-colormap Jet;
-[X, Y] = meshgrid(1:Nx, 1:Ny);
-surf(X, Y, Bz);
-shading interp;
-title ('Bz');
-xlabel ('x');
-ylabel ('y');
-zlabel ('Bz');
-grid ;
+% figure(3);
+% colormap Jet;
+% [X, Y] = meshgrid(1:Nx, 1:Ny);
+% surf(X, Y, Bz);
+% shading interp;
+% title ('Bz');
+% xlabel ('x');
+% ylabel ('y');
+% zlabel ('Bz');
+% grid ;
