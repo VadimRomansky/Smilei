@@ -1,10 +1,10 @@
 clear;
-directory_name = './output1/';
+directory_name = './output_theta0-90/';
 file_name = 'ParticleBinning6';
 file_ending = '.h5';
 
 Color = {'red','blue','green','black','cyan','magenta','yellow',[0.75,0,0.67],[0.5,0.5,0.0],[.98,.5,.44]};
-LegendTitle = {'{\theta} = 25', '{\theta} = 26','{\theta} = 27', '{\theta} = 28', '{\theta} = 29', '{\theta} = 30','{\theta} = 31', '{\theta} = 32', '{\theta} = 33', '{\theta} = 34'};
+LegendTitle = {'{\theta} = 0', '{\theta} = 10','{\theta} = 20', '{\theta} = 30', '{\theta} = 40', '{\theta} = 50','{\theta} = 60', '{\theta} = 70', '{\theta} = 80', '{\theta} = 90'};
 
 Nd = 10;
 start = 0;
@@ -42,8 +42,8 @@ Fp(1:Nd,1:Np)=0;
 samplingFactor = 20;
 
 for i = 1:Nd,
-    startx(i) = fix(22000/samplingFactor)+1;
-    endx(i) = fix(27000/samplingFactor);
+    startx(i) = fix(20000/samplingFactor)+1;
+    endx(i) = fix(30000/samplingFactor);
 end;
 
 for k = 1:Nd,
