@@ -1,6 +1,6 @@
 clear;
 directory_name = './output_theta0-90/';
-file_name = 'ParticleBinning63';
+file_name = 'ParticleBinning63û';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
@@ -67,7 +67,7 @@ end;
 for k=1:Ns,
     for i=1:Np,
         for j=startx(k):endx(k),
-            Fp(i,k)=Fp(i,k)+fp(i,j)*energy(i)*energy(i)/de(i);
+            Fp(i,k)=Fp(i,k)+fp(i,j)/de(i);
         end;
     end;
 end;
@@ -77,8 +77,8 @@ hold on;
 for k = 1:Ns,
     plot(energy(1:Np),Fp(1:Np,k),'color',Color{k});
 end;
-title('F(E)E^2');
+title('F(E)');
 xlabel('E/me c^2');
-ylabel('F(E)E^2');
+ylabel('F(E)');
 legend('far downstream', 'downstream', 'front', 'upstream', 'far upstream', 'far far upstream','Location','northwest');
 grid;

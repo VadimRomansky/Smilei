@@ -25,16 +25,41 @@ Bz= hdf5read(full_name, name2z);
 
 Ny=size(Bx,1);
 Nx=size(Bx,2);
-
 Ns = 5;
 
-Bxa(1:Nx,1:Ns) = 0;
-Bya(1:Nx,1:Ns) = 0;
-Bza(1:Nx,1:Ns) = 0;
-Bnorma(1:Nx,1:Ns) = 0;
+Bxa(1:Nx,1:Ndata) = 0;
+Bya(1:Nx,1:Ndata) = 0;
+Bza(1:Nx,1:Ndata) = 0;
+Bnorma(1:Nx,1:Ndata) = 0;
 
-for k=1:Ns,
-    Nt = fix(Ndata*k/Ns);
+sampling = 4;
+beta = 0.75;
+diag_every = 20000;
+length = 200;
+xstart(1:Ns,1:Ndata) = 0;
+xend(1:Ns,1:Ndata) = 0;
+xstart(1,1) = 45000;
+xend(1,1) = xstart(1,1)+length;
+xstart(2,1) = 46000;
+xend(2,1) = xstart(2,1)+length;
+xstart(3,1) = 47000;
+xend(3,1) = xstart(3,1)+length;
+xstart(4,1) = 48000;
+xend(4,1) = xstart(4,1)+length;
+xstart(5,1) = 49000;
+xend(5,1) = xstart(5,1)+length;
+for j = 1:Ns,
+    for i = 2:Ndata,
+        xstart(j,i) = xstart(j,1) - fix((i-1)*beta*0.45*diag_every/sampling);
+        xend(j,i) = xstart(j,i) + 100;
+    end;
+end;
+
+Bnormaa(1:Ns,1:Ndata) = 0;
+Bzaa(1:Ns, 1:Ndata) = 0;
+
+for k=1:Ndata,
+    Nt = k;
     name2x = strcat(info.Groups.Groups(Nt).Name, '/Bx');
     name2y = strcat(info.Groups.Groups(Nt).Name, '/By');
     name2z = strcat(info.Groups.Groups(Nt).Name, '/Bz');
@@ -52,46 +77,36 @@ for k=1:Ns,
     end;
 end;
 
+for l = 1:Ns,
+    for k = 1:Ndata,
+        for i = xstart(l,k):xend(l,k),
+            for j = 1:Ny,
+                Bnormaa(l,k) = Bnormaa(l,k) + By(j,i)*By(j,i) + Bz(j,i)*Bz(j,i);
+                Bzaa(l,k) = Bzaa(l,k) + Bz(j,i)/(length*Ny);
+            end;
+        end;
+        Bnormaa(l,k) = sqrt(Bnormaa(l,k)/(length*Ny));
+    end;
+end;
+
 set(0,'DefaultFigureColormap',feval('jet'));
 
 figure(1);
 hold on;
-for k = 1:Ns,
-    plot((1:Nx)/10, Bxa(1:Nx,k),'color',Color{k});
+for k =1:Ns,
+    plot(1:Ndata, Bnormaa(k,1:Ndata),'Color',Color{k});
 end;
-title ('Bx');
-xlabel ('x {\omega}_{pi} /c');
-ylabel ('Bx');
+title ('B_{\perp}');
+xlabel ('t');
+ylabel ('B_{\perp}');
 grid ;
 
 figure(2);
 hold on;
-for k = 1:Ns,
-    plot((1:Nx)/10, Bya(1:Nx,k),'color',Color{k});
+for k =1:Ns,
+    plot(1:Ndata, Bzaa(k,1:Ndata),'Color',Color{k});
 end;
-title ('By');
-xlabel ('x {\omega}_{pi} /c');
-ylabel ('By');
-grid ;
-
-figure(3);
-hold on;
-for k = 1:Ns,
-    plot((1:Nx)/10, Bza(1:Nx,k),'color',Color{k});
-end;
-title ('Bz');
-xlabel ('x {\omega}_{pi} /c');
-ylabel ('Bz');
-grid ;
-
-figure(4);
-hold on;
-for k = 1:Ns,
-    plot((1:Nx)/10, smooth(Bnorma(1:Nx,k),100),'color',Color{k});
-end;
-legend('700 {\omega}_{pi}^{-1}', '1400 {\omega}_{pi}^{-1}', '2100 {\omega}_{pi}^{-1}', '2800 {\omega}_{pi}^{-1}', '3500 {\omega}_{pi}^{-1}','Location','northwest');
-%legend('600 wpi^{-1}', '1200 wpi^{-1}', '1800 wpi^{-1}', '2400 wpi^{-1}', '3000 wpi^{-1}', '3600 wpi^{-1}','Location','northwest');
-title ('B_{\perp}');
-xlabel ('x {\omega}_{pi} /c');
-ylabel ('B_{\perp}');
+title ('B_z');
+xlabel ('t');
+ylabel ('B_z');
 grid ;

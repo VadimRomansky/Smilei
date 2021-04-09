@@ -28,14 +28,14 @@ endx(1) = 5000/samplingFactor;
 startx(2) = 5000/samplingFactor+1;
 endx(2) = 10000/samplingFactor;
 
-startx(3) = 15000/samplingFactor+1;
-endx(3) = 20000/samplingFactor;
+startx(3) = 10000/samplingFactor+1;
+endx(3) = 15000/samplingFactor;
 
-startx(4) = 25000/samplingFactor+1;
-endx(4) = 30000/samplingFactor;
+startx(4) = 20000/samplingFactor+1;
+endx(4) = 25000/samplingFactor;
 
-startx(5) = 35000/samplingFactor+1;
-endx(5) = 40000/samplingFactor;
+startx(5) = 30000/samplingFactor+1;
+endx(5) = 35000/samplingFactor;
 
 
 %startx(1)= 5000/samplingFactor;
@@ -66,7 +66,7 @@ for k=1:Ns,
     fp= hdf5read(full_name, name);
     for i=1:Np,
         for j=startx(k):endx(k),
-            Fp(i,k)=Fp(i,k)+fp(i,j)*energy(i)/de(i);
+            Fp(i,k)=Fp(i,k)+fp(i,j)*energy(i)*energy(i)/de(i);
         end;
     end;
 end;
@@ -76,10 +76,10 @@ hold on;
 for k = 1:Ns,
     plot(energy(1:Np),Fp(1:Np,k),'color',Color{k});
 end;
-title('F(E) E');
-xlabel('E/me c^2');
-ylabel('F(E)E');
+title('F(E)');
+xlabel('E/m_e c^2');
+ylabel('F(E)E^2');
 %legend('far downstream', 'downstream', 'front', 'upstream', 'far upstream', 'far far upstream','Location','northwest');
 %legend('1', '2', '3', '4', '5', '6','Location','northwest');
-legend('600 wpi^{-1}', '1200 wpi^{-1}', '1800 wpi^{-1}', '2400 wpi^{-1}', '3000 wpi^{-1}', '3600 wpi^{-1}','Location','northwest');
+legend('700 {\omega}_{pi}^{-1}', '1400 {\omega}_{pi}^{-1}', '2100 {\omega}_{pi}^{-1}', '2800 {\omega}_{pi}^{-1}', '3500 {\omega}_{pi}^{-1}','Location','northwest');
 grid;

@@ -26,15 +26,28 @@ Bz= hdf5read(full_name, name2z);
 Ny=size(Bx,1);
 Nx=size(Bx,2);
 
-Ns = 5;
 
-Bxa(1:Nx,1:Ns) = 0;
-Bya(1:Nx,1:Ns) = 0;
-Bza(1:Nx,1:Ns) = 0;
-Bnorma(1:Nx,1:Ns) = 0;
+Bxa(1:Nx,1:Ndata) = 0;
+Bya(1:Nx,1:Ndata) = 0;
+Bza(1:Nx,1:Ndata) = 0;
+Bnorma(1:Nx,1:Ndata) = 0;
 
-for k=1:Ns,
-    Nt = fix(Ndata*k/Ns);
+sampling = 4;
+beta = 0.75;
+diag_every = 20000;
+xstart(1:Ndata) = 0;
+xend(1:Ndata) = 0;
+xstart(1) = 50000;
+xend(1) = xstart(1)+100;
+for i = 2:Ndata,
+    xstart(i) = xstart(1) - fix((i-1)*beta*0.45*diag_every/sampling);
+    xend(i) = xstart(i) + 100;
+end;
+
+Bnormaa(1:Ndata) = 0;
+
+for k=1:Ndata,
+    Nt = k;
     name2x = strcat(info.Groups.Groups(Nt).Name, '/Bx');
     name2y = strcat(info.Groups.Groups(Nt).Name, '/By');
     name2z = strcat(info.Groups.Groups(Nt).Name, '/Bz');
@@ -52,46 +65,21 @@ for k=1:Ns,
     end;
 end;
 
+for k = 1:Ndata,
+    for i = xstart(k):xend(k),
+        for j = 1:Ny,
+            Bnormaa(k) = Bnormaa(k) + By(j,i)*By(j,i) + Bz(j,i)*Bz(j,i);
+        end;
+    end;
+    Bnormaa(k) = sqrt(Bnormaa(k)/(100*Ny));
+end;
+
 set(0,'DefaultFigureColormap',feval('jet'));
 
 figure(1);
 hold on;
-for k = 1:Ns,
-    plot((1:Nx)/10, Bxa(1:Nx,k),'color',Color{k});
-end;
-title ('Bx');
-xlabel ('x {\omega}_{pi} /c');
-ylabel ('Bx');
-grid ;
-
-figure(2);
-hold on;
-for k = 1:Ns,
-    plot((1:Nx)/10, Bya(1:Nx,k),'color',Color{k});
-end;
-title ('By');
-xlabel ('x {\omega}_{pi} /c');
-ylabel ('By');
-grid ;
-
-figure(3);
-hold on;
-for k = 1:Ns,
-    plot((1:Nx)/10, Bza(1:Nx,k),'color',Color{k});
-end;
-title ('Bz');
-xlabel ('x {\omega}_{pi} /c');
-ylabel ('Bz');
-grid ;
-
-figure(4);
-hold on;
-for k = 1:Ns,
-    plot((1:Nx)/10, smooth(Bnorma(1:Nx,k),100),'color',Color{k});
-end;
-legend('700 {\omega}_{pi}^{-1}', '1400 {\omega}_{pi}^{-1}', '2100 {\omega}_{pi}^{-1}', '2800 {\omega}_{pi}^{-1}', '3500 {\omega}_{pi}^{-1}','Location','northwest');
-%legend('600 wpi^{-1}', '1200 wpi^{-1}', '1800 wpi^{-1}', '2400 wpi^{-1}', '3000 wpi^{-1}', '3600 wpi^{-1}','Location','northwest');
+plot(1:Ndata, Bnormaa(1:Ndata));
 title ('B_{\perp}');
-xlabel ('x {\omega}_{pi} /c');
+xlabel ('t');
 ylabel ('B_{\perp}');
 grid ;
