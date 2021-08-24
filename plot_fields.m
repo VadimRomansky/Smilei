@@ -1,6 +1,6 @@
 clear;
-directory_name = './output/';
-file_name = 'Fields0';
+directory_name = './output_theta0-90_gamma1.5sigma0.004/';
+file_name = 'Fields03';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
@@ -37,15 +37,22 @@ set(0,'DefaultFigureColormap',feval('jet'));
 % zlabel ('Bx');
 % grid ;
 % 
+sampling = 20;
+tempB(1:Ny, 1:fix(Nx/2)) = 0;
+for i = 1:fix(Nx/2),
+    for j = 1:Ny,
+        tempB(j,i) = sqrt(Bx(j,i)*Bx(j,i) + By(j,i)*By(j,i) + Bz(j,i)*Bz(j,i));
+    end;
+end;
 figure(2);
 colormap Jet;
-[X, Y] = meshgrid(1:Nx, 1:Ny);
-surf(X, Y, By);
+[X, Y] = meshgrid((1:fix(Nx/2))*0.2*sampling, (1:Ny)*2*sampling);
+surf(X, Y, tempB);
 shading interp;
-title ('By');
+title ('B');
 xlabel ('x');
 ylabel ('y');
-zlabel ('By');
+zlabel ('B/B_0');
 grid ;
 
 % figure(3);

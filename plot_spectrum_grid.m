@@ -1,6 +1,6 @@
 clear;
 directory_name = './output/';
-file_name = 'ParticleBinning7';
+file_name = 'ParticleBinning6';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
@@ -33,8 +33,8 @@ Fp2(1:Np)=0;
 
 samplingFactor = 20;
 
-startx = fix(20000/samplingFactor)+1;
-endx = fix(30000/samplingFactor);
+startx = fix(60000/samplingFactor)+1;
+endx = fix(70000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,

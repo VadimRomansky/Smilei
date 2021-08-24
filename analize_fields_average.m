@@ -34,7 +34,7 @@ Bnorma(1:Nx,1:Ndata) = 0;
 
 sampling = 4;
 beta = 0.75;
-diag_every = 20000;
+diag_every = 5000;
 length = 200;
 xstart(1:Ns,1:Ndata) = 0;
 xend(1:Ns,1:Ndata) = 0;

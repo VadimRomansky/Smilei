@@ -1,5 +1,5 @@
 clear;
-directory_name = './output_theta25-34/';
+directory_name = './output_theta/';
 file_name = 'ParticleBinning0';
 file_ending = '.h5';
 

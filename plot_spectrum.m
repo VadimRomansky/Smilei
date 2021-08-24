@@ -1,6 +1,6 @@
 clear;
-directory_name = './output1/';
-file_name = 'ParticleBinning63';
+directory_name = './output_theta0-90/';
+file_name = 'ParticleBinning73';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
