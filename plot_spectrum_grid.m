@@ -1,10 +1,11 @@
 clear;
-directory_name = './output/';
-file_name = 'ParticleBinning6';
+directory_name = './output_gamma1.5_sigma0.004_theta20-40/';
+file_name = 'ParticleBinning62';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
 Ndata = size(info.Datasets,1);
+Ndata = 15;
 name1 = info.Datasets(1).Name;
 name2 = info.Datasets(fix(Ndata)).Name;
 fp1= hdf5read(full_name, name1);
@@ -33,8 +34,8 @@ Fp2(1:Np)=0;
 
 samplingFactor = 20;
 
-startx = fix(60000/samplingFactor)+1;
-endx = fix(70000/samplingFactor);
+startx = fix(80000/samplingFactor)+1;
+endx = fix(90000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,
@@ -64,7 +65,7 @@ end;
 
 figure(1);
 %plot(energy(1:Np),Fp2(1:Np),'red', energy(startPowerP:endPowerP), Fpa(startPowerP:endPowerP),'blue');
-plot(energy(1:Np),Fp2(1:Np),'red');
+loglog(energy(1:Np),Fp2(1:Np),'red');
 title('F(E)');
 xlabel('Ekin/me c^2');
 ylabel('F(E)');

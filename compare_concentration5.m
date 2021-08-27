@@ -1,9 +1,9 @@
 clear;
-directory_name = './outputs/';
+directory_name = './output_gamma1.5_sigma0.004_theta20-40/';
 file_name = 'ParticleBinning0';
 file_ending = '.h5';
 
-Number = {0, 2, 3, 4, 8};
+Number = {0, 1, 2, 3, 4};
 Color = {'red','blue','green','black','cyan','magenta','yellow',[0.75,0,0.67],[0.5,0.5,0.0],[.98,.5,.44]};
 LegendTitle = {'{\theta} = 0', '{\theta} = 10','{\theta} = 20', '{\theta} = 30', '{\theta} = 40', '{\theta} = 50','{\theta} = 60', '{\theta} = 70', '{\theta} = 80', '{\theta} = 90'};
 
@@ -14,7 +14,7 @@ full_name = strcat(directory_name, file_name, num2str(Number{1}), file_ending);
 
 info = h5info(full_name);
 Ndata = size(info.Datasets,1);
-Ndata = 100;
+Ndata = 20;
 name = info.Datasets(Ndata).Name;
 fp= hdf5read(full_name, name);
 
