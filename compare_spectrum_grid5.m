@@ -1,11 +1,11 @@
 clear;
-directory_name = './output_gamma1.5_sigma0.004_theta20-40/';
+directory_name = './output_theta0-90gamma0.3_sigma0.004/';
 file_name = 'ParticleBinning6';
 file_ending = '.h5';
 
-Number = {0, 1, 2, 3, 4};
+Number = {1, 2, 3, 4, 5};
 Color = {'red','blue','green','black','cyan','magenta','yellow',[0.75,0,0.67],[0.5,0.5,0.0],[.98,.5,.44]};
-LegendTitle = {'{\theta} = 20', '{\theta} = 25','{\theta} = 30', '{\theta} = 35', '{\theta} = 40', '{\theta} = 50','{\theta} = 60', '{\theta} = 70', '{\theta} = 80', '{\theta} = 90'};
+LegendTitle = {'{\theta} = 0', '{\theta} = 10','{\theta} = 20', '{\theta} = 30', '{\theta} = 40', '{\theta} = 50','{\theta} = 60', '{\theta} = 70', '{\theta} = 80', '{\theta} = 90'};
 
 Nd = 5;
 start = 0;
@@ -53,7 +53,7 @@ for k = 1:Nd,
     fp = hdf5read(full_name, name);
     for i=1:Np,
         for j=startx:endx,
-            Fp(k,i)=Fp(k, i)+fp(i,j)*energy(i)*energy(i)/de(i);
+            Fp(k,i)=Fp(k, i)+fp(i,j)*(energy(i)+1)*(energy(i)+1)/de(i);
         end;
     end;
 end;
