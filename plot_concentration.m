@@ -14,6 +14,9 @@ fp2 = hdf5read(full_name, name2);
 fp3 = hdf5read(full_name, name3);
 N=size(fp1,1);
 
+dx = 0.2;
+factor = 1.0/(dx*dx);
+
 figure(1);
-plot(1:N,fp1(1:N),1:N,fp3(1:N),1:N,fp2(1:N));
+plot(1:N,fp1(1:N)*factor,1:N,fp3(1:N)*factor,1:N,fp2(1:N)*factor);
 grid;
