@@ -89,8 +89,8 @@ for i=1:Np,
         fluxTotalEnergy = fluxTotalEnergy + fe1(i,j)*(me*energyElectron(i) + me);
     end;
 end;
-fluxTotalEnergy = fluxTotalEnergy;
-fluxKineticEnergy = fluxKineticEnergy;
+%fluxTotalEnergy = fluxTotalEnergy;
+%fluxKineticEnergy = fluxKineticEnergy;
 
 info = h5info(field_name);
 Ndata = size(info.Groups.Groups,1);
@@ -150,13 +150,36 @@ electronTotalEnergy = 0;
 electronKineticEnergy = 0;
 protonTotalEnergy = 0;
 protonKineticEnergy = 0;
+electronAcceleratedTotalEnergy= 0;
+protonAcceleratedTotalEnergy= 0;
+electronAcceleratedKineticEnergy= 0;
+protonAcceleratedKineticEnergy= 0;
+
+electronAcceleratedLevel = 2*gamma;
+protonAcceleratedLevel = 2*gamma;
 
 for i=1:Np,
     for j=startx:endx,
-        protonKineticEnergy = protonKineticEnergy + fp2(i,j)*me*energyProton(i)/(dx*dx);
-        electronKineticEnergy = electronKineticEnergy + fe2(i,j)*me*energyElectron(i)/(dx*dx);
-        protonTotalEnergy = protonTotalEnergy + fp2(i,j)*(me*energyProton(i) + mp)/(dx*dx);
-        electronTotalEnergy = electronTotalEnergy + fe2(i,j)*(me*energyElectron(i) + me)/(dx*dx);
+        protonKineticEnergy = protonKineticEnergy + fp2(i,j)*me*energyProton(i);
+        electronKineticEnergy = electronKineticEnergy + fe2(i,j)*me*energyElectron(i);
+        protonTotalEnergy = protonTotalEnergy + fp2(i,j)*(me*energyProton(i) + mp);
+        electronTotalEnergy = electronTotalEnergy + fe2(i,j)*(me*energyElectron(i) + me);
+        electronGamma = 1.0 + energyElectron(i);
+        protonGamma = 1.0 + energyProton(i)*me/mp;
+        if(electronGamma > electronAcceleratedLevel)
+            electronAcceleratedKineticEnergy = electronAcceleratedKineticEnergy + fe2(i,j)*me*energyElectron(i);
+            electronAcceleratedTotalEnergy = electronAcceleratedTotalEnergy + fe2(i,j)*(me*energyElectron(i) + me);
+        end;
+        if(protonGamma > protonAcceleratedLevel)
+            protonAcceleratedKineticEnergy = protonAcceleratedKineticEnergy + fp2(i,j)*me*energyElectron(i);
+            protonAcceleratedTotalEnergy = protonAcceleratedTotalEnergy + fp2(i,j)*(me*energyElectron(i) + mp);
+        end;
     end;
 end;
 
+epsilonB = magneticEnergy/fluxTotalEnergy;
+epsilonE = electricEnergy/fluxTotalEnergy;
+epsilon_e = electronTotalEnergy/fluxTotalEnergy;
+epsilon_e_accelerated = electronAcceleratedTotalEnergy/fluxTotalEnergy;
+epsilon_p = protonTotalEnergy/fluxTotalEnergy;
+epsilon_p_accelerated = protonAcceleratedTotalEnergy/fluxTotalEnergy;
