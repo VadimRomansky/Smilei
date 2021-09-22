@@ -2,13 +2,15 @@ clear;
 general = importdata('./output/scalars.txt');
 N=size(general,1);
 
-v = 0.9999;
+v = 0.9;
+theta = 35*pi/180;
 gamma = 1.0/sqrt(1.0 - v*v);
 sigma = 0.004;
 E1 = general(1,9)/general(1,6);
-Eb = 2*general(1,9)/(1 + v*v);
+
+Eb = general(1,9)/(1 + v*v*sin(theta)*sin(theta));
 Etot = general(1,6)*gamma/(gamma - 1);
-measuredSigma = Eb/Etot;
+measuredSigma = 2*Eb/Etot;
 
 figure(1);
 plot(general(1:N,1), general(1:N,4));
