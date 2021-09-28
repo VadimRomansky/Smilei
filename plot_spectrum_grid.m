@@ -14,8 +14,12 @@ fp2 = hdf5read(full_name, name2);
 Np=size(fp1,1);
 Nx=size(fp1,2);
 
-minE = 0.1;
-maxE = 1000;
+minEe = 0.001;
+maxEe = 1000;
+minEp = 0.1;
+maxEp = 5000;
+minE = minEe;
+maxE = maxEe;
 factor = (maxE/minE)^(1.0/(Np-1));
 
 energy(1:Np) = 0;

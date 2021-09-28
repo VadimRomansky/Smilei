@@ -1,6 +1,6 @@
 clear;
-directory_name = './output_theta0-90_gamma1.5sigma0.004/';
-file_name = 'Fields03';
+directory_name = './output/';
+file_name = 'Fields0';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);

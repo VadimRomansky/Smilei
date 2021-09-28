@@ -10,7 +10,7 @@ full_proton_name = strcat(directory_name, file_proton_name, file_number, file_ex
 field_name = strcat(directory_name, field_file_name, file_number, file_extension);
 info = h5info(full_electron_name);
 Ndata = size(info.Datasets,1);
-Ndata = 15;
+Ndata = 7;
 name1 = info.Datasets(1).Name;
 name2 = info.Datasets(fix(Ndata)).Name;
 fp1= hdf5read(full_proton_name, name1);
@@ -22,15 +22,15 @@ me = 1.0;
 massFactor = 100;
 mp = me*massFactor;
 
-v = 0.9;
+v = 0.1;
 gamma = 1.0/sqrt(1.0 - v*v);
 
-dx = 0.1;
+dx = 0.2;
 
 samplingFactor = 20;
 fieldsSamplingFactor = 4;
-start = 1;
-fin = 200;
+start = 5000;
+fin = 10000;
 startFieldx = fix(start/fieldsSamplingFactor)+1;
 endFieldx = fix(fin/fieldsSamplingFactor);
 startx = fix(start/samplingFactor)+1;
@@ -38,9 +38,9 @@ endx = fix(fin/samplingFactor);
 
 Np=size(fp1,1);
 Nx=size(fp1,2);
-Ny1 = 400;
+Ny1 = 200;
 
-minElectronE = 0.1;
+minElectronE = 0.001;
 maxElectronE = 1000;
 factorElectron = (maxElectronE/minElectronE)^(1.0/(Np-1));
 
@@ -89,11 +89,9 @@ for i=1:Np,
         fluxTotalEnergy = fluxTotalEnergy + fe1(i,j)*(me*energyElectron(i) + me);
     end;
 end;
-%fluxTotalEnergy = fluxTotalEnergy;
-%fluxKineticEnergy = fluxKineticEnergy;
 
 info = h5info(field_name);
-Ndata = size(info.Groups.Groups,1);
+%Ndata = size(info.Groups.Groups,1);
 name1x = strcat(info.Groups.Groups(1).Name, '/Bx');
 name1y = strcat(info.Groups.Groups(1).Name, '/By');
 name1z = strcat(info.Groups.Groups(1).Name, '/Bz');
@@ -183,3 +181,10 @@ epsilon_e = electronTotalEnergy/fluxTotalEnergy;
 epsilon_e_accelerated = electronAcceleratedTotalEnergy/fluxTotalEnergy;
 epsilon_p = protonTotalEnergy/fluxTotalEnergy;
 epsilon_p_accelerated = protonAcceleratedTotalEnergy/fluxTotalEnergy;
+
+epsilonBnonrel = magneticEnergy/fluxKineticEnergy;
+epsilonEnonrel = electricEnergy/fluxKineticEnergy;
+epsilon_enonrel = electronTotalEnergy/fluxKineticEnergy;
+epsilon_e_acceleratednonrel = electronAcceleratedTotalEnergy/fluxKineticEnergy;
+epsilon_pnonrel = protonTotalEnergy/fluxKineticEnergy;
+epsilon_p_acceleratednonrel = protonAcceleratedTotalEnergy/fluxKineticEnergy;
