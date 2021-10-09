@@ -265,3 +265,40 @@ fraction_p_accelerated = (protonTotalEnergy - maxwellProtonTotalEnergy)/total_en
 
 fractionB = magneticEnergy/total_energy;
 fractionE = electricEnergy/total_energy;
+
+
+startPowerP = 95;
+endPowerP = 115;
+
+startPowerE = 140;
+endPowerE = 150;
+
+startPower = startPowerE;
+endPower = endPowerE;
+
+Fea(1:Np) = 0;
+
+Fea(startPower) = Felectron(startPower);
+Fea(endPower) = Felectron(endPower);
+
+gammap = log(Fea(startPower)/Fea(endPower))/log((energyElectron(startPower)+1)/(energyElectron(endPower)+1));
+
+
+ap = exp(log(Fea(startPower)) - gammap*log((energyElectron(startPower)+1)));
+
+for i = 1:startPower-1,
+    Fea(i) = Felectron(i);
+end;
+for i = startPower:Np,
+    Fea(i) = ap*((energyElectron(i)+1)^gammap);
+end;
+
+extrapolatedElectronTotalEnergy = 0;
+extrapolatedElectronKineticEnergy = 0;
+for i = 1:Np,
+    extrapolatedElectronKineticEnergy = extrapolatedElectronKineticEnergy + Fea(i)*(me*energyElectron(i))*deElectron(i);
+    extrapolatedElectronTotalEnergy = extrapolatedElectronTotalEnergy + Fea(i)*(me*energyElectron(i) + me)*deElectron(i);
+end;
+
+epsilon_e_accelerated_extrapolated = (extrapolatedElectronTotalEnergy - maxwellElectronTotalEnergy)/fluxTotalEnergy;
+epsilon_e_accelerated_extrapolatednonrel = (extrapolatedElectronTotalEnergy - maxwellElectronTotalEnergy)/fluxKineticEnergy;

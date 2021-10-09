@@ -1,6 +1,6 @@
 clear;
 directory_name = './output/';
-file_name = 'ParticleBinning6';
+file_name = 'ParticleBinning7';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
@@ -17,15 +17,15 @@ minEe = 0.001;
 maxEe = 1000;
 minEp = 0.1;
 maxEp = 5000;
-minE = minEe;
-maxE = maxEe;
+minE = minEp;
+maxE = maxEp;
 factor = (maxE/minE)^(1.0/(Np-1));
 
 mp = 1.67*10^-24;
 mass_ratio = 100;
 me = mp/mass_ratio;
 
-m = me;
+m = mp;
 
 gam = 1.048;
 beta = sqrt(1 - 1/(gam*gam));
@@ -37,9 +37,9 @@ Tp = 2*10^11;
 Tpmin = 10^9;
 Tpmax = 10^13;
 
-T = Te;
-Tmax = Temax;
-Tmin = Temin;
+T = Tp;
+Tmax = Tpmax;
+Tmin = Tpmin;
 kB = 1.3806488*10^-16;
 theta = kB*T/(m*c*c);
 
@@ -131,32 +131,32 @@ endPowerP = 115;
 startPowerE = 140;
 endPowerE = 150;
 
-startPower = startPowerE;
-endPower = endPowerE;
+startPower = startPowerP;
+endPower = endPowerP;
 
 Fpa(1:Np) = 0;
 
 Fpa(startPower) = Fp2(startPower);
 Fpa(endPower) = Fp2(endPower);
 
-gammap = log(Fpa(startPower)/Fpa(endPower))/log((energy(startPower)+1)/(energy(endPower)+1));
+gammap = log(Fpa(startPower)/Fpa(endPower))/log((me*energy(startPower)+m)/(me*energy(endPower)+m));
 
 
-ap = exp(log(Fpa(startPower)) - gammap*log((energy(startPower)+1)));
+ap = exp(log(Fpa(startPower)) - gammap*log((me*energy(startPower)+m)));
 
 for i = startPower-20:endPower+20,
-    Fpa(i) = ap*((energy(i)+1)^gammap);
+    Fpa(i) = ap*((me*energy(i)+m)^gammap);
 end;
 
 
 
 figure(1);
 hold on;
-plot(energy(1:Np),Fp2(1:Np),'red','LineWidth',2);
-plot(energy(1:Np), Fjuttner(1:Np),'blue','LineWidth',2);
-plot(energy(1:Np),Fpa(1:Np),'green','LineWidth',2);
+plot(energy(1:Np)+m/me,Fp2(1:Np),'red','LineWidth',2);
+plot(energy(1:Np)+m/me, Fjuttner(1:Np),'blue','LineWidth',2);
+plot(energy(1:Np)+m/me,Fpa(1:Np),'green','LineWidth',2);
 title('F(E)');
-xlabel('Ekin/me c^2');
+xlabel('E/me c^2');
 ylabel('F(E)');
 name = strcat('powerlaw \gamma = ',num2str(gammap));
 legend('Fe', 'maxwell-juttner',name,'Location','southeast');
