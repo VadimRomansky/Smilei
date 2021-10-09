@@ -10,7 +10,7 @@ full_proton_name = strcat(directory_name, file_proton_name, file_number, file_ex
 field_name = strcat(directory_name, field_file_name, file_number, file_extension);
 info = h5info(full_electron_name);
 Ndata = size(info.Datasets,1);
-Ndata = 7;
+%Ndata = 7;
 name1 = info.Datasets(1).Name;
 name2 = info.Datasets(fix(Ndata)).Name;
 fp1= hdf5read(full_proton_name, name1);
@@ -26,6 +26,8 @@ v = 0.1;
 gamma = 1.0/sqrt(1.0 - v*v);
 
 dx = 0.2;
+kB = 1.3806488*10^-16;
+c = 2.99792458*10^10;
 
 samplingFactor = 20;
 fieldsSamplingFactor = 4;
@@ -70,13 +72,52 @@ for i = 2:Np,
     deProton(i) = energyProton(i) - energyProton(i-1);
 end;
 
-Fp1(1:Np)=0;
-Fp2(1:Np)=0;
+mprotonreal = 1.67*10^-24;
+melectronreal = mprotonreal/100;
+Fproton(1:Np)=0;
+Felectron(1:Np)=0;
+FprotonMaxwell(1:Np) = 0;
+FelectronMaxwell(1:Np) = 0;
+Te = 4.736*10^10;
+Tp = 1.667*10^11;
+%norm = 0;
+%for i = 1:Np,
+%    norm = norm + (fe1(i,10)/(dx*dx*Ny1))/samplingFactor;
+%end;
 
-norm = 0;
+normproton = 0.0;
+normelectron = 0.0;
 for i = 1:Np,
-    norm = norm + (fe1(i,10)/(dx*dx*Ny1))/samplingFactor;
+    for j=startx:endx,
+        normproton = normproton + fp2(i,j)*me/mp;
+        normelectron = normelectron + fe2(i,j);
+        Fproton(i)=Fproton(i)+fp2(i,j)/deProton(i);
+        Felectron(i)=Felectron(i)+fe2(i,j)/deElectron(i);
+    end;
+    
+    theta = kB*Tp/(mprotonreal*c*c);
+    bes = besselk(2, 1/theta);
+    gam = energyProton(i)*me/mp + 1;
+    beta = sqrt(1.0 - 1.0/(gam*gam));
+    exp1 = exp(-gam/theta);   
+    FprotonMaxwell(i) = (1.0/(theta*bes))*exp1*gam*gam*beta;
+    
+    theta = kB*Te/(melectronreal*c*c);
+    bes = besselk(2, 1/theta);
+    gam = energyElectron(i) + 1;
+    beta = sqrt(1.0 - 1.0/(gam*gam));
+    exp1 = exp(-gam/theta);   
+    FelectronMaxwell(i) = (1.0/(theta*bes))*exp1*gam*gam*beta;
 end;
+
+for i = 1:Np,
+    FprotonMaxwell(i) = FprotonMaxwell(i)*normproton;
+    FelectronMaxwell(i) = FelectronMaxwell(i)*normelectron;
+end;
+
+%figure(1);
+%hold on;
+%plot(energyProton(1:Np),Fproton(1:Np), energyProton(1:Np), FprotonMaxwell(1:Np));
 
 fluxKineticEnergy = 0;
 fluxTotalEnergy = 0;
@@ -153,10 +194,20 @@ protonAcceleratedTotalEnergy= 0;
 electronAcceleratedKineticEnergy= 0;
 protonAcceleratedKineticEnergy= 0;
 
-electronAcceleratedLevel = 2*gamma;
+electronAcceleratedLevel = 8;
 protonAcceleratedLevel = 2*gamma;
 
+maxwellElectronKineticEnergy = 0;
+maxwellElectronTotalEnergy = 0;
+maxwellProtonKineticEnergy = 0;
+maxwellProtonTotalEnergy = 0;
+
 for i=1:Np,
+    
+    maxwellElectronKineticEnergy = maxwellElectronKineticEnergy + FelectronMaxwell(i)*me*energyElectron(i)*deElectron(i);
+    maxwellElectronTotalEnergy = maxwellElectronTotalEnergy + FelectronMaxwell(i)*(me*energyElectron(i) + me)*deElectron(i);
+    maxwellProtonKineticEnergy = maxwellProtonKineticEnergy + FprotonMaxwell(i)*me*energyProton(i)*deProton(i);
+    maxwellProtonTotalEnergy = maxwellProtonTotalEnergy + FprotonMaxwell(i)*(me*energyProton(i) + mp)*deProton(i);
     for j=startx:endx,
         protonKineticEnergy = protonKineticEnergy + fp2(i,j)*me*energyProton(i);
         electronKineticEnergy = electronKineticEnergy + fe2(i,j)*me*energyElectron(i);
@@ -188,3 +239,29 @@ epsilon_enonrel = electronTotalEnergy/fluxKineticEnergy;
 epsilon_e_acceleratednonrel = electronAcceleratedTotalEnergy/fluxKineticEnergy;
 epsilon_pnonrel = protonTotalEnergy/fluxKineticEnergy;
 epsilon_p_acceleratednonrel = protonAcceleratedTotalEnergy/fluxKineticEnergy;
+
+epsilon_e_maxwell_acceleratednonrel = (electronTotalEnergy - maxwellElectronTotalEnergy)/fluxKineticEnergy;
+epsilon_e_maxwell_accelerated = (electronTotalEnergy - maxwellElectronTotalEnergy)/fluxTotalEnergy;
+
+epsilon_p_maxwell_acceleratednonrel = (protonTotalEnergy - maxwellProtonTotalEnergy)/fluxKineticEnergy;
+epsilon_p_maxwell_accelerated = (protonTotalEnergy - maxwellProtonTotalEnergy)/fluxTotalEnergy;
+
+epsilon_e_kinetic_maxwell_acceleratednonrel = (electronKineticEnergy - maxwellElectronKineticEnergy)/fluxKineticEnergy;
+epsilon_e_kinetic_maxwell_accelerated = (electronKineticEnergy - maxwellElectronKineticEnergy)/fluxTotalEnergy;
+
+epsilon_p_kinetic_maxwell_acceleratednonrel = (protonKineticEnergy - maxwellProtonKineticEnergy)/fluxKineticEnergy;
+epsilon_p_kinetic_maxwell_accelerated = (protonKineticEnergy - maxwellProtonKineticEnergy)/fluxTotalEnergy;
+
+total_energy = (magneticEnergy + electricEnergy + electronTotalEnergy + protonTotalEnergy);
+total_kinetic_energy = (magneticEnergy + electricEnergy + electronKineticEnergy + protonKineticEnergy);
+
+fraction_e = electronTotalEnergy/total_energy;
+fraction_e_kinetic = electronKineticEnergy/total_energy;
+fraction_e_accelerated = (electronTotalEnergy - maxwellElectronTotalEnergy)/total_energy;
+
+fraction_p = protonTotalEnergy/total_energy;
+fraction_p_kinetic = protonKineticEnergy/total_energy;
+fraction_p_accelerated = (protonTotalEnergy - maxwellProtonTotalEnergy)/total_energy;
+
+fractionB = magneticEnergy/total_energy;
+fractionE = electricEnergy/total_energy;

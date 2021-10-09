@@ -13,35 +13,15 @@ Etot = general(1,6)*gamma/(gamma - 1);
 measuredSigma = 2*Eb/Etot;
 
 figure(1);
-plot(general(1:N,1), general(1:N,4));
+plot(general(1:N,1), general(1:N,4), 'red', general(1:N,1), general(1:N,6), 'green', general(1:N,1), general(1:N,9), 'blue');
 title ('Utot');
-xlabel ('t');
-ylabel ('E');
-grid;
-
-figure(2);
-plot(general(1:N,1), general(1:N,5));
-title ('Uexp');
-xlabel ('t');
-ylabel ('E');
-grid;
-
-figure(3);
-plot(general(1:N,1), general(1:N,6));
-title ('Ukin');
-xlabel ('t');
-ylabel ('E');
-grid;
-
-figure(4);
-plot(general(1:N,1), general(1:N,9));
-title ('Uelm');
+legend('Utot', 'Ukin', 'Uelm');
 xlabel ('t');
 ylabel ('E');
 grid;
 
 figure(5);
-plot(general(1:N,1), general(1:N,34));
+plot(general(1:N,1), general(1:N,34), 'color', 'red');
 title ('Exmax');
 xlabel ('t');
 ylabel ('E');
