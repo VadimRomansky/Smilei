@@ -47,8 +47,8 @@ endx = fix(12000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,
-        Fp1(i)=Fp1(i)+fp1(i,j)*(energy(i) + m)*(energy(i) + m)/de(i);
-        Fp2(i)=Fp2(i)+fp2(i,j)*(energy(i) + m)*(energy(i) + m)/de(i);
+        Fp1(i)=Fp1(i)+fp1(i,j)/de(i);
+        Fp2(i)=Fp2(i)+fp2(i,j)/de(i);
     end;
 end;
 

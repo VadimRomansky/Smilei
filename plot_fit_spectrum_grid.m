@@ -1,6 +1,6 @@
 clear;
 directory_name = './output/';
-file_name = 'ParticleBinning7';
+file_name = 'ParticleBinning6';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
@@ -17,15 +17,15 @@ minEe = 0.001;
 maxEe = 1000;
 minEp = 0.1;
 maxEp = 5000;
-minE = minEp;
-maxE = maxEp;
+minE = minEe;
+maxE = maxEe;
 factor = (maxE/minE)^(1.0/(Np-1));
 
 mp = 1.67*10^-24;
 mass_ratio = 100;
 me = mp/mass_ratio;
 
-m = mp;
+m = me;
 
 gam = 1.048;
 beta = sqrt(1 - 1/(gam*gam));
@@ -37,9 +37,9 @@ Tp = 2*10^11;
 Tpmin = 10^9;
 Tpmax = 10^13;
 
-T = Tp;
-Tmax = Tpmax;
-Tmin = Tpmin;
+T = Te;
+Tmax = Temax;
+Tmin = Temin;
 kB = 1.3806488*10^-16;
 theta = kB*T/(m*c*c);
 
@@ -131,8 +131,8 @@ endPowerP = 115;
 startPowerE = 140;
 endPowerE = 150;
 
-startPower = startPowerP;
-endPower = endPowerP;
+startPower = startPowerE;
+endPower = endPowerE;
 
 Fpa(1:Np) = 0;
 

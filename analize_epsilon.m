@@ -266,6 +266,15 @@ fraction_p_accelerated = (protonTotalEnergy - maxwellProtonTotalEnergy)/total_en
 fractionB = magneticEnergy/total_energy;
 fractionE = electricEnergy/total_energy;
 
+fraction_e_accelerated_kinetic = (electronKineticEnergy - maxwellElectronKineticEnergy)/total_kinetic_energy;
+
+fraction_e_accelerated_kinetic_scaled = (electronKineticEnergy - maxwellElectronKineticEnergy)/total_kinetic_energy/sqrt(18);
+
+fractionB_kinetic = magneticEnergy/total_kinetic_energy;
+
+
+
+
 
 startPowerP = 95;
 endPowerP = 115;
