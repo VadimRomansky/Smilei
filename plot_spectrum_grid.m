@@ -42,8 +42,8 @@ Fp2(1:Np)=0;
 
 samplingFactor = 20;
 
-startx = fix(7000/samplingFactor)+1;
-endx = fix(12000/samplingFactor);
+startx = fix(35000/samplingFactor)+1;
+endx = fix(40000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,
@@ -76,7 +76,7 @@ figure(1);
 loglog(energy(1:Np),Fp2(1:Np),'red');
 title('F(E)');
 xlabel('Ekin/me c^2');
-ylabel('F(E)*E^2');
+ylabel('F(E)');
 name = strcat('approximation gamma = ',num2str(gammap-2));
 %legend('Fe', name,'Location','southeast');
 grid;

@@ -1,5 +1,5 @@
 clear;
-directory_name = './output_theta0-90/';
+directory_name = './output/';
 file_name = 'Fields0';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
@@ -57,7 +57,7 @@ set(0,'DefaultFigureColormap',feval('jet'));
 figure(1);
 hold on;
 for k = 1:Ns,
-    plot((1:Nx)/10, Bxa(1:Nx,k),'color',Color{k});
+    plot((1:Nx), Bxa(1:Nx,k),'color',Color{k});
 end;
 title ('Bx');
 xlabel ('x {\omega}_{pi} /c');
@@ -67,7 +67,7 @@ grid ;
 figure(2);
 hold on;
 for k = 1:Ns,
-    plot((1:Nx)/10, Bya(1:Nx,k),'color',Color{k});
+    plot((1:Nx), Bya(1:Nx,k),'color',Color{k});
 end;
 title ('By');
 xlabel ('x {\omega}_{pi} /c');
@@ -77,7 +77,7 @@ grid ;
 figure(3);
 hold on;
 for k = 1:Ns,
-    plot((1:Nx)/10, Bza(1:Nx,k),'color',Color{k});
+    plot((1:Nx), Bza(1:Nx,k),'color',Color{k});
 end;
 title ('Bz');
 xlabel ('x {\omega}_{pi} /c');
@@ -87,7 +87,7 @@ grid ;
 figure(4);
 hold on;
 for k = 1:Ns,
-    plot((1:Nx)/10, smooth(Bnorma(1:Nx,k),100),'color',Color{k});
+    plot((1:Nx), smooth(Bnorma(1:Nx,k),100),'color',Color{k});
 end;
 legend('700 {\omega}_{pi}^{-1}', '1400 {\omega}_{pi}^{-1}', '2100 {\omega}_{pi}^{-1}', '2800 {\omega}_{pi}^{-1}', '3500 {\omega}_{pi}^{-1}','Location','northwest');
 %legend('600 wpi^{-1}', '1200 wpi^{-1}', '1800 wpi^{-1}', '2400 wpi^{-1}', '3000 wpi^{-1}', '3600 wpi^{-1}','Location','northwest');

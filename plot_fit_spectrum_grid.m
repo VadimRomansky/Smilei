@@ -5,6 +5,7 @@ file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
 Ndata = size(info.Datasets,1);
+%Ndata = 7;
 name1 = info.Datasets(1).Name;
 name2 = info.Datasets(Ndata).Name;
 fp1= hdf5read(full_name, name1);
@@ -60,8 +61,8 @@ Fp2(1:Np)=0;
 
 samplingFactor = 20;
 
-startx = fix(7000/samplingFactor)+1;
-endx = fix(12000/samplingFactor);
+startx = fix(25000/samplingFactor)+1;
+endx = fix(30000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,
@@ -128,8 +129,8 @@ end;
 startPowerP = 95;
 endPowerP = 115;
 
-startPowerE = 140;
-endPowerE = 150;
+startPowerE = 137;
+endPowerE = 148;
 
 startPower = startPowerE;
 endPower = endPowerE;
@@ -139,26 +140,39 @@ Fpa(1:Np) = 0;
 Fpa(startPower) = Fp2(startPower);
 Fpa(endPower) = Fp2(endPower);
 
-gammap = log(Fpa(startPower)/Fpa(endPower))/log((me*energy(startPower)+m)/(me*energy(endPower)+m));
+%gammap = log(Fpa(startPower)/Fpa(endPower))/log((me*energy(startPower)+m)/(me*energy(endPower)+m));
 
+polyfitx(1:endPower-startPower + 1) = 0;
+polyfity(1:endPower-startPower + 1) = 0;
 
-ap = exp(log(Fpa(startPower)) - gammap*log((me*energy(startPower)+m)));
+for i = 1:endPower-startPower + 1,
+    polyfitx(i) = log((me*energy(i+startPower - 1)+m));
+    polyfity(i) = log(Fp2(i+startPower - 1));
+end;
+p = polyfit(polyfitx, polyfity, 1);
+
+%ap = exp(log(Fpa(startPower)) - gammap*log((me*energy(startPower)+m)));
 
 for i = startPower-20:endPower+20,
-    Fpa(i) = ap*((me*energy(i)+m)^gammap);
+    %Fpa(i) = ap*((me*energy(i)+m)^gammap);
+    Fpa(i) = exp(polyval(p, log(me*energy(i)+m)));
 end;
 
 
 
 figure(1);
 hold on;
+set(gca, 'YScale', 'log');
+set(gca, 'XScale', 'log');
 plot(energy(1:Np)+m/me,Fp2(1:Np),'red','LineWidth',2);
 plot(energy(1:Np)+m/me, Fjuttner(1:Np),'blue','LineWidth',2);
 plot(energy(1:Np)+m/me,Fpa(1:Np),'green','LineWidth',2);
+plot(energy(startPower) + m/me,Fp2(startPower),'o','Color','red');
+plot(energy(endPower) + m/me,Fp2(endPower),'o','Color','red');
 title('F(E)');
 xlabel('E/me c^2');
 ylabel('F(E)');
-name = strcat('powerlaw \gamma = ',num2str(gammap));
+name = strcat('powerlaw \gamma = ',num2str(p(1)));
 legend('Fe', 'maxwell-juttner',name,'Location','southeast');
 grid;
 
