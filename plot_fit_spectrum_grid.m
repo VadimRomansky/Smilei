@@ -62,7 +62,7 @@ Fp2(1:Np)=0;
 samplingFactor = 20;
 
 startx = fix(25000/samplingFactor)+1;
-endx = fix(30000/samplingFactor);
+endx = fix(28000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,
@@ -153,7 +153,7 @@ p = polyfit(polyfitx, polyfity, 1);
 
 %ap = exp(log(Fpa(startPower)) - gammap*log((me*energy(startPower)+m)));
 
-for i = startPower-20:endPower+20,
+for i = startPower-5:endPower+5,
     %Fpa(i) = ap*((me*energy(i)+m)^gammap);
     Fpa(i) = exp(polyval(p, log(me*energy(i)+m)));
 end;
@@ -176,5 +176,12 @@ name = strcat('powerlaw \gamma = ',num2str(p(1)));
 legend('Fe', 'maxwell-juttner',name,'Location','southeast');
 grid;
 
-dlmwrite('Ee9.dat',energy,'delimiter','\n');
-dlmwrite('Fe9.dat',Fp2,'delimiter','\n');
+output(1:167,1:4) = 0;
+for i = 1:167,
+    output(i,1) = log10(energy(i) + m/me);
+    output(i,2) = Fp2(i);
+    output(i,3) = Fjuttner(i);
+    output(i,4) = Fpa(i);
+end;
+
+dlmwrite('electrons.dat',output,'delimiter',' ');

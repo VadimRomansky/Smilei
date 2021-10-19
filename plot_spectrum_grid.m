@@ -42,8 +42,8 @@ Fp2(1:Np)=0;
 
 samplingFactor = 20;
 
-startx = fix(35000/samplingFactor)+1;
-endx = fix(40000/samplingFactor);
+startx = fix(15000/samplingFactor)+1;
+endx = fix(20000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,
