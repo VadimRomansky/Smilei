@@ -1,0 +1,27 @@
+size 24 24
+set font times8b hei 1.0
+set lwidth 0.12
+amove 3.0 3.0
+begin graph
+  size 20 20
+  fullsize
+  xtitle "x \omega_e /c"
+  ytitle "n/n_0"
+  data   "concentrations.dat"
+  xaxis min 0 max 8000
+  xaxis ftick 0 dticks 2000 
+  yaxis min 0 max 10.0
+  d1 lstyle 1 lwidth 0.12 color black
+  d2 lstyle 1 lwidth 0.12 color purple
+  d3 lstyle 1 lwidth 0.12 color green
+  d4 lstyle 1 lwidth 0.12 color blue
+  d5 lstyle 1 lwidth 0.12 color red
+end graph
+begin key
+   pos tr
+   text "t = 1.4\cdot 10^4 {\omega_e}^{-1}" line lstyle 1 lwidth 0.12 color black
+   text "t = 2.8\cdot 10^4  {\omega_e}^{-1}" line lstyle 1 lwidth 0.12 color purple
+   text "t = 4.2\cdot 10^4  {\omega_e}^{-1}" line lstyle 1 lwidth 0.12 color green
+   text "t = 5.6\cdot 10^4  {\omega_e}^{-1}" line lstyle 1 lwidth 0.12 color blue
+   text "t = 7\cdot 10^4  {\omega_e}^{-1}" line lstyle 1 lwidth 0.12 color red
+end key

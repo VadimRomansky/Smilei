@@ -1,11 +1,11 @@
 clear;
-directory_name = './output/';
-file_name = 'ParticleBinning6';
+directory_name = './output_theta0-90_gamma1.5sigma0.004/';
+file_name = 'ParticleBinning63';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
-Ndata = size(info.Datasets,1);
-%Ndata = 7;
+%Ndata = size(info.Datasets,1);
+Ndata = 15;
 name1 = info.Datasets(1).Name;
 name2 = info.Datasets(Ndata).Name;
 fp1= hdf5read(full_name, name1);
@@ -14,7 +14,7 @@ fp2 = hdf5read(full_name, name2);
 Np=size(fp1,1);
 Nx=size(fp1,2);
 
-minEe = 0.001;
+minEe = 0.1;
 maxEe = 1000;
 minEp = 0.1;
 maxEp = 5000;
@@ -32,8 +32,8 @@ gam = 1.048;
 beta = sqrt(1 - 1/(gam*gam));
 c = 2.99792458*10^10;
 Te = 2.6*10^9;
-Temin = 10^9;
-Temax = 2*10^11;
+Temin = 10^8;
+Temax = 2*10^12;
 Tp = 2*10^11;
 Tpmin = 10^9;
 Tpmax = 10^13;
@@ -61,8 +61,8 @@ Fp2(1:Np)=0;
 
 samplingFactor = 20;
 
-startx = fix(25000/samplingFactor)+1;
-endx = fix(28000/samplingFactor);
+startx = fix(20000/samplingFactor)+1;
+endx = fix(25000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,
@@ -81,8 +81,8 @@ for i = 1:Np,
     Fp2(i) = Fp2(i)*norm/normp;
 end;
 
-index1 = 50;
-index2 = 100;
+index1 = 10;
+index2 = 80;
 
 Tleft = Tmin;
 Tright = Tmax;
@@ -126,10 +126,10 @@ for i = 1:Np,
     Fjuttner(i) = (1.0/(theta*bes))*exp1*gam*gam*beta;
 end;
 
-startPowerP = 95;
-endPowerP = 115;
+startPowerP = 115;
+endPowerP = 135;
 
-startPowerE = 137;
+startPowerE = 136;
 endPowerE = 148;
 
 startPower = startPowerE;

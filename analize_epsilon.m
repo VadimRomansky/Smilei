@@ -31,7 +31,7 @@ c = 2.99792458*10^10;
 
 samplingFactor = 20;
 fieldsSamplingFactor = 4;
-start = 25000;
+start = 23000;
 fin = 28000;
 startFieldx = fix(start/fieldsSamplingFactor)+1;
 endFieldx = fix(fin/fieldsSamplingFactor);
@@ -121,15 +121,20 @@ end;
 
 fluxKineticEnergy = 0;
 fluxTotalEnergy = 0;
-
+fluxRestEnergy = 0;
 for i=1:Np,
     for j=startx:endx,
         fluxKineticEnergy = fluxKineticEnergy + fp1(i,j)*me*energyProton(i);
         fluxKineticEnergy = fluxKineticEnergy + fe1(i,j)*me*energyElectron(i);
         fluxTotalEnergy = fluxTotalEnergy + fp1(i,j)*(me*energyProton(i) + mp);
         fluxTotalEnergy = fluxTotalEnergy + fe1(i,j)*(me*energyElectron(i) + me);
+        fluxRestEnergy = fluxRestEnergy + fp1(i,j)*mp;
+        fluxRestEnergy = fluxRestEnergy + fe1(i,j)*me;
     end;
 end;
+
+%fluxRestEnergy = fluxTotalEnergy - fluxKineticEnergy;
+fluxKineticEnergy2 = fluxRestEnergy*0.375*0.375;
 
 info = h5info(field_name);
 %Ndata = size(info.Groups.Groups,1);
@@ -187,6 +192,7 @@ initialSigma = 2*magneticInitialEnergy/fluxTotalEnergy;
 
 electronTotalEnergy = 0;
 electronKineticEnergy = 0;
+protonRestEnergy = 0;
 protonTotalEnergy = 0;
 protonKineticEnergy = 0;
 electronAcceleratedTotalEnergy= 0;
@@ -209,6 +215,7 @@ for i=1:Np,
     maxwellProtonKineticEnergy = maxwellProtonKineticEnergy + FprotonMaxwell(i)*me*energyProton(i)*deProton(i);
     maxwellProtonTotalEnergy = maxwellProtonTotalEnergy + FprotonMaxwell(i)*(me*energyProton(i) + mp)*deProton(i);
     for j=startx:endx,
+        protonRestEnergy = protonRestEnergy + fp2(i,j)*mp;
         protonKineticEnergy = protonKineticEnergy + fp2(i,j)*me*energyProton(i);
         electronKineticEnergy = electronKineticEnergy + fe2(i,j)*me*energyElectron(i);
         protonTotalEnergy = protonTotalEnergy + fp2(i,j)*(me*energyProton(i) + mp);
@@ -264,6 +271,7 @@ fraction_p_kinetic = protonKineticEnergy/total_energy;
 fraction_p_accelerated = (protonTotalEnergy - maxwellProtonTotalEnergy)/total_energy;
 
 fractionB = magneticEnergy/total_energy;
+fractionBrest = magneticEnergy/protonRestEnergy;
 fractionE = electricEnergy/total_energy;
 
 fraction_e_accelerated_kinetic = (electronKineticEnergy - maxwellElectronKineticEnergy)/total_kinetic_energy;
@@ -311,3 +319,6 @@ end;
 
 epsilon_e_accelerated_extrapolated = (extrapolatedElectronTotalEnergy - maxwellElectronTotalEnergy)/fluxTotalEnergy;
 epsilon_e_accelerated_extrapolatednonrel = (extrapolatedElectronTotalEnergy - maxwellElectronTotalEnergy)/fluxKineticEnergy;
+
+epsilon_e_chev = (electronKineticEnergy - maxwellElectronKineticEnergy)/fluxKineticEnergy2/sqrt(18);
+epsilon_B_chev = magneticEnergy/fluxKineticEnergy2;

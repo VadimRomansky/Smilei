@@ -1,6 +1,6 @@
 clear;
-directory_name = './output_theta0-90_gamma1.5sigma0.004/';
-file_name = 'ParticleBinning7';
+directory_name = './output_theta0-90gamma0.3_sigma0.004/';
+file_name = 'ParticleBinning6';
 file_ending = '.h5';
 
 Color = {'red','blue','green','black','cyan','magenta','yellow',[0.75,0,0.67],[0.5,0.5,0.0],[.98,.5,.44]};
@@ -42,8 +42,8 @@ Fp(1:Nd,1:Np)=0;
 samplingFactor = 20;
 
 for i = 1:Nd,
-    startx(i) = fix(20000/samplingFactor)+1;
-    endx(i) = fix(30000/samplingFactor);
+    startx(i) = fix(17000/samplingFactor)+1;
+    endx(i) = fix(22000/samplingFactor);
 end;
 
 for k = 1:Nd,

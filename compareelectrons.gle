@@ -1,0 +1,24 @@
+size 24 24
+set font times8b hei 1.0
+set lwidth 0.12
+amove 3.7 3.0
+begin graph
+  size 20 20
+  fullsize
+  xtitle "Log_1_0\,E\,[m_ec^2]"
+  ytitle "F(E)"
+  data   "compareelectrons.dat"
+  xaxis min 0 max 3
+  xaxis ftick 0 dticks 1 
+  yaxis min 1.0E-8 max 0.3 log 
+  ylabels log off
+  d1 lstyle 1 lwidth 0.12 color blue
+  d2 lstyle 1 lwidth 0.12 color red
+  d4 lstyle 1 lwidth 0.12 color green
+end graph
+begin key
+   pos tr
+   text "\theta = 10^{\circ}" line lstyle 1 lwidth 0.12 color blue
+   text "\theta = 30^{\circ}" line lstyle 1 lwidth 0.12 color red
+   text "\theta = 60^{\circ}" line lstyle 1 lwidth 0.12 color green
+end key

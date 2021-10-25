@@ -1,6 +1,6 @@
 clear;
-directory_name = './output/';
-file_name = 'ParticleBinning6';
+directory_name = './output_theta0-90gamma0.3_sigma0.004/';
+file_name = 'ParticleBinning62';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
@@ -42,8 +42,8 @@ Fp2(1:Np)=0;
 
 samplingFactor = 20;
 
-startx = fix(15000/samplingFactor)+1;
-endx = fix(20000/samplingFactor);
+startx = fix(1000/samplingFactor)+1;
+endx = fix(10000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,
@@ -81,5 +81,5 @@ name = strcat('approximation gamma = ',num2str(gammap-2));
 %legend('Fe', name,'Location','southeast');
 grid;
 
-dlmwrite('Ep0.dat',energy,'delimiter',' ');
-dlmwrite('Fp0.dat',Fp2,'delimiter',' ');
+dlmwrite('Ee0.dat',energy,'delimiter',' ');
+dlmwrite('Fs0.dat',Fp2,'delimiter',' ');
