@@ -27,12 +27,16 @@ Validate("Ey probe at iteration 1500", Ey, 0.01)
 Ey = S.Probe.Probe1.Ey().getData()
 Validate("0-D probe Ey vs time", Ey, 0.01)
 
+# TEST POYNTING IN PROBE
+PoyX = S.Probe(2,"PoyX",average={"axis2":"all"},subset={"axis1":0}).getData()
+Validate("Integrated PoyX vs time", PoyX, 0.1)
+
 # TEST THAT Ubal_norm STAYS OK
 max_ubal_norm = np.max( np.abs(S.Scalar.Ubal_norm().getData()) )
 Validate("Max Ubal_norm is below 10%", max_ubal_norm<0.1 )
 
 # TEST THE GRID PARAMETERS
-with h5py.File("./restart000/Fields0.h5") as f:
+with h5py.File("./restart000/Fields0.h5", "r") as f:
 	dt = f["data/0000000000"].attrs["dt"]
 	dx = f["data/0000000000/Ex"].attrs["gridSpacing"]
 	patchSize = f["data/0000000000"].attrs["patchSize"]

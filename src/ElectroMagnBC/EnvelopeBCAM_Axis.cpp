@@ -16,8 +16,8 @@
 using namespace std;
 
 
-EnvelopeBCAM_Axis::EnvelopeBCAM_Axis( Params &params, Patch *patch, unsigned int _min_max )
-    : EnvelopeBC( params, patch, _min_max )
+EnvelopeBCAM_Axis::EnvelopeBCAM_Axis( Params &params, Patch *patch, unsigned int i_boundary )
+    : EnvelopeBC( params, patch, i_boundary )
 {
     // oversize
     oversize_ = params.oversize[0];
@@ -46,15 +46,15 @@ void EnvelopeBCAM_Axis::apply( LaserEnvelope *envelope, ElectroMagn *EMfields, d
     
     //Field2D *Env_Aabs2Dcyl  = static_cast<Field2D *>( EMfields->Env_A_abs_ ); // absolute value of the envelope |A|
 
-    Field2D *Env_Eabs2Dcyl  = static_cast<Field2D *>( EMfields->Env_E_abs_ ); // absolute value of the envelope of the transverse electric field of the  laser |E|
+    //Field2D *Env_Eabs2Dcyl  = static_cast<Field2D *>( EMfields->Env_E_abs_ ); // absolute value of the envelope of the transverse electric field of the  laser |E|
  
-    Field2D *Env_Exabs2Dcyl  = static_cast<Field2D *>( EMfields->Env_Ex_abs_ ); // absolute value of the envelope of the longitudinal electric field of the  laser |Ex|
+    //Field2D *Env_Exabs2Dcyl  = static_cast<Field2D *>( EMfields->Env_Ex_abs_ ); // absolute value of the envelope of the longitudinal electric field of the  laser |Ex|
     
     double ellipticity_factor = envelope->ellipticity_factor;
 // APPLICATION OF BCs OVER THE FULL GHOST CELL REGION
   
 
-    if( min_max == 2 && patch->isYmin() ) { // j_p = 2 corresponds to r=0
+    if( i_boundary_ == 2 && patch->isYmin() ) { // j_p = 2 corresponds to r=0
     
         // zero radial derivative on axis 
         //unsigned int j=2;

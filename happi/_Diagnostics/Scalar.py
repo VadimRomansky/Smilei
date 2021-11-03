@@ -4,7 +4,7 @@ from .._Utils import *
 class Scalar(Diagnostic):
 	"""Class for loading a Scalar diagnostic"""
 	
-	def _init(self, scalar=None, timesteps=None, data_log=False, **kwargs):
+	def _init(self, scalar=None, timesteps=None, data_log=False, data_transform=None, **kwargs):
 		# Get available scalars
 		scalars = self.getScalars()
 		
@@ -42,6 +42,7 @@ class Scalar(Diagnostic):
 		
 		# Put data_log as object's variable
 		self._data_log = data_log
+		self._data_transform = data_transform
 		
 		# Already get the data from the file
 		# Loop file line by line
@@ -49,18 +50,21 @@ class Scalar(Diagnostic):
 		self._values = []
 		times_values = {}
 		for path in self._results_path:
-			with open(path+'/scalars.txt') as f:
-				for line in f:
-					line = line.strip()
-					if line[0]!="#": break
-					prevline = line
-				scalars = prevline[1:].strip().split() # list of scalars
-				scalarindex = scalars.index(scalar) # index of the requested scalar
-				line = str(line.strip()).split()
-				times_values[ int( self._np.round(float(line[0]) / float(self.timestep)) ) ] = float(line[scalarindex])
-				for line in f:
+			try:
+				with open(path+'/scalars.txt') as f:
+					for line in f:
+						line = line.strip()
+						if line[0]!="#": break
+						prevline = line
+					scalars = prevline[1:].strip().split() # list of scalars
+					scalarindex = scalars.index(scalar) # index of the requested scalar
 					line = str(line.strip()).split()
 					times_values[ int( self._np.round(float(line[0]) / float(self.timestep)) ) ] = float(line[scalarindex])
+					for line in f:
+						line = str(line.strip()).split()
+						times_values[ int( self._np.round(float(line[0]) / float(self.timestep)) ) ] = float(line[scalarindex])
+			except:
+				continue
 		self._alltimesteps  = self._np.array(sorted(times_values.keys()))
 		self._values = self._np.array([times_values[k] for k in self._alltimesteps])
 		self._timesteps = self._np.copy(self._alltimesteps)
@@ -75,7 +79,7 @@ class Scalar(Diagnostic):
 		if timesteps is not None:
 			try:
 				self._timesteps = self._selectTimesteps(timesteps, self._timesteps)
-			except:
+			except Exception as e:
 				self._error += ["Argument `timesteps` must be one or two non-negative integers"]
 				return
 		
@@ -116,13 +120,13 @@ class Scalar(Diagnostic):
 	
 	# get all available scalars
 	def getScalars(self):
+		allScalars = None
 		for path in self._results_path:
 			try:
 				file = path+'/scalars.txt'
 				f = open(file, 'r')
-			except:
-				self._error += ["Cannot open 'scalars.txt' in directory '"+path+"'"]
-				return []
+			except Exception as e:
+				continue
 			try:
 				# Find last commented line
 				prevline = ""
@@ -132,11 +136,16 @@ class Scalar(Diagnostic):
 					prevline = line[1:].strip()
 				scalars = str(prevline).split() # list of scalars
 				scalars = scalars[1:] # remove first, which is "time"
-			except:
+			except Exception as e:
 				scalars = []
 			f.close()
-			try:    allScalars = self._np.intersect1d(allScalars, scalars)
-			except: allScalars = scalars
+			if allScalars is None:
+				allScalars = scalars
+			else:
+				allScalars = self._np.intersect1d(allScalars, scalars)
+		if allScalars is None:
+			self._error += ["Cannot open 'scalars.txt'"]
+			return []
 		return allScalars
 	
 	# get all available timesteps
@@ -152,4 +161,6 @@ class Scalar(Diagnostic):
 			return []
 		# Get value at selected time
 		A = self._values[ self._data[t] ]
+
+		if callable(self._data_transform): A = self._data_transform(A)
 		return A

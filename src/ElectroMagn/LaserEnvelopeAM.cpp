@@ -92,7 +92,7 @@ void LaserEnvelopeAM::initEnvelope( Patch *patch, ElectroMagn *EMfields )
     Field2D *GradPhir_m2Dcyl  = static_cast<Field2D *>( GradPhir_m );
 
     bool isYmin = ( static_cast<ElectroMagnAM *>( EMfields ) )->isYmin;
-    int  j_glob = ( static_cast<ElectroMagnAM *>( EMfields ) )->j_glob_;
+    //int  j_glob = ( static_cast<ElectroMagnAM *>( EMfields ) )->j_glob_;
     
     
     vector<double> position( 2, 0 );
@@ -119,7 +119,7 @@ void LaserEnvelopeAM::initEnvelope( Patch *patch, ElectroMagn *EMfields )
             // |A|
             ( *Env_Aabs2Dcyl )( i, j )= std::abs( ( *A2Dcyl )( i, j ) );
             // |E envelope| = |-(dA/dt-ik0cA)|
-            ( *Env_Eabs2Dcyl )( i, j )= std::abs( ( ( *A2Dcyl )( i, j )-( *A02Dcyl )( i, j ) )/timestep - i1*( *A2Dcyl )( i, j ) );
+            ( *Env_Eabs2Dcyl )( i, j )= std::abs( ( ( *A2Dcyl )( i, j )-( *A02Dcyl )( i, j ) )/timestep - i1*omega*( *A2Dcyl )( i, j ) );
             // compute ponderomotive potential at timestep n
             ( *Phi2Dcyl )( i, j )     = ellipticity_factor*std::abs( ( *A2Dcyl )( i, j ) ) * std::abs( ( *A2Dcyl )( i, j ) ) * 0.5;
             // compute ponderomotive potential at timestep n-1
@@ -372,7 +372,7 @@ void LaserEnvelopeAM::computePhiEnvAEnvE( ElectroMagn *EMfields )
 
     bool isYmin = ( static_cast<ElectroMagnAM *>( EMfields ) )->isYmin;
 
-    int  j_glob = ( static_cast<ElectroMagnAM *>( EMfields ) )->j_glob_;
+    //int  j_glob = ( static_cast<ElectroMagnAM *>( EMfields ) )->j_glob_;
     
     
     // Compute ponderomotive potential Phi=|A|^2/2, at timesteps n+1, including ghost cells
@@ -381,7 +381,7 @@ void LaserEnvelopeAM::computePhiEnvAEnvE( ElectroMagn *EMfields )
             ( *Phi2Dcyl )( i, j )       = ellipticity_factor*std::abs( ( *A2Dcyl )( i, j ) ) * std::abs( ( *A2Dcyl )( i, j ) ) * 0.5;
             ( *Env_Aabs2Dcyl )( i, j )  = std::abs( ( *A2Dcyl )( i, j ) );
             // |E envelope| = |-(dA/dt-ik0cA)|, forward finite difference for the time derivative
-            ( *Env_Eabs2Dcyl )( i, j )  = std::abs( ( ( *A2Dcyl )( i, j )-( *A02Dcyl )( i, j ) )/timestep - i1*( *A2Dcyl )( i, j ) );
+            ( *Env_Eabs2Dcyl )( i, j )  = std::abs( ( ( *A2Dcyl )( i, j )-( *A02Dcyl )( i, j ) )/timestep - i1*omega*( *A2Dcyl )( i, j ) );
             // |Ex envelope| = |-dA/dr|, central finite difference for the space derivative
             ( *Env_Exabs2Dcyl )( i, j ) =  std::abs( (( *A2Dcyl )( i, j+1)-( *A2Dcyl )( i, j-1) )*one_ov_2dr );
         } // end r loop
@@ -391,9 +391,9 @@ void LaserEnvelopeAM::computePhiEnvAEnvE( ElectroMagn *EMfields )
     if (isYmin){ // axis BC
         for( unsigned int i=1 ; i <A_->dims_[0]-1; i++ ) { // l loop
             unsigned int j = 2;  // j_p=2 corresponds to r=0    
-            ( *Phi2Dcyl )      ( i, j )   = std::abs( ( *A2Dcyl )( i, j ) ) * std::abs( ( *A2Dcyl )( i, j ) ) * 0.5;  
+            ( *Phi2Dcyl )      ( i, j )   = ellipticity_factor*std::abs( ( *A2Dcyl )( i, j ) ) * std::abs( ( *A2Dcyl )( i, j ) ) * 0.5;  
             ( *Env_Aabs2Dcyl ) ( i, j )   = std::abs( ( *A2Dcyl )( i, j ) );
-            ( *Env_Eabs2Dcyl ) ( i, j )   = std::abs( ( ( *A2Dcyl )( i, j )-( *A02Dcyl )( i, j ) )/timestep - i1*( *A2Dcyl )( i, j ) );
+            ( *Env_Eabs2Dcyl ) ( i, j )   = std::abs( ( ( *A2Dcyl )( i, j )-( *A02Dcyl )( i, j ) )/timestep - i1*omega*( *A2Dcyl )( i, j ) );
             ( *Env_Exabs2Dcyl )( i, j )   = 0.;
             // Axis BC on |A|
             ( *Env_Aabs2Dcyl )( i, j-1 )  = ( *Env_Aabs2Dcyl )( i, j+1 );

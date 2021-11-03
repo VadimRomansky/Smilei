@@ -1,10 +1,11 @@
 clear;
-directory_name = './output/';
-file_name = 'ParticleBinning7';
+directory_name = './output_theta0-90_gamma0.3sigma0.0002/';
+file_name = 'ParticleBinning63';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
 Ndata = size(info.Datasets,1);
+Ndata = 11;
 name = info.Datasets(Ndata).Name;
 fp= hdf5read(full_name, name);
 
@@ -25,17 +26,17 @@ endx(1:Ns) = 0;
 startx(1) = 0/samplingFactor+1;
 endx(1) = 5000/samplingFactor;
 
-startx(2) = 7000/samplingFactor+1;
-endx(2) = 12000/samplingFactor;
+startx(2) = 5000/samplingFactor+1;
+endx(2) = 10000/samplingFactor;
 
-startx(3) = 16000/samplingFactor+1;
-endx(3) = 21000/samplingFactor;
+startx(3) = 10000/samplingFactor+1;
+endx(3) = 15000/samplingFactor;
 
-startx(4) = 25000/samplingFactor+1;
-endx(4) = 30000/samplingFactor;
+startx(4) = 17000/samplingFactor+1;
+endx(4) = 22000/samplingFactor;
 
-startx(5) = 25000/samplingFactor+1;
-endx(5) = 30000/samplingFactor;
+startx(5) = 23000/samplingFactor+1;
+endx(5) = 28000/samplingFactor;
 
 
 %startx(1)= 5000/samplingFactor;
@@ -45,7 +46,7 @@ endx(5) = 30000/samplingFactor;
 %    endx(i) = startx(i)+fix(5000/samplingFactor);
 %end;
 
-minE = 0.1;
+minE = 0.001;
 maxE = 1000;
 factor = (maxE/minE)^(1.0/(Np-1));
 
@@ -62,12 +63,12 @@ end;
 
 for k=1:Ns,
     norm = 0;
-    Nt = fix(Ndata*k/Ns);
+    Nt = fix(1 + (Ndata-1)*k/Ns);
     name = info.Datasets(Nt).Name;
     fp= hdf5read(full_name, name);
     for i=1:Np,
         for j=startx(k):endx(k),
-            Fp(i,k)=Fp(i,k)+fp(i,j)*energy(i)*energy(i)/de(i);
+            Fp(i,k)=Fp(i,k)+fp(i,j)/de(i);
             norm = norm + fp(i,j);
         end;
     end;
@@ -78,8 +79,10 @@ end;
 
 figure(2);
 hold on;
+set(gca, 'YScale', 'log');
+set(gca, 'XScale', 'log');
 for k = 2:Ns,
-    plot(energy(1:Np),Fp(1:Np,k),'color',Color{k});
+    plot(energy(1:Np)+1,Fp(1:Np,k),'color',Color{k-1});
 end;
 title('F(E)');
 xlabel('E/m_e c^2');

@@ -220,7 +220,7 @@ where F is either S or V.
 Comparing :math:`T_s` and :math:`T_v` determines which of the scalar or vectorized operators should be locally selected.
 This operation is repeated every given number of time steps to adapt to the evolving plasma distribution. Note that similar
 approximations may be computed for specific processors instead of using a general rule.
-In Smilei, other typical processors have been included, requiring an additional compilation flag automatically included in the machine files for `make`.
+In Smilei, other typical processors have been included, requiring an additional compilation flag automatically included in the machine files for ``make``.
 
 The process of computing the faster mode and changing operators accordingly is called reconfiguration
 
@@ -261,7 +261,7 @@ The following video shows how the patches are dynamically switched in vectorized
 
 .. raw:: html
 
-  <video style="display:block; margin: 0 auto; width: 100%;" controls src="http://mdls-internet.extra.cea.fr/projects/Smilei/uploads/videos/weibel_interp.mp4" width="100%">
+  <video style="display:block; margin: 0 auto; width: 100%;" controls src="http://www.maisondelasimulation.fr/projects/Smilei/uploads/videos/weibel_interp.mp4" width="100%">
   </video>
 
 For this specific benchmark, the speed-up obtained with vectorization is of x2.

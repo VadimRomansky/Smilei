@@ -58,7 +58,7 @@ public:
                               Particles * particles,
                               Species * species,
                               unsigned int nPart,
-                              unsigned int iPart, double *indexes, Params &params );
+                              unsigned int iPart, double *indexes, Params &params, Random * rand );
     
     //! Creation of the particle momentum
     static void createMomentum( std::string momentum_initialization,
@@ -67,7 +67,9 @@ public:
                             unsigned int nPart,
                             unsigned int iPart,
                             double *temp,
-                            double *vel);
+                            double *vel,
+                            Random * rand
+                            );
     
     //! Creation of the particle weight
     static void createWeight( std::string position_initialization,
@@ -75,10 +77,8 @@ public:
                             unsigned int nPart,
                             unsigned int iPart,
                             double n_real_particles,
-                            Params &params );
-
-    //! Regulate of the particle weight with particle position
-    static void regulateWeightwithPositionAM( Particles * particles, std::string position_initialization_on_species_type_, double dr );
+                            Params &params,
+                            bool renormalize );
     
     // For all particles in a mesh initialize its charge state
     static void createCharge( Particles * particles, Species * species,
@@ -95,12 +95,12 @@ public:
     
     //! Initialization with the positions of another species
     bool position_initialization_on_species_;
-
-    //! Initialization type of the species where position initialization is made
-    std::string position_initialization_on_species_type_;
     
     //! Flag if initialized in particles of a species
     bool initialized_in_species_;
+    
+    //! Flag to disable the position initialization (handle outside the creator for instance)
+    bool disable_position_initialization_;
     
     //! Position initialization type
     std::string position_initialization_;
@@ -116,7 +116,7 @@ public:
     
     //! Density profile
     Profile * density_profile_;
-                                       
+    
     //! Type of profile
     std::string density_profile_type_;
 
@@ -135,7 +135,7 @@ public:
 private:
 
     //! Provides a Maxwell-Juttner distribution of energies
-    static std::vector<double> maxwellJuttner( Species * species, unsigned int npoints, double temperature );
+    static std::vector<double> maxwellJuttner( Species * species, unsigned int npoints, double temperature, Random * rand );
     //! Array used in the Maxwell-Juttner sampling (see doc)
     static const double lnInvF[1000];
     //! Array used in the Maxwell-Juttner sampling (see doc)

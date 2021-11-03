@@ -5,9 +5,7 @@ Contributions to the development of :program:`Smilei` are welcome.
 
 * `Chatroom <https://app.element.io/#/room/!LQrdVpOJEohPSWMlmf:matrix.org>`_ for discussion and sharing.
 * `GitHub issues <https://github.com/SmileiPIC/Smilei/issues>`_ for bugs and requests.
-* `GitHub fork <https://github.com/SmileiPIC/Smilei/issues>`_ to develop new features
-  (you can make a `pull request <https://github.com/SmileiPIC/Smilei/pulls>`_ when
-  your features are ready).
+* Develop new features (clone the repository clicking the "fork" button the `GitHub page <https://github.com/SmileiPIC/Smilei>`_  so you can then make a `pull request <https://github.com/SmileiPIC/Smilei/pulls>`_ to integrate them in the main repository).
 
 Guidelines for new developments are:
 
@@ -15,31 +13,27 @@ Guidelines for new developments are:
 * Write the documentation corresponding to the new features, if any.
 * Make validation cases, and reference data, corresponding to the added features.
 
-But you can also contribute by updating the list of publications on :program:`Smilei`'s website.
-This is quite simple and we first explain how to do so before going into the details of further developments.
-
 ----
 
 .. _HowToListMyPaper:
 
-How can I add my publication to the publication list on Smilei's website?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Add my publication to the list on Smilei's website
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Adding your paper to the publication list on :program:`Smilei`'s website consists in modifying the code documentation.
-To really understand how to do this, you can read next section.
-Here we quickly explain the simplest way for you to add your publication to the list.
-It consists in directly updating the file ``doc/Sphinx/material.rst`` by adding a block such as::
+You can easily add your paper to the :doc:`material`.
 
-    .. rst-class:: bigcitation
+* On GitHub, edit the file
+  `material.rst <https://github.com/SmileiPIC/Smilei/blob/master/doc/Sphinx/material.rst>`_.
+  and add a few lines such as::
 
     .. [MyNameYEAR]
 
         M. Name, A. Collaborator and B. Collaborator,
         `Title of my paper`,
-        `Reference of the Paper X, XXXX (Year) <link to the paper>`_,
+        `Reference of the Paper <https://link/to/the/paper>`_,
         `arXiv:xxxx.xxxx <https://arxiv.org/abs/xxxx.xxxx>`_
 
-You will then need to make a pull request to share your update.
+* Make a pull request to share your update.
 
 ----
 

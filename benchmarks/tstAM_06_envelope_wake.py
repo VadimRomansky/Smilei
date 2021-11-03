@@ -1,4 +1,4 @@
-############################# Laser envelope propagation in vacuum
+############################# Laser envelope propagation in underdense plasma
 dx = 0.69 
 dr = 5. 
 dt = 0.57#0.8*dx
@@ -85,7 +85,6 @@ Species(
     mean_velocity = [0.0, 0.0, 0.0],
     temperature = [0.,0.,0.],
     pusher = "ponderomotive_boris",
-    ponderomotive_dynamics = "True",
     time_frozen = 0.0,
     boundary_conditions = [
        ["remove", "remove"],

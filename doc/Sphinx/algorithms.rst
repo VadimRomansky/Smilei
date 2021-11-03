@@ -77,10 +77,11 @@ function :math:`f_s` as a sum of :math:`N_s` *quasi-particles* (also referred to
   :label: fs_discretized
 
   f_s(t,\mathbf{x},\mathbf{p}) =
-    \sum_{p=1}^{N_s}\,w_p\,\,S\big(\mathbf{x}-\mathbf{x}_p(t)\big)\,\delta\big(\mathbf{p}-\mathbf{p}_p(t)\big)\,,
+    \sum_{p=1}^{N_s}\,\frac{w_p}{V_c}\,\,S\big(\mathbf{x}-\mathbf{x}_p(t)\big)\,\delta\big(\mathbf{p}-\mathbf{p}_p(t)\big)\,,
 
 where :math:`w_p` is a quasi-particle *weight*, :math:`\mathbf{x}_p` is its position,
-:math:`\mathbf{p}_p` is its momentum, :math:`S` is the shape-function of all quasi-particles,
+:math:`\mathbf{p}_p` is its momentum, :math:`V_c` is the hypervolume of the cell,
+:math:`S` is the shape-function of all quasi-particles,
 and :math:`\delta` is the Dirac distribution.
 
 In PIC codes, Vlasov's equation :eq:`Vlasov` is integrated along the continuous trajectories
@@ -105,6 +106,8 @@ where :math:`r_s = q_s/m_s` is the charge-over-mass ratio (for species :math:`s`
 
 
 ----
+
+.. _StaggeredGrid:
 
 Time and space discretization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -167,7 +170,7 @@ to the cell it originates from:
 
 .. math::
 
-  w_p = \frac{n_s\big(\mathbf{x}_p(t=0)\big)}{N_s}\,.
+  w_p = \frac{n_s\big(\mathbf{x}_p(t=0)\big)}{N_s} V_c\,.
 
 This variable weighting is particularly beneficial when considering initially
 highly-inhomogeneous density distributions.
@@ -178,7 +181,9 @@ are computed on the grid using a simple projection technique:
 
 .. math::
 
-  \rho(t=0,\mathbf{x}) = \sum_s\,q_s\,\sum_p\,w_p\,S\big(\mathbf{x}-\mathbf{x}_p(t=0)\big)\,.
+  \rho(t=0,\mathbf{x}) = \sum_s\,\sum_p\,W_p\,S\big(\mathbf{x}-\mathbf{x}_p(t=0)\big)\,,
+
+where :math:`W_p = q_s w_p / V_c`.
 
 Then, the initial electric fields are computed from :math:`\rho(t=0,\mathbf{x})`
 by solving Poisson's equation. In :program:`Smilei`, this is done using the conjugate gradient
@@ -190,7 +195,7 @@ External (divergence-free) electric and/or magnetic fields can then be added to 
 resulting electrostatic fields, provided they fullfill Maxwell's equations :eq:`Maxwell`,
 and in particular Gauss' and Poisson's.
 
-Note that a relativistic plasma needs :doc:`special treatment <relativistic_fields_initialization>`.
+Note that a relativistically drifting plasma needs :doc:`special treatment <relativistic_fields_initialization>`.
 
 ----
 
@@ -222,13 +227,12 @@ particle position using a simple interpolation technique:
 .. math::
 
   \begin{eqnarray}
-  \mathbf{E}_p^{(n)} = V_c^{-1} \int d\mathbf{x}\, S\left(\mathbf{x}-\mathbf{x}_p^{(n)}\right) \mathbf{E}^{(n)}(\mathbf{x})\,,\\
-  \mathbf{B}_p^{(n)} = V_c^{-1} \int d\mathbf{x}\, S\left(\mathbf{x}-\mathbf{x}_p^{(n)}\right) \mathbf{B}^{(n)}(\mathbf{x})\,,
+  \mathbf{E}_p^{(n)} = V_c^{-1} \int d^3\mathbf{x}\, S\left(\mathbf{x}-\mathbf{x}_p^{(n)}\right) \mathbf{E}^{(n)}(\mathbf{x})\,,\\
+  \mathbf{B}_p^{(n)} = V_c^{-1} \int d^3\mathbf{x}\, S\left(\mathbf{x}-\mathbf{x}_p^{(n)}\right) \mathbf{B}^{(n)}(\mathbf{x})\,,
   \end{eqnarray}
 
 where we have used the time-centered magnetic fields
-:math:`\mathbf{B}^{(n)}=\tfrac{1}{2}[\mathbf{B}^{(n+1/2) } + \mathbf{B}^{(n-1/2)}]`,
-and :math:`V_c` denotes the volume of a cell.
+:math:`\mathbf{B}^{(n)}=\tfrac{1}{2}[\mathbf{B}^{(n+1/2) } + \mathbf{B}^{(n-1/2)}]`.
 
 
 Particle push
@@ -277,11 +281,11 @@ with charge :math:`q` are computed as:
 .. math::
 
   \begin{eqnarray}
-  (J_x)_{i+\tfrac{1}{2},j}^{(n+\tfrac{1}{2})} = (J_x)_{i-\tfrac{1}{2},j}^{(n+\tfrac{1}{2})} + q\,w_p\,\frac{\Delta x}{\Delta t}\,(W_x)_{i+\tfrac{1}{2},j}^{(n+\tfrac{1}{2})}\,\\
-  (J_y)_{i,j+\tfrac{1}{2}}^{(n+\tfrac{1}{2})} = (J_y)_{i,j-\tfrac{1}{2}}^{(n+\tfrac{1}{2})} + q\,w_p\,\frac{\Delta y}{\Delta t}\,(W_y)_{j,i+\tfrac{1}{2}}^{(n+\tfrac{1}{2})}\,
+  (J_x)_{i+\tfrac{1}{2},j}^{(n+\tfrac{1}{2})} = (J_x)_{i-\tfrac{1}{2},j}^{(n+\tfrac{1}{2})} + W_p\,\frac{\Delta x}{\Delta t}\,(W_x)_{i+\tfrac{1}{2},j}^{(n+\tfrac{1}{2})}\,\\
+  (J_y)_{i,j+\tfrac{1}{2}}^{(n+\tfrac{1}{2})} = (J_y)_{i,j-\tfrac{1}{2}}^{(n+\tfrac{1}{2})} + W_p\,\frac{\Delta y}{\Delta t}\,(W_y)_{j,i+\tfrac{1}{2}}^{(n+\tfrac{1}{2})}\,
   \end{eqnarray}
 
-where :math:`(W_x)^{(n+\tfrac{1}{2})}` and :math:`(W_y)^{(n+\tfrac{1}{2})}` are computed
+where :math:`(W_x)^{(n+\tfrac{1}{2})}` and :math:`(W_y)^{(n+\tfrac{1}{2})}` are quantities computed
 from the particle current and former positions :math:`x_p^{(n+1)}` and :math:`x_p^{(n)}`,
 respectively, using the method developed by Esirkepov.
 The particle current in the :math:`z`-direction (not a dimension of the grid) is,
@@ -289,7 +293,7 @@ in this geometry, computed using a simple projection:
 
 .. math::
 
-  (J_z)_{i,j} = q w_r \mathbf{v}_p\,S(\mathbf{x}_{i,j}-\mathbf{x}_p)\,.
+  (J_z)_{i,j} = W_r \mathbf{v}_p\,S(\mathbf{x}_{i,j}-\mathbf{x}_p)\,.
 
 
 In all cases, the charge density deposited by the particle is obtained using the simple
@@ -297,7 +301,7 @@ projection:
 
 .. math::
 
-  (\rho)_{i,j}^{(n+1)} = q\,w_p\,S(\mathbf{x}_{i,j}-\mathbf{x}_p^{(n+1)})\,.
+  (\rho)_{i,j}^{(n+1)} = W_p\,S(\mathbf{x}_{i,j}-\mathbf{x}_p^{(n+1)})\,.
 
 The total charge and current densities henceforth gather the contributions of all
 quasi-particles of all species. It is worth noting that, within a charge-conserving
@@ -376,26 +380,34 @@ Lastly, periodic BCs correspond to applying the fields from the opposite boundar
 Multi-pass filtering of the current densities
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A multi-pass binomial filter on the current densities is available in :program:`Smilei`,
-which implementation follows that `presented by Vay et al. (2011) <https://www.sciencedirect.com/science/article/pii/S0021999111002270?via%3Dihub>`_.
-Each pass consists in a 3-points spatial averaging (in all spatial dimensions) of the current densities, 
-so that the filtered current density (here defined at location i on a one-dimensional grid) is recomputed as:
+A multi-pass filter on the current densities is available in :program:`Smilei`.
+The user can choose a simple 3-points FIR binomial filter,
+which implementation follows that presented by
+`Vay et al. (2011) <https://www.sciencedirect.com/science/article/pii/S0021999111002270?via%3Dihub>`_,
+or a N-point kernel FIR filter.
+Each pass consists in a N-point spatial averaging (in one or all spatial dimensions)
+of the current densities, so that the filtered current density (here defined
+at location i on a one-dimensional grid) is recomputed as:
 
 .. math::
 
-    J_{f,i} = \frac{1}{2}\,J_i + \frac{J_{i+1}+J_{i-1}}{4}.
+    J_{f,i} = \sum_{n=-(N-1)/2}^{+(N-1)/2} K_{(N-1)/2+n}J_{i+n}
 
+In particular, the binomial filter uses a kernel *K = [0.25,0.5,0.25]* resulting in
 
-Current filtering, if required by the user, is applied before solving
+.. math::
+
+    J_{f,i} = \frac{1}{2} J_i + \frac{J_{i+1}+J_{i-1}}{4}
+
+A user-provided FIR kernel must be of length *N* with an odd number of coefficients
+(symmetrical to avoid phase effects).
+The number of ghost cells must be greater than *(N-1)/2*.
+Moreover, the sum of the kernel's coefficients must be equal to one.
+This `online tool <https://fiiir.com/>`_ is handy to design a custom filter.
+
+Current filtering, if requested by the user, is applied before solving
 Maxwell’s equation, and the number of passes is an :ref:`input parameter <CurrentFilter>`
 defined by the user.
-
-If necessary the user can provide his own FIR filter by setting his own kernel of length N. The number of ghost-cells have to be greater than (N-1)/2 accordingly.
-
-Large band low-pass filter of the current densities
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-A large band low-pass filter on the current densities is available in :program:`Smilei` too. The convolution kernel is a 21 points windowed-sinc.
 
 ----
 

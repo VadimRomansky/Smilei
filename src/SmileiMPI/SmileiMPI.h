@@ -24,8 +24,6 @@ class DiagnosticParticleBinning;
 class DiagnosticScreen;
 class DiagnosticRadiationSpectrum;
 
-#define SMILEI_COMM_DUMP_TIME 16777216
-
 //  --------------------------------------------------------------------------------------------------------------------
 //! Class SmileiMPI
 //  --------------------------------------------------------------------------------------------------------------------
@@ -35,6 +33,7 @@ class SmileiMPI
     friend class PatchesFactory;
     friend class Patch;
     friend class VectorPatch;
+    friend class SimWindow;
     friend class AsyncMPIbuffers;
 
 public:
@@ -133,7 +132,7 @@ public:
     //! Method to synchronize MPI process in the current MPI communicator
     inline void barrier()
     {
-        MPI_Barrier( SMILEI_COMM_WORLD );
+        MPI_Barrier( world_ );
     }
     //! Return MPI_Comm_rank
     inline int getRank()
@@ -147,17 +146,37 @@ public:
     }
 
     //! Return MPI_Comm_world
-    inline MPI_Comm getGlobalComm()
+    inline MPI_Comm& world()
     {
-        return SMILEI_COMM_WORLD;
+        return world_;
     }
 
-    //! Return MPI_Comm_size
+    //! Return omp_max_threads
     inline int getOMPMaxThreads()
     {
         return smilei_omp_max_threads;
     }
-
+    
+    //! Return local number of cores
+    inline int getNumCores()
+    {
+        return number_of_cores;
+    }
+    
+    //! Return global number of cores
+    inline int getGlobalNumCores()
+    {
+        return global_number_of_cores;
+    }
+    
+    //! Return tag upper bound of this MPI implementation
+    inline int getTagUB()
+    {
+        int flag;
+        int* tag_ub_ptr;
+        MPI_Comm_get_attr(MPI_COMM_WORLD, MPI_TAG_UB, &tag_ub_ptr, &flag);
+        return *tag_ub_ptr;
+    }
 
     // Global buffers for vectorization of Species::dynamics
     // -----------------------------------------------------
@@ -229,7 +248,7 @@ public:
     inline int globalNbrParticles( Species *species, int locNbrParticles )
     {
         int nParticles( 0 );
-        MPI_Reduce( &locNbrParticles, &nParticles, 1, MPI_INT, MPI_SUM, 0, SMILEI_COMM_WORLD );
+        MPI_Reduce( &locNbrParticles, &nParticles, 1, MPI_INT, MPI_SUM, 0, world_ );
         return nParticles;
     }
 
@@ -237,7 +256,7 @@ public:
 
 protected:
     //! Global MPI Communicator
-    MPI_Comm SMILEI_COMM_WORLD;
+    MPI_Comm world_;
 
     //! Number of MPI process in the current communicator
     int smilei_sz;
@@ -245,6 +264,10 @@ protected:
     int smilei_rk;
     //! OMP max number of threads in one MPI
     int smilei_omp_max_threads;
+    //! OMP available cores in one MPI
+    int number_of_cores;
+    //! Global number of cores
+    int global_number_of_cores;
 
     // Store periodicity (0/1) per direction
     // Should move in Params : last parameters of this type in this class

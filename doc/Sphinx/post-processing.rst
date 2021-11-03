@@ -84,10 +84,63 @@ In the case of the species, you can also obtain a given species by its name::
 
 ----
 
+Obtain diagnostic information
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. rubric:: Print available diagnostics
+
+Commands ``S.Scalar``, ``S.Field``, ``S.Probe`` (etc.) will display general information
+about the corresponding diagnostics in the simulation.
+
+.. rubric:: List available diagnostics
+
+.. py:method:: getDiags(diagType)
+
+  Returns a list of available diagnostics of the given type
+  
+  * ``diagType``: The diagnostic type (``"Field"``, ``"Probe"``, etc.)
+
+.. py:method:: getTrackSpecies()
+
+  Returns a list of available tracked species.
+  
+.. rubric:: Information on specific diagnostics
+
+.. py:method:: fieldInfo(diag)
+
+  * ``diag``: the number or name of a Field diagnostic
+  
+  Returns a dictionnary containing:
+  
+  * ``"diagNumber"``: the diagnostic number
+  * ``"diagName"``: the diagnostic name
+  * ``"fields"``: list of the available fields in this diagnostic. In the case of
+    ``AMcylindrical`` geometry, this is a dictionnary with a list of modes for each field.
+
+.. py:method:: probeInfo(diag)
+
+  * ``diag``: the number or name of a Probe diagnostic
+  
+  Returns a dictionnary containing:
+  
+  * ``"probeNumber"``: the diagnostic number
+  * ``"probeName"``: the diagnostic name
+  * ``"fields"``: list of the available fields in this diagnostic
+  
+.. py:method:: performanceInfo()
+ 
+  Returns a dictionnary containing:
+  
+  * ``"quantities_uint"``: a list of the available integer quantities
+  * ``"quantities_double"``: a list of the available float quantities
+  * ``"patch_arrangement"``: the type of patch arrangement
+
+----
+
 Open a Scalar diagnostic
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. py:method:: Scalar(scalar=None, timesteps=None, units=[""], data_log=False, **kwargs)
+.. py:method:: Scalar(scalar=None, timesteps=None, units=[""], data_log=False, data_transform=None, **kwargs)
 
   * ``scalar``: The name of the scalar.
      | If not given, then a list of available scalars is printed.
@@ -98,6 +151,8 @@ Open a Scalar diagnostic
   * ``units``: A unit specification (see :ref:`units`)
   * ``data_log``:
      | If ``True``, then :math:`\log_{10}` is applied to the output.
+  * ``data_transform``:
+     | If this is set to a function, the function is applied to the output before plotting.
   * See also :ref:`otherkwargs`
 
 **Example**::
@@ -110,9 +165,9 @@ Open a Scalar diagnostic
 Open a Field diagnostic
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-.. py:method:: Field(diagNumber=None, field=None, timesteps=None, subset=None, average=None, units=[""], data_log=False, moving=False, export_dir=None, **kwargs)
+.. py:method:: Field(diagNumber=None, field=None, timesteps=None, subset=None, average=None, units=[""], data_log=False, data_transform=None, moving=False, export_dir=None, **kwargs)
 
-  * ``timesteps``, ``units``, ``data_log``: same as before.
+  * ``timesteps``, ``units``, ``data_log``, ``data_transform``: same as before.
   * ``diagNumber``: number or ``name`` of the fields diagnostic
      | If not given, then a list of available diagnostic numbers is printed.
   * ``field``: The name of a field (``"Ex"``, ``"Ey"``, etc.)
@@ -168,9 +223,9 @@ Open a Field diagnostic
 Open a Probe diagnostic
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-.. py:method:: Probe(probeNumber=None, field=None, timesteps=None, subset=None, average=None, units=[""], data_log=False, **kwargs)
+.. py:method:: Probe(probeNumber=None, field=None, timesteps=None, subset=None, average=None, units=[""], data_log=False, data_transform=None, **kwargs)
 
-  * ``timesteps``, ``units``, ``data_log``, ``export_dir``: same as before.
+  * ``timesteps``, ``units``, ``data_log``, ``data_transform``, ``export_dir``: same as before.
   * ``probeNumber``: number or ``name`` of the probe (the first one has number 0).
      | If not given, a list of available probes is printed.
   * ``field``: name of the field (``"Bx"``, ``"By"``, ``"Bz"``, ``"Ex"``, ``"Ey"``, ``"Ez"``, ``"Jx"``, ``"Jy"``, ``"Jz"`` or ``"Rho"``).
@@ -191,9 +246,9 @@ Open a Probe diagnostic
 Open a ParticleBinning diagnostic
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. py:method:: ParticleBinning(diagNumber=None, timesteps=None, subset=None, sum=None, units=[""], data_log=False, **kwargs)
+.. py:method:: ParticleBinning(diagNumber=None, timesteps=None, subset=None, sum=None, units=[""], data_log=False, data_transform=None, **kwargs)
 
-  * ``timesteps``, ``units``, ``data_log``, ``export_dir``: same as before.
+  * ``timesteps``, ``units``, ``data_log``, ``data_transform``, ``export_dir``: same as before.
   * ``diagNumber``: number or ``name`` of the particle binning diagnostic (starts at 0).
      | If not given, a list of available diagnostics is printed.
      | It can also be an operation between several diagnostics.
@@ -236,9 +291,9 @@ Open a ParticleBinning diagnostic
 Open a Screen diagnostic
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. py:method:: Screen(diagNumber=None, timesteps=None, subset=None, sum=None, units=[""], data_log=False, **kwargs)
+.. py:method:: Screen(diagNumber=None, timesteps=None, subset=None, sum=None, units=[""], data_log=False, data_transform=None, **kwargs)
 
-  * ``timesteps``, ``units``, ``data_log``, ``export_dir``: same as before.
+  * ``timesteps``, ``units``, ``data_log``, ``data_transform``, ``export_dir``: same as before.
   * ``diagNumber``, ``subset`` and ``sum``: identical to that of ParticleBinning diagnostics.
   * See also :ref:`otherkwargs`
 
@@ -253,9 +308,9 @@ Open a Screen diagnostic
 Open a RadiationSpectrum diagnostic
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. py:method:: ParticleBinning(diagNumber=None, timesteps=None, subset=None, sum=None, units=[""], data_log=False, **kwargs)
+.. py:method:: ParticleBinning(diagNumber=None, timesteps=None, subset=None, sum=None, units=[""], data_log=False, data_transform=None, **kwargs)
 
-  * ``timesteps``, ``units``, ``data_log``, ``export_dir``: same as before.
+  * ``timesteps``, ``units``, ``data_log``, ``data_transform``, ``export_dir``: same as before.
   * ``diagNumber``, ``subset`` and ``sum``: identical to that of ParticleBinning diagnostics.
   * See also :ref:`otherkwargs`
 
@@ -278,7 +333,7 @@ Open a TrackParticles diagnostic
 
   * ``timesteps``, ``units``, ``export_dir``: same as before.
   * ``species``: the name of a tracked-particle species.
-     | If omitted, a list of available tracked-particle species is printed.
+    If omitted, a list of available tracked-particle species is printed.
   * ``select``: Instructions for selecting particles among those available.
     A detailed explanation is provided below
   * ``axes``: A list of axes for plotting the trajectories or obtaining particle data.
@@ -288,10 +343,20 @@ Open a TrackParticles diagnostic
      | **Example:** ``axes = ["x"]`` corresponds to :math:`x` versus time.
      | **Example:** ``axes = ["x","y"]`` correspond to 2-D trajectories.
      | **Example:** ``axes = ["x","px"]`` correspond to phase-space trajectories.
-  * ``sort``: If ``False``, the particles are not sorted by ID. This can save significant
-    time, but prevents plotting, exporting to VTK, and the ``select`` argument. Only
-    ``getData()`` is available in this mode. Read :doc:`this <ids>` for more information
-    on particle IDs.
+  * ``sort``: may be either
+    
+    * ``False``: the particles are not sorted by ID. This can save significant
+      time, but prevents plotting, exporting to VTK, and the ``select`` argument. Only
+      ``getData`` and ``iterParticles`` are available in this mode.
+      Read :doc:`this <ids>` for more information on particle IDs.
+    * ``True``: the particles are sorted in a new file, unless this file already exists.
+      If it does, sorted particles are directly read from the sorted file.
+    * A string for selecting particles (same syntax as ``select``): only selected
+      particles are sorted in a new file. The file name must be defined
+      in the argument ``sorted_as``.
+    
+  * ``sorted_as``: a keyword that defines the new sorted file name (when ``sort`` is a
+    selection) or refers to a previously user-defined sorted file name (when ``sort`` is not given).
   * ``length``: The length of each plotted trajectory, in number of timesteps.
   * See also :ref:`otherkwargs`
 
@@ -331,9 +396,9 @@ The post-processing of the *performances* diagnostic may be achieved in three di
 modes: ``raw``, ``map``, or ``histogram``, described further below. You must choose one
 and only one mode between those three.
 
-.. py:method:: Performances(raw=None, map=None, histogram=None, timesteps=None, units=[""], data_log=False, species=None, **kwargs)
+.. py:method:: Performances(raw=None, map=None, histogram=None, timesteps=None, units=[""], data_log=False, data_transform=None, species=None, **kwargs)
 
-  * ``timesteps``, ``units``, ``data_log``, ``export_dir``: same as before.
+  * ``timesteps``, ``units``, ``data_log``, ``data_transform``, ``export_dir``: same as before.
   * ``raw`` : The name of a quantity, or an operation between them (see quantities below).
     The requested quantity is listed for each process.
   * ``map`` : The name of a quantity, or an operation between them (see quantities below).
@@ -363,7 +428,8 @@ and only one mode between those three.
   * ``timer_syncDens``             : time spent synchronzing densities by each proc
   * ``timer_diags``                : time spent by each proc calculating and writing diagnostics
   * ``timer_total``                : the sum of all timers above (except timer_global)
-  * ``memory_total``               : the total memory used by the process
+  * ``memory_total``               : the total memory (RSS) used by the process in GB
+  * ``memory_peak``               : the peak memory (peak RSS) used by the process in GB
 
   **WARNING**: The timers ``loadBal`` and ``diags`` include *global* communications.
   This means they might contain time doing nothing, waiting for other processes.
@@ -442,6 +508,12 @@ to manipulate the plotting options:
 
 * ``figure``: The figure number that is passed to matplotlib.
 * ``vmin``, ``vmax``: data value limits.
+* ``vsym``: makes data limits symmetric about 0 (``vmin`` and ``vmax`` are ignored),
+  and sets the colormap to ``smileiD``. 
+  
+  * If ``vsym = True``, autoscale symmetrically.
+  * If ``vsym`` is a number, limits are set to [-``vsym``, ``vsym``].
+  
 * ``xmin``, ``xmax``, ``ymin``, ``ymax``: axes limits.
 * ``xfactor``, ``yfactor``: factors to rescale axes.
 * ``side``: ``"left"`` (by default) or ``"right"`` puts the y-axis on the left-
@@ -727,6 +799,16 @@ Simultaneous plotting of multiple diagnostics
   * ``skipAnimation`` : if True, plots only the last frame.
   * ``timesteps``: same as the ``timesteps`` argument of the :py:func:`plot` method.
 
+
+.. py:function:: happi.multiSlide(diag1, diag2, ... , **kwargs)
+
+  Identical to ``happi.multiPlot`` but uses a time slider instead of an animation.
+
+  * ``diag1``, ``diag2``, etc.
+     | Diagnostics prepared by ``Scalar()``, ``Field()``, ``Probe()``, etc.
+  * ``figure`` and ``shape``: same as in ``happi.multiPlot``.
+
+
 **Example**::
 
     S = happi.Open("path/to/my/results")
@@ -780,7 +862,7 @@ there are many more optional arguments. They are directly passed to the *matplot
   Please refer to
   `matplotlib's line options <http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot>`_.
 
-.. rubric:: For the image: ``cmap``, ``aspect``, ``interpolation``
+.. rubric:: For the image: ``cmap``, ``aspect``, ``interpolation``, ``norm``
 
 ..
 
@@ -789,7 +871,7 @@ there are many more optional arguments. They are directly passed to the *matplot
 
 .. rubric:: For the colorbar: ``cbaspect``, ``orientation``, ``fraction``, ``pad``,
   ``shrink``, ``anchor``, ``panchor``, ``extend``, ``extendfrac``, ``extendrect``,
-  ``spacing``, ``ticks``, ``format``, ``drawedges``
+  ``spacing``, ``ticks``, ``format``, ``drawedges``, ``size``, ``clabel``
 
 ..
 
@@ -806,7 +888,7 @@ there are many more optional arguments. They are directly passed to the *matplot
   `matplotlib's tick label format <http://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.ticklabel_format.html>`_.
 
 .. rubric:: For fonts: ``title_font``, ``xlabel_font``, ``xticklabels_font``,
-  ``ylabel_font``, ``yticklabels_font``
+  ``ylabel_font``, ``yticklabels_font``, ``colorbar_font``
   
 ..
 
@@ -814,7 +896,7 @@ there are many more optional arguments. They are directly passed to the *matplot
   `matplotlib's text options <https://matplotlib.org/api/text_api.html#matplotlib.text.Text>`_,
   for instance::
 
-    title_font = {'fontsize': 15, 'fontweight': 'bold', 'fontfamily':'serif', 'color': 'k'}
+    title_font = {'size': 15, 'weight': 'bold', 'family':'serif', 'color': 'k'}
 
 **Example**:
 
