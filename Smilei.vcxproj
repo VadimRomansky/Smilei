@@ -1,0 +1,500 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="scripts\hilbert_curve\Hilbert_functions.cpp" />
+    <ClCompile Include="scripts\hilbert_curve\main.cpp" />
+    <ClCompile Include="src\checkpoint\Checkpoint.cpp" />
+    <ClCompile Include="src\collisions\CollisionalFusionDD.cpp" />
+    <ClCompile Include="src\collisions\CollisionalIonization.cpp" />
+    <ClCompile Include="src\collisions\CollisionalNuclearReaction.cpp" />
+    <ClCompile Include="src\collisions\Collisions.cpp" />
+    <ClCompile Include="src\collisions\CollisionsSingle.cpp" />
+    <ClCompile Include="src\diagnostic\DiagnosticFields.cpp" />
+    <ClCompile Include="src\diagnostic\DiagnosticFields1D.cpp" />
+    <ClCompile Include="src\diagnostic\DiagnosticFields2D.cpp" />
+    <ClCompile Include="src\diagnostic\DiagnosticFields3D.cpp" />
+    <ClCompile Include="src\diagnostic\DiagnosticFieldsAM.cpp" />
+    <ClCompile Include="src\diagnostic\DiagnosticParticleBinning.cpp" />
+    <ClCompile Include="src\diagnostic\DiagnosticParticleBinningBase.cpp" />
+    <ClCompile Include="src\diagnostic\DiagnosticPerformances.cpp" />
+    <ClCompile Include="src\diagnostic\DiagnosticProbes.cpp" />
+    <ClCompile Include="src\diagnostic\DiagnosticRadiationSpectrum.cpp" />
+    <ClCompile Include="src\diagnostic\DiagnosticScalar.cpp" />
+    <ClCompile Include="src\diagnostic\DiagnosticScreen.cpp" />
+    <ClCompile Include="src\diagnostic\DiagnosticTrack.cpp" />
+    <ClCompile Include="src\diagnostic\Histogram.cpp" />
+    <ClCompile Include="src\diagnostic\TimeSelection.cpp" />
+    <ClCompile Include="src\domaindecomposition\GlobalDomainDecomposition.cpp" />
+    <ClCompile Include="src\domaindecomposition\HilbertDomainDecomposition.cpp" />
+    <ClCompile Include="src\domaindecomposition\Hilbert_functions.cpp" />
+    <ClCompile Include="src\domaindecomposition\LinearizedDomainDecomposition.cpp" />
+    <ClCompile Include="src\domaindecomposition\RegionDomainDecomposition.cpp" />
+    <ClCompile Include="src\electromagnbc\ElectroMagnBC.cpp" />
+    <ClCompile Include="src\electromagnbc\ElectroMagnBC1D.cpp" />
+    <ClCompile Include="src\electromagnbc\ElectroMagnBC1D_refl.cpp" />
+    <ClCompile Include="src\electromagnbc\ElectroMagnBC1D_SM.cpp" />
+    <ClCompile Include="src\electromagnbc\ElectroMagnBC2D.cpp" />
+    <ClCompile Include="src\electromagnbc\ElectroMagnBC2D_refl.cpp" />
+    <ClCompile Include="src\electromagnbc\ElectroMagnBC2D_SM.cpp" />
+    <ClCompile Include="src\electromagnbc\ElectroMagnBC2D_Trans_Damping.cpp" />
+    <ClCompile Include="src\electromagnbc\ElectroMagnBC3D.cpp" />
+    <ClCompile Include="src\electromagnbc\ElectroMagnBC3D_BM.cpp" />
+    <ClCompile Include="src\electromagnbc\ElectroMagnBC3D_refl.cpp" />
+    <ClCompile Include="src\electromagnbc\ElectroMagnBC3D_SM.cpp" />
+    <ClCompile Include="src\electromagnbc\ElectroMagnBCAM.cpp" />
+    <ClCompile Include="src\electromagnbc\ElectroMagnBCAM_BM.cpp" />
+    <ClCompile Include="src\electromagnbc\ElectroMagnBCAM_ramp.cpp" />
+    <ClCompile Include="src\electromagnbc\ElectroMagnBCAM_SM.cpp" />
+    <ClCompile Include="src\electromagnbc\EnvelopeBC.cpp" />
+    <ClCompile Include="src\electromagnbc\EnvelopeBC1D_refl.cpp" />
+    <ClCompile Include="src\electromagnbc\EnvelopeBC2D_refl.cpp" />
+    <ClCompile Include="src\electromagnbc\EnvelopeBC3D_refl.cpp" />
+    <ClCompile Include="src\electromagnbc\EnvelopeBCAM_Axis.cpp" />
+    <ClCompile Include="src\electromagnbc\EnvelopeBCAM_refl.cpp" />
+    <ClCompile Include="src\electromagnsolver\MA_Solver1D_norm.cpp" />
+    <ClCompile Include="src\electromagnsolver\MA_Solver2D_Friedman.cpp" />
+    <ClCompile Include="src\electromagnsolver\MA_Solver2D_norm.cpp" />
+    <ClCompile Include="src\electromagnsolver\MA_Solver3D_norm.cpp" />
+    <ClCompile Include="src\electromagnsolver\MA_SolverAM_norm.cpp" />
+    <ClCompile Include="src\electromagnsolver\MF_Solver1D_Yee.cpp" />
+    <ClCompile Include="src\electromagnsolver\MF_Solver2D_Bouchard.cpp" />
+    <ClCompile Include="src\electromagnsolver\MF_Solver2D_Cowan.cpp" />
+    <ClCompile Include="src\electromagnsolver\MF_Solver2D_Grassi.cpp" />
+    <ClCompile Include="src\electromagnsolver\MF_Solver2D_GrassiSpL.cpp" />
+    <ClCompile Include="src\electromagnsolver\MF_Solver2D_Lehe.cpp" />
+    <ClCompile Include="src\electromagnsolver\MF_Solver2D_Yee.cpp" />
+    <ClCompile Include="src\electromagnsolver\MF_Solver3D_Bouchard.cpp" />
+    <ClCompile Include="src\electromagnsolver\MF_Solver3D_Lehe.cpp" />
+    <ClCompile Include="src\electromagnsolver\MF_Solver3D_Yee.cpp" />
+    <ClCompile Include="src\electromagnsolver\MF_SolverAM_Yee.cpp" />
+    <ClCompile Include="src\electromagnsolver\PXR_Solver2D_GPSTD.cpp" />
+    <ClCompile Include="src\electromagnsolver\PXR_Solver3D_FDTD.cpp" />
+    <ClCompile Include="src\electromagnsolver\PXR_Solver3D_GPSTD.cpp" />
+    <ClCompile Include="src\electromagnsolver\PXR_SolverAM_GPSTD.cpp" />
+    <ClCompile Include="src\electromagn\ElectroMagn.cpp" />
+    <ClCompile Include="src\electromagn\ElectroMagn1D.cpp" />
+    <ClCompile Include="src\electromagn\ElectroMagn2D.cpp" />
+    <ClCompile Include="src\electromagn\ElectroMagn3D.cpp" />
+    <ClCompile Include="src\electromagn\ElectroMagnAM.cpp" />
+    <ClCompile Include="src\electromagn\Laser.cpp" />
+    <ClCompile Include="src\electromagn\LaserEnvelope.cpp" />
+    <ClCompile Include="src\electromagn\LaserEnvelope1D.cpp" />
+    <ClCompile Include="src\electromagn\LaserEnvelope2D.cpp" />
+    <ClCompile Include="src\electromagn\LaserEnvelope3D.cpp" />
+    <ClCompile Include="src\electromagn\LaserEnvelopeAM.cpp" />
+    <ClCompile Include="src\electromagn\LaserPropagator.cpp" />
+    <ClCompile Include="src\field\cField1D.cpp" />
+    <ClCompile Include="src\field\cField2D.cpp" />
+    <ClCompile Include="src\field\cField3D.cpp" />
+    <ClCompile Include="src\field\Field1D.cpp" />
+    <ClCompile Include="src\field\Field2D.cpp" />
+    <ClCompile Include="src\field\Field3D.cpp" />
+    <ClCompile Include="src\interpolator\Interpolator.cpp" />
+    <ClCompile Include="src\interpolator\Interpolator1D.cpp" />
+    <ClCompile Include="src\interpolator\Interpolator1D2Order.cpp" />
+    <ClCompile Include="src\interpolator\Interpolator1D3Order.cpp" />
+    <ClCompile Include="src\interpolator\Interpolator1D4Order.cpp" />
+    <ClCompile Include="src\interpolator\Interpolator2D.cpp" />
+    <ClCompile Include="src\interpolator\Interpolator2D2Order.cpp" />
+    <ClCompile Include="src\interpolator\Interpolator2D2OrderV.cpp" />
+    <ClCompile Include="src\interpolator\Interpolator2D4Order.cpp" />
+    <ClCompile Include="src\interpolator\Interpolator3D.cpp" />
+    <ClCompile Include="src\interpolator\Interpolator3D2Order.cpp" />
+    <ClCompile Include="src\interpolator\Interpolator3D2OrderV.cpp" />
+    <ClCompile Include="src\interpolator\Interpolator3D4Order.cpp" />
+    <ClCompile Include="src\interpolator\Interpolator3D4OrderV.cpp" />
+    <ClCompile Include="src\interpolator\InterpolatorAM.cpp" />
+    <ClCompile Include="src\interpolator\InterpolatorAM1Order.cpp" />
+    <ClCompile Include="src\interpolator\InterpolatorAM2Order.cpp" />
+    <ClCompile Include="src\ionization\Ionization.cpp" />
+    <ClCompile Include="src\ionization\IonizationFromRate.cpp" />
+    <ClCompile Include="src\ionization\IonizationTables.cpp" />
+    <ClCompile Include="src\ionization\IonizationTunnel.cpp" />
+    <ClCompile Include="src\ionization\IonizationTunnelEnvelopeAveraged.cpp" />
+    <ClCompile Include="src\merging\Merging.cpp" />
+    <ClCompile Include="src\merging\MergingVranicCartesian.cpp" />
+    <ClCompile Include="src\merging\MergingVranicSpherical.cpp" />
+    <ClCompile Include="src\movwindow\SimWindow.cpp" />
+    <ClCompile Include="src\multiphotonbreitwheeler\MultiphotonBreitWheeler.cpp" />
+    <ClCompile Include="src\multiphotonbreitwheeler\MultiphotonBreitWheelerTables.cpp" />
+    <ClCompile Include="src\multiphotonbreitwheeler\MultiphotonBreitWheelerTablesDefault.cpp" />
+    <ClCompile Include="src\params\OpenPMDparams.cpp" />
+    <ClCompile Include="src\params\Params.cpp" />
+    <ClCompile Include="src\params\PeekAtSpecies.cpp" />
+    <ClCompile Include="src\particlebc\BoundaryConditionType.cpp" />
+    <ClCompile Include="src\particlebc\PartBoundCond.cpp" />
+    <ClCompile Include="src\particlebc\PartWall.cpp" />
+    <ClCompile Include="src\particleinjector\ParticleInjector.cpp" />
+    <ClCompile Include="src\particles\Particle.cpp" />
+    <ClCompile Include="src\particles\ParticleCreator.cpp" />
+    <ClCompile Include="src\particles\Particles.cpp" />
+    <ClCompile Include="src\patch\DoubleGrids.cpp" />
+    <ClCompile Include="src\patch\DoubleGridsAM.cpp" />
+    <ClCompile Include="src\patch\Patch.cpp" />
+    <ClCompile Include="src\patch\Patch1D.cpp" />
+    <ClCompile Include="src\patch\Patch2D.cpp" />
+    <ClCompile Include="src\patch\Patch3D.cpp" />
+    <ClCompile Include="src\patch\PatchAM.cpp" />
+    <ClCompile Include="src\patch\Region.cpp" />
+    <ClCompile Include="src\patch\SyncVectorPatch.cpp" />
+    <ClCompile Include="src\patch\VectorPatch.cpp" />
+    <ClCompile Include="src\picsar_interface\interface.cpp" />
+    <ClCompile Include="src\profiles\Function.cpp" />
+    <ClCompile Include="src\profiles\Profile.cpp" />
+    <ClCompile Include="src\projector\Projector.cpp" />
+    <ClCompile Include="src\projector\Projector1D.cpp" />
+    <ClCompile Include="src\projector\Projector1D2Order.cpp" />
+    <ClCompile Include="src\projector\Projector1D4Order.cpp" />
+    <ClCompile Include="src\projector\Projector2D.cpp" />
+    <ClCompile Include="src\projector\Projector2D2Order.cpp" />
+    <ClCompile Include="src\projector\Projector2D2OrderV.cpp" />
+    <ClCompile Include="src\projector\Projector2D4Order.cpp" />
+    <ClCompile Include="src\projector\Projector3D.cpp" />
+    <ClCompile Include="src\projector\Projector3D2Order.cpp" />
+    <ClCompile Include="src\projector\Projector3D2OrderGPU.cpp" />
+    <ClCompile Include="src\projector\Projector3D2OrderV.cpp" />
+    <ClCompile Include="src\projector\Projector3D4Order.cpp" />
+    <ClCompile Include="src\projector\Projector3D4OrderV.cpp" />
+    <ClCompile Include="src\projector\ProjectorAM.cpp" />
+    <ClCompile Include="src\projector\ProjectorAM1Order.cpp" />
+    <ClCompile Include="src\projector\ProjectorAM2Order.cpp" />
+    <ClCompile Include="src\pusher\Pusher.cpp" />
+    <ClCompile Include="src\pusher\PusherBoris.cpp" />
+    <ClCompile Include="src\pusher\PusherBorisNR.cpp" />
+    <ClCompile Include="src\pusher\PusherHigueraCary.cpp" />
+    <ClCompile Include="src\pusher\PusherPhoton.cpp" />
+    <ClCompile Include="src\pusher\PusherPonderomotiveBoris.cpp" />
+    <ClCompile Include="src\pusher\PusherPonderomotivePositionBoris.cpp" />
+    <ClCompile Include="src\pusher\PusherVay.cpp" />
+    <ClCompile Include="src\radiation\Radiation.cpp" />
+    <ClCompile Include="src\radiation\RadiationCorrLandauLifshitz.cpp" />
+    <ClCompile Include="src\radiation\RadiationDiagRadiationSpectrum.cpp" />
+    <ClCompile Include="src\radiation\RadiationLandauLifshitz.cpp" />
+    <ClCompile Include="src\radiation\RadiationMonteCarlo.cpp" />
+    <ClCompile Include="src\radiation\RadiationNiel.cpp" />
+    <ClCompile Include="src\radiation\RadiationTables.cpp" />
+    <ClCompile Include="src\radiation\RadiationTablesDefault.cpp" />
+    <ClCompile Include="src\radiation\RadiationTools.cpp" />
+    <ClCompile Include="src\Smilei.cpp" />
+    <ClCompile Include="src\smileimpi\AsyncMPIbuffers.cpp" />
+    <ClCompile Include="src\smileimpi\SmileiMPI.cpp" />
+    <ClCompile Include="src\smileimpi\SmileiMPI_test.cpp" />
+    <ClCompile Include="src\species\Species.cpp" />
+    <ClCompile Include="src\species\SpeciesMetrics.cpp" />
+    <ClCompile Include="src\species\SpeciesV.cpp" />
+    <ClCompile Include="src\species\SpeciesVAdaptive.cpp" />
+    <ClCompile Include="src\species\SpeciesVAdaptiveMixedSort.cpp" />
+    <ClCompile Include="src\tools\backward.cpp" />
+    <ClCompile Include="src\tools\H5.cpp" />
+    <ClCompile Include="src\tools\PyTools.cpp" />
+    <ClCompile Include="src\tools\tabulatedFunctions.cpp" />
+    <ClCompile Include="src\tools\Timer.cpp" />
+    <ClCompile Include="src\tools\Timers.cpp" />
+    <ClCompile Include="src\tools\Tools.cpp" />
+    <ClCompile Include="src\tools\userFunctions.cpp" />
+    <ClCompile Include="tools\tables\Main.cpp" />
+    <ClCompile Include="tools\tables\MultiphotonBreitWheeler.cpp" />
+    <ClCompile Include="tools\tables\NonlinearInverseComptonScattering.cpp" />
+    <ClCompile Include="tools\tables\Tools.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="scripts\hilbert_curve\Hilbert_functions.h" />
+    <ClInclude Include="src\checkpoint\Checkpoint.h" />
+    <ClInclude Include="src\collisions\CollisionalFusionDD.h" />
+    <ClInclude Include="src\collisions\CollisionalIonization.h" />
+    <ClInclude Include="src\collisions\CollisionalNuclearReaction.h" />
+    <ClInclude Include="src\collisions\Collisions.h" />
+    <ClInclude Include="src\collisions\CollisionsFactory.h" />
+    <ClInclude Include="src\collisions\CollisionsSingle.h" />
+    <ClInclude Include="src\diagnostic\Diagnostic.h" />
+    <ClInclude Include="src\diagnostic\DiagnosticFactory.h" />
+    <ClInclude Include="src\diagnostic\DiagnosticFields.h" />
+    <ClInclude Include="src\diagnostic\DiagnosticFields1D.h" />
+    <ClInclude Include="src\diagnostic\DiagnosticFields2D.h" />
+    <ClInclude Include="src\diagnostic\DiagnosticFields3D.h" />
+    <ClInclude Include="src\diagnostic\DiagnosticFieldsAM.h" />
+    <ClInclude Include="src\diagnostic\DiagnosticParticleBinning.h" />
+    <ClInclude Include="src\diagnostic\DiagnosticParticleBinningBase.h" />
+    <ClInclude Include="src\diagnostic\DiagnosticPerformances.h" />
+    <ClInclude Include="src\diagnostic\DiagnosticProbes.h" />
+    <ClInclude Include="src\diagnostic\DiagnosticRadiationSpectrum.h" />
+    <ClInclude Include="src\diagnostic\DiagnosticScalar.h" />
+    <ClInclude Include="src\diagnostic\DiagnosticScreen.h" />
+    <ClInclude Include="src\diagnostic\DiagnosticTrack.h" />
+    <ClInclude Include="src\diagnostic\Histogram.h" />
+    <ClInclude Include="src\diagnostic\HistogramFactory.h" />
+    <ClInclude Include="src\diagnostic\TimeSelection.h" />
+    <ClInclude Include="src\domaindecomposition\DomainDecomposition.h" />
+    <ClInclude Include="src\domaindecomposition\DomainDecompositionFactory.h" />
+    <ClInclude Include="src\domaindecomposition\GlobalDomainDecomposition.h" />
+    <ClInclude Include="src\domaindecomposition\HilbertDomainDecomposition.h" />
+    <ClInclude Include="src\domaindecomposition\Hilbert_functions.h" />
+    <ClInclude Include="src\domaindecomposition\LinearizedDomainDecomposition.h" />
+    <ClInclude Include="src\domaindecomposition\RegionDomainDecomposition.h" />
+    <ClInclude Include="src\electromagnbc\ElectroMagnBC.h" />
+    <ClInclude Include="src\electromagnbc\ElectroMagnBC1D.h" />
+    <ClInclude Include="src\electromagnbc\ElectroMagnBC1D_refl.h" />
+    <ClInclude Include="src\electromagnbc\ElectroMagnBC1D_SM.h" />
+    <ClInclude Include="src\electromagnbc\ElectroMagnBC2D.h" />
+    <ClInclude Include="src\electromagnbc\ElectroMagnBC2D_refl.h" />
+    <ClInclude Include="src\electromagnbc\ElectroMagnBC2D_SM.h" />
+    <ClInclude Include="src\electromagnbc\ElectroMagnBC2D_Trans_Damping.h" />
+    <ClInclude Include="src\electromagnbc\ElectroMagnBC3D.h" />
+    <ClInclude Include="src\electromagnbc\ElectroMagnBC3D_BM.h" />
+    <ClInclude Include="src\electromagnbc\ElectroMagnBC3D_refl.h" />
+    <ClInclude Include="src\electromagnbc\ElectroMagnBC3D_SM.h" />
+    <ClInclude Include="src\electromagnbc\ElectroMagnBCAM.h" />
+    <ClInclude Include="src\electromagnbc\ElectroMagnBCAM_BM.h" />
+    <ClInclude Include="src\electromagnbc\ElectroMagnBCAM_ramp.h" />
+    <ClInclude Include="src\electromagnbc\ElectroMagnBCAM_SM.h" />
+    <ClInclude Include="src\electromagnbc\ElectroMagnBC_Factory.h" />
+    <ClInclude Include="src\electromagnbc\EnvelopeBC.h" />
+    <ClInclude Include="src\electromagnbc\EnvelopeBC1D_refl.h" />
+    <ClInclude Include="src\electromagnbc\EnvelopeBC2D_refl.h" />
+    <ClInclude Include="src\electromagnbc\EnvelopeBC3D_refl.h" />
+    <ClInclude Include="src\electromagnbc\EnvelopeBCAM_Axis.h" />
+    <ClInclude Include="src\electromagnbc\EnvelopeBCAM_refl.h" />
+    <ClInclude Include="src\electromagnbc\EnvelopeBC_Factory.h" />
+    <ClInclude Include="src\electromagnsolver\MA_Solver1D_norm.h" />
+    <ClInclude Include="src\electromagnsolver\MA_Solver2D_Friedman.h" />
+    <ClInclude Include="src\electromagnsolver\MA_Solver2D_norm.h" />
+    <ClInclude Include="src\electromagnsolver\MA_Solver3D_norm.h" />
+    <ClInclude Include="src\electromagnsolver\MA_SolverAM_norm.h" />
+    <ClInclude Include="src\electromagnsolver\MF_Solver1D_Yee.h" />
+    <ClInclude Include="src\electromagnsolver\MF_Solver2D_Bouchard.h" />
+    <ClInclude Include="src\electromagnsolver\MF_Solver2D_Cowan.h" />
+    <ClInclude Include="src\electromagnsolver\MF_Solver2D_Grassi.h" />
+    <ClInclude Include="src\electromagnsolver\MF_Solver2D_GrassiSpL.h" />
+    <ClInclude Include="src\electromagnsolver\MF_Solver2D_Lehe.h" />
+    <ClInclude Include="src\electromagnsolver\MF_Solver2D_Yee.h" />
+    <ClInclude Include="src\electromagnsolver\MF_Solver3D_Bouchard.h" />
+    <ClInclude Include="src\electromagnsolver\MF_Solver3D_Lehe.h" />
+    <ClInclude Include="src\electromagnsolver\MF_Solver3D_Yee.h" />
+    <ClInclude Include="src\electromagnsolver\MF_SolverAM_Yee.h" />
+    <ClInclude Include="src\electromagnsolver\PXR_Solver2D_GPSTD.h" />
+    <ClInclude Include="src\electromagnsolver\PXR_Solver3D_FDTD.h" />
+    <ClInclude Include="src\electromagnsolver\PXR_Solver3D_GPSTD.h" />
+    <ClInclude Include="src\electromagnsolver\PXR_SolverAM_GPSTD.h" />
+    <ClInclude Include="src\electromagnsolver\Solver.h" />
+    <ClInclude Include="src\electromagnsolver\Solver1D.h" />
+    <ClInclude Include="src\electromagnsolver\Solver2D.h" />
+    <ClInclude Include="src\electromagnsolver\Solver3D.h" />
+    <ClInclude Include="src\electromagnsolver\SolverAM.h" />
+    <ClInclude Include="src\electromagnsolver\SolverFactory.h" />
+    <ClInclude Include="src\electromagn\ElectroMagn.h" />
+    <ClInclude Include="src\electromagn\ElectroMagn1D.h" />
+    <ClInclude Include="src\electromagn\ElectroMagn2D.h" />
+    <ClInclude Include="src\electromagn\ElectroMagn3D.h" />
+    <ClInclude Include="src\electromagn\ElectroMagnAM.h" />
+    <ClInclude Include="src\electromagn\ElectroMagnFactory.h" />
+    <ClInclude Include="src\electromagn\EnvelopeFactory.h" />
+    <ClInclude Include="src\electromagn\Laser.h" />
+    <ClInclude Include="src\electromagn\LaserEnvelope.h" />
+    <ClInclude Include="src\electromagn\LaserPropagator.h" />
+    <ClInclude Include="src\field\cField.h" />
+    <ClInclude Include="src\field\cField1D.h" />
+    <ClInclude Include="src\field\cField2D.h" />
+    <ClInclude Include="src\field\cField3D.h" />
+    <ClInclude Include="src\field\dcomplex.h" />
+    <ClInclude Include="src\field\Field.h" />
+    <ClInclude Include="src\field\Field1D.h" />
+    <ClInclude Include="src\field\Field2D.h" />
+    <ClInclude Include="src\field\Field3D.h" />
+    <ClInclude Include="src\field\FieldFactory.h" />
+    <ClInclude Include="src\interpolator\Interpolator.h" />
+    <ClInclude Include="src\interpolator\Interpolator1D.h" />
+    <ClInclude Include="src\interpolator\Interpolator1D2Order.h" />
+    <ClInclude Include="src\interpolator\Interpolator1D3Order.h" />
+    <ClInclude Include="src\interpolator\Interpolator1D4Order.h" />
+    <ClInclude Include="src\interpolator\Interpolator2D.h" />
+    <ClInclude Include="src\interpolator\Interpolator2D2Order.h" />
+    <ClInclude Include="src\interpolator\Interpolator2D2OrderV.h" />
+    <ClInclude Include="src\interpolator\Interpolator2D4Order.h" />
+    <ClInclude Include="src\interpolator\Interpolator3D.h" />
+    <ClInclude Include="src\interpolator\Interpolator3D2Order.h" />
+    <ClInclude Include="src\interpolator\Interpolator3D2OrderV.h" />
+    <ClInclude Include="src\interpolator\Interpolator3D4Order.h" />
+    <ClInclude Include="src\interpolator\Interpolator3D4OrderV.h" />
+    <ClInclude Include="src\interpolator\InterpolatorAM.h" />
+    <ClInclude Include="src\interpolator\InterpolatorAM1Order.h" />
+    <ClInclude Include="src\interpolator\InterpolatorAM2Order.h" />
+    <ClInclude Include="src\interpolator\InterpolatorFactory.h" />
+    <ClInclude Include="src\ionization\Ionization.h" />
+    <ClInclude Include="src\ionization\IonizationFactory.h" />
+    <ClInclude Include="src\ionization\IonizationFromRate.h" />
+    <ClInclude Include="src\ionization\IonizationTables.h" />
+    <ClInclude Include="src\ionization\IonizationTunnel.h" />
+    <ClInclude Include="src\ionization\IonizationTunnelEnvelopeAveraged.h" />
+    <ClInclude Include="src\merging\Merging.h" />
+    <ClInclude Include="src\merging\MergingFactory.h" />
+    <ClInclude Include="src\merging\MergingVranicCartesian.h" />
+    <ClInclude Include="src\merging\MergingVranicSpherical.h" />
+    <ClInclude Include="src\movwindow\SimWindow.h" />
+    <ClInclude Include="src\multiphotonbreitwheeler\MultiphotonBreitWheeler.h" />
+    <ClInclude Include="src\multiphotonbreitwheeler\MultiphotonBreitWheelerFactory.h" />
+    <ClInclude Include="src\multiphotonbreitwheeler\MultiphotonBreitWheelerTables.h" />
+    <ClInclude Include="src\multiphotonbreitwheeler\MultiphotonBreitWheelerTablesDefault.h" />
+    <ClInclude Include="src\params\OpenPMDparams.h" />
+    <ClInclude Include="src\params\Params.h" />
+    <ClInclude Include="src\params\PeekAtSpecies.h" />
+    <ClInclude Include="src\particlebc\BoundaryConditionType.h" />
+    <ClInclude Include="src\particlebc\PartBoundCond.h" />
+    <ClInclude Include="src\particlebc\PartWall.h" />
+    <ClInclude Include="src\particleinjector\ParticleInjector.h" />
+    <ClInclude Include="src\particleinjector\ParticleInjectorFactory.h" />
+    <ClInclude Include="src\particles\Particle.h" />
+    <ClInclude Include="src\particles\ParticleCreator.h" />
+    <ClInclude Include="src\particles\ParticleData.h" />
+    <ClInclude Include="src\particles\Particles.h" />
+    <ClInclude Include="src\patch\DoubleGrids.h" />
+    <ClInclude Include="src\patch\DoubleGridsAM.h" />
+    <ClInclude Include="src\patch\Patch.h" />
+    <ClInclude Include="src\patch\Patch1D.h" />
+    <ClInclude Include="src\patch\Patch2D.h" />
+    <ClInclude Include="src\patch\Patch3D.h" />
+    <ClInclude Include="src\patch\PatchAM.h" />
+    <ClInclude Include="src\patch\PatchesFactory.h" />
+    <ClInclude Include="src\patch\Region.h" />
+    <ClInclude Include="src\patch\SyncVectorPatch.h" />
+    <ClInclude Include="src\patch\VectorPatch.h" />
+    <ClInclude Include="src\picsar_interface\interface.h" />
+    <ClInclude Include="src\profiles\Function.h" />
+    <ClInclude Include="src\profiles\Profile.h" />
+    <ClInclude Include="src\projector\Projector.h" />
+    <ClInclude Include="src\projector\Projector1D.h" />
+    <ClInclude Include="src\projector\Projector1D2Order.h" />
+    <ClInclude Include="src\projector\Projector1D4Order.h" />
+    <ClInclude Include="src\projector\Projector2D.h" />
+    <ClInclude Include="src\projector\Projector2D2Order.h" />
+    <ClInclude Include="src\projector\Projector2D2OrderV.h" />
+    <ClInclude Include="src\projector\Projector2D4Order.h" />
+    <ClInclude Include="src\projector\Projector3D.h" />
+    <ClInclude Include="src\projector\Projector3D2Order.h" />
+    <ClInclude Include="src\projector\Projector3D2OrderGPU.h" />
+    <ClInclude Include="src\projector\Projector3D2OrderV.h" />
+    <ClInclude Include="src\projector\Projector3D4Order.h" />
+    <ClInclude Include="src\projector\Projector3D4OrderV.h" />
+    <ClInclude Include="src\projector\ProjectorAM.h" />
+    <ClInclude Include="src\projector\ProjectorAM1Order.h" />
+    <ClInclude Include="src\projector\ProjectorAM2Order.h" />
+    <ClInclude Include="src\projector\ProjectorFactory.h" />
+    <ClInclude Include="src\pusher\Pusher.h" />
+    <ClInclude Include="src\pusher\PusherBoris.h" />
+    <ClInclude Include="src\pusher\PusherBorisNR.h" />
+    <ClInclude Include="src\pusher\PusherFactory.h" />
+    <ClInclude Include="src\pusher\PusherHigueraCary.h" />
+    <ClInclude Include="src\pusher\PusherPhoton.h" />
+    <ClInclude Include="src\pusher\PusherPonderomotiveBoris.h" />
+    <ClInclude Include="src\pusher\PusherPonderomotivePositionBoris.h" />
+    <ClInclude Include="src\pusher\PusherVay.h" />
+    <ClInclude Include="src\radiation\Radiation.h" />
+    <ClInclude Include="src\radiation\RadiationCorrLandauLifshitz.h" />
+    <ClInclude Include="src\radiation\RadiationDiagRadiationSpectrum.h" />
+    <ClInclude Include="src\radiation\RadiationFactory.h" />
+    <ClInclude Include="src\radiation\RadiationLandauLifshitz.h" />
+    <ClInclude Include="src\radiation\RadiationMonteCarlo.h" />
+    <ClInclude Include="src\radiation\RadiationNiel.h" />
+    <ClInclude Include="src\radiation\RadiationTables.h" />
+    <ClInclude Include="src\radiation\RadiationTablesDefault.h" />
+    <ClInclude Include="src\radiation\RadiationTools.h" />
+    <ClInclude Include="src\Smilei.h" />
+    <ClInclude Include="src\smileimpi\AsyncMPIbuffers.h" />
+    <ClInclude Include="src\smileimpi\SmileiMPI.h" />
+    <ClInclude Include="src\smileimpi\SmileiMPI_test.h" />
+    <ClInclude Include="src\species\Species.h" />
+    <ClInclude Include="src\species\SpeciesFactory.h" />
+    <ClInclude Include="src\species\SpeciesMetrics.h" />
+    <ClInclude Include="src\species\SpeciesV.h" />
+    <ClInclude Include="src\species\SpeciesVAdaptive.h" />
+    <ClInclude Include="src\species\SpeciesVAdaptiveMixedSort.h" />
+    <ClInclude Include="src\tools\backward.hpp" />
+    <ClInclude Include="src\tools\codeConstants.h" />
+    <ClInclude Include="src\tools\H5.h" />
+    <ClInclude Include="src\tools\PyTools.h" />
+    <ClInclude Include="src\tools\Random.h" />
+    <ClInclude Include="src\tools\tabulatedFunctions.h" />
+    <ClInclude Include="src\tools\Timer.h" />
+    <ClInclude Include="src\tools\Timers.h" />
+    <ClInclude Include="src\tools\Tools.h" />
+    <ClInclude Include="src\tools\userFunctions.h" />
+    <ClInclude Include="tools\tables\H5.h" />
+    <ClInclude Include="tools\tables\MultiphotonBreitWheeler.h" />
+    <ClInclude Include="tools\tables\NonlinearInverseComptonScattering.h" />
+    <ClInclude Include="tools\tables\Tools.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\index.html" />
+    <None Include="doc\sphinx\smilei_theme\layout.html" />
+    <None Include="doc\sphinx\smilei_theme\search.html" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

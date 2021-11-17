@@ -1,0 +1,1280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="scripts\hilbert_curve\Hilbert_functions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\hilbert_curve\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Smilei.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\checkpoint\Checkpoint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\collisions\CollisionalFusionDD.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\collisions\CollisionalIonization.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\collisions\CollisionalNuclearReaction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\collisions\Collisions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\collisions\CollisionsSingle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\diagnostic\DiagnosticFields.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\diagnostic\DiagnosticFields1D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\diagnostic\DiagnosticFields2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\diagnostic\DiagnosticFields3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\diagnostic\DiagnosticFieldsAM.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\diagnostic\DiagnosticParticleBinning.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\diagnostic\DiagnosticParticleBinningBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\diagnostic\DiagnosticPerformances.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\diagnostic\DiagnosticProbes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\diagnostic\DiagnosticRadiationSpectrum.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\diagnostic\DiagnosticScalar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\diagnostic\DiagnosticScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\diagnostic\DiagnosticTrack.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\diagnostic\Histogram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\diagnostic\TimeSelection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\domaindecomposition\GlobalDomainDecomposition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\domaindecomposition\HilbertDomainDecomposition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\domaindecomposition\Hilbert_functions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\domaindecomposition\LinearizedDomainDecomposition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\domaindecomposition\RegionDomainDecomposition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagn\ElectroMagn.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagn\ElectroMagn1D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagn\ElectroMagn2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagn\ElectroMagn3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagn\ElectroMagnAM.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagn\Laser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagn\LaserEnvelope.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagn\LaserEnvelope1D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagn\LaserEnvelope2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagn\LaserEnvelope3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagn\LaserEnvelopeAM.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagn\LaserPropagator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnbc\ElectroMagnBC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnbc\ElectroMagnBC1D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnbc\ElectroMagnBC1D_refl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnbc\ElectroMagnBC1D_SM.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnbc\ElectroMagnBC2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnbc\ElectroMagnBC2D_refl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnbc\ElectroMagnBC2D_SM.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnbc\ElectroMagnBC2D_Trans_Damping.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnbc\ElectroMagnBC3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnbc\ElectroMagnBC3D_BM.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnbc\ElectroMagnBC3D_refl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnbc\ElectroMagnBC3D_SM.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnbc\ElectroMagnBCAM.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnbc\ElectroMagnBCAM_BM.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnbc\ElectroMagnBCAM_ramp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnbc\ElectroMagnBCAM_SM.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnbc\EnvelopeBC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnbc\EnvelopeBC1D_refl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnbc\EnvelopeBC2D_refl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnbc\EnvelopeBC3D_refl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnbc\EnvelopeBCAM_Axis.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnbc\EnvelopeBCAM_refl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnsolver\MA_Solver1D_norm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnsolver\MA_Solver2D_Friedman.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnsolver\MA_Solver2D_norm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnsolver\MA_Solver3D_norm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnsolver\MA_SolverAM_norm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnsolver\MF_Solver1D_Yee.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnsolver\MF_Solver2D_Bouchard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnsolver\MF_Solver2D_Cowan.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnsolver\MF_Solver2D_Grassi.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnsolver\MF_Solver2D_GrassiSpL.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnsolver\MF_Solver2D_Lehe.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnsolver\MF_Solver2D_Yee.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnsolver\MF_Solver3D_Bouchard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnsolver\MF_Solver3D_Lehe.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnsolver\MF_Solver3D_Yee.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnsolver\MF_SolverAM_Yee.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnsolver\PXR_Solver2D_GPSTD.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnsolver\PXR_Solver3D_FDTD.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnsolver\PXR_Solver3D_GPSTD.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\electromagnsolver\PXR_SolverAM_GPSTD.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\field\cField1D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\field\cField2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\field\cField3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\field\Field1D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\field\Field2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\field\Field3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\interpolator\Interpolator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\interpolator\Interpolator1D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\interpolator\Interpolator1D2Order.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\interpolator\Interpolator1D3Order.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\interpolator\Interpolator1D4Order.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\interpolator\Interpolator2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\interpolator\Interpolator2D2Order.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\interpolator\Interpolator2D2OrderV.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\interpolator\Interpolator2D4Order.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\interpolator\Interpolator3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\interpolator\Interpolator3D2Order.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\interpolator\Interpolator3D2OrderV.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\interpolator\Interpolator3D4Order.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\interpolator\Interpolator3D4OrderV.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\interpolator\InterpolatorAM.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\interpolator\InterpolatorAM1Order.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\interpolator\InterpolatorAM2Order.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ionization\Ionization.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ionization\IonizationFromRate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ionization\IonizationTables.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ionization\IonizationTunnel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ionization\IonizationTunnelEnvelopeAveraged.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\merging\Merging.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\merging\MergingVranicCartesian.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\merging\MergingVranicSpherical.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\movwindow\SimWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\multiphotonbreitwheeler\MultiphotonBreitWheeler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\multiphotonbreitwheeler\MultiphotonBreitWheelerTables.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\multiphotonbreitwheeler\MultiphotonBreitWheelerTablesDefault.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\params\OpenPMDparams.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\params\Params.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\params\PeekAtSpecies.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\particlebc\BoundaryConditionType.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\particlebc\PartBoundCond.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\particlebc\PartWall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\particleinjector\ParticleInjector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\particles\Particle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\particles\ParticleCreator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\particles\Particles.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\patch\DoubleGrids.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\patch\DoubleGridsAM.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\patch\Patch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\patch\Patch1D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\patch\Patch2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\patch\Patch3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\patch\PatchAM.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\patch\Region.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\patch\SyncVectorPatch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\patch\VectorPatch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\picsar_interface\interface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\profiles\Function.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\profiles\Profile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\projector\Projector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\projector\Projector1D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\projector\Projector1D2Order.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\projector\Projector1D4Order.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\projector\Projector2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\projector\Projector2D2Order.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\projector\Projector2D2OrderV.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\projector\Projector2D4Order.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\projector\Projector3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\projector\Projector3D2Order.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\projector\Projector3D2OrderGPU.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\projector\Projector3D2OrderV.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\projector\Projector3D4Order.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\projector\Projector3D4OrderV.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\projector\ProjectorAM.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\projector\ProjectorAM1Order.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\projector\ProjectorAM2Order.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pusher\Pusher.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pusher\PusherBoris.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pusher\PusherBorisNR.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pusher\PusherHigueraCary.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pusher\PusherPhoton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pusher\PusherPonderomotiveBoris.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pusher\PusherPonderomotivePositionBoris.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pusher\PusherVay.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\radiation\Radiation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\radiation\RadiationCorrLandauLifshitz.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\radiation\RadiationDiagRadiationSpectrum.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\radiation\RadiationLandauLifshitz.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\radiation\RadiationMonteCarlo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\radiation\RadiationNiel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\radiation\RadiationTables.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\radiation\RadiationTablesDefault.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\radiation\RadiationTools.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\smileimpi\AsyncMPIbuffers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\smileimpi\SmileiMPI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\smileimpi\SmileiMPI_test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\species\Species.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\species\SpeciesMetrics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\species\SpeciesV.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\species\SpeciesVAdaptive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\species\SpeciesVAdaptiveMixedSort.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tools\backward.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tools\H5.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tools\PyTools.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tools\tabulatedFunctions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tools\Timer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tools\Timers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tools\Tools.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tools\userFunctions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tools\tables\Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tools\tables\MultiphotonBreitWheeler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tools\tables\NonlinearInverseComptonScattering.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tools\tables\Tools.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="scripts\hilbert_curve\Hilbert_functions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Smilei.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\checkpoint\Checkpoint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\collisions\CollisionalFusionDD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\collisions\CollisionalIonization.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\collisions\CollisionalNuclearReaction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\collisions\Collisions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\collisions\CollisionsFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\collisions\CollisionsSingle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\diagnostic\Diagnostic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\diagnostic\DiagnosticFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\diagnostic\DiagnosticFields.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\diagnostic\DiagnosticFields1D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\diagnostic\DiagnosticFields2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\diagnostic\DiagnosticFields3D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\diagnostic\DiagnosticFieldsAM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\diagnostic\DiagnosticParticleBinning.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\diagnostic\DiagnosticParticleBinningBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\diagnostic\DiagnosticPerformances.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\diagnostic\DiagnosticProbes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\diagnostic\DiagnosticRadiationSpectrum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\diagnostic\DiagnosticScalar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\diagnostic\DiagnosticScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\diagnostic\DiagnosticTrack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\diagnostic\Histogram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\diagnostic\HistogramFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\diagnostic\TimeSelection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\domaindecomposition\DomainDecomposition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\domaindecomposition\DomainDecompositionFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\domaindecomposition\GlobalDomainDecomposition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\domaindecomposition\HilbertDomainDecomposition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\domaindecomposition\Hilbert_functions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\domaindecomposition\LinearizedDomainDecomposition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\domaindecomposition\RegionDomainDecomposition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagn\ElectroMagn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagn\ElectroMagn1D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagn\ElectroMagn2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagn\ElectroMagn3D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagn\ElectroMagnAM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagn\ElectroMagnFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagn\EnvelopeFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagn\Laser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagn\LaserEnvelope.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagn\LaserPropagator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnbc\ElectroMagnBC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnbc\ElectroMagnBC1D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnbc\ElectroMagnBC1D_refl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnbc\ElectroMagnBC1D_SM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnbc\ElectroMagnBC2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnbc\ElectroMagnBC2D_refl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnbc\ElectroMagnBC2D_SM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnbc\ElectroMagnBC2D_Trans_Damping.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnbc\ElectroMagnBC3D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnbc\ElectroMagnBC3D_BM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnbc\ElectroMagnBC3D_refl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnbc\ElectroMagnBC3D_SM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnbc\ElectroMagnBCAM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnbc\ElectroMagnBCAM_BM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnbc\ElectroMagnBCAM_ramp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnbc\ElectroMagnBCAM_SM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnbc\ElectroMagnBC_Factory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnbc\EnvelopeBC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnbc\EnvelopeBC1D_refl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnbc\EnvelopeBC2D_refl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnbc\EnvelopeBC3D_refl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnbc\EnvelopeBCAM_Axis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnbc\EnvelopeBCAM_refl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnbc\EnvelopeBC_Factory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnsolver\MA_Solver1D_norm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnsolver\MA_Solver2D_Friedman.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnsolver\MA_Solver2D_norm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnsolver\MA_Solver3D_norm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnsolver\MA_SolverAM_norm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnsolver\MF_Solver1D_Yee.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnsolver\MF_Solver2D_Bouchard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnsolver\MF_Solver2D_Cowan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnsolver\MF_Solver2D_Grassi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnsolver\MF_Solver2D_GrassiSpL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnsolver\MF_Solver2D_Lehe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnsolver\MF_Solver2D_Yee.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnsolver\MF_Solver3D_Bouchard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnsolver\MF_Solver3D_Lehe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnsolver\MF_Solver3D_Yee.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnsolver\MF_SolverAM_Yee.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnsolver\PXR_Solver2D_GPSTD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnsolver\PXR_Solver3D_FDTD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnsolver\PXR_Solver3D_GPSTD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnsolver\PXR_SolverAM_GPSTD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnsolver\Solver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnsolver\Solver1D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnsolver\Solver2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnsolver\Solver3D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnsolver\SolverAM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\electromagnsolver\SolverFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\field\cField.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\field\cField1D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\field\cField2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\field\cField3D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\field\dcomplex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\field\Field.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\field\Field1D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\field\Field2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\field\Field3D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\field\FieldFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\interpolator\Interpolator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\interpolator\Interpolator1D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\interpolator\Interpolator1D2Order.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\interpolator\Interpolator1D3Order.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\interpolator\Interpolator1D4Order.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\interpolator\Interpolator2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\interpolator\Interpolator2D2Order.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\interpolator\Interpolator2D2OrderV.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\interpolator\Interpolator2D4Order.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\interpolator\Interpolator3D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\interpolator\Interpolator3D2Order.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\interpolator\Interpolator3D2OrderV.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\interpolator\Interpolator3D4Order.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\interpolator\Interpolator3D4OrderV.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\interpolator\InterpolatorAM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\interpolator\InterpolatorAM1Order.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\interpolator\InterpolatorAM2Order.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\interpolator\InterpolatorFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ionization\Ionization.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ionization\IonizationFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ionization\IonizationFromRate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ionization\IonizationTables.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ionization\IonizationTunnel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ionization\IonizationTunnelEnvelopeAveraged.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\merging\Merging.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\merging\MergingFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\merging\MergingVranicCartesian.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\merging\MergingVranicSpherical.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\movwindow\SimWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\multiphotonbreitwheeler\MultiphotonBreitWheeler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\multiphotonbreitwheeler\MultiphotonBreitWheelerFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\multiphotonbreitwheeler\MultiphotonBreitWheelerTables.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\multiphotonbreitwheeler\MultiphotonBreitWheelerTablesDefault.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\params\OpenPMDparams.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\params\Params.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\params\PeekAtSpecies.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\particlebc\BoundaryConditionType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\particlebc\PartBoundCond.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\particlebc\PartWall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\particleinjector\ParticleInjector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\particleinjector\ParticleInjectorFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\particles\Particle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\particles\ParticleCreator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\particles\ParticleData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\particles\Particles.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\patch\DoubleGrids.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\patch\DoubleGridsAM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\patch\Patch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\patch\Patch1D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\patch\Patch2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\patch\Patch3D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\patch\PatchAM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\patch\PatchesFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\patch\Region.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\patch\SyncVectorPatch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\patch\VectorPatch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\picsar_interface\interface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\profiles\Function.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\profiles\Profile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\projector\Projector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\projector\Projector1D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\projector\Projector1D2Order.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\projector\Projector1D4Order.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\projector\Projector2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\projector\Projector2D2Order.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\projector\Projector2D2OrderV.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\projector\Projector2D4Order.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\projector\Projector3D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\projector\Projector3D2Order.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\projector\Projector3D2OrderGPU.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\projector\Projector3D2OrderV.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\projector\Projector3D4Order.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\projector\Projector3D4OrderV.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\projector\ProjectorAM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\projector\ProjectorAM1Order.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\projector\ProjectorAM2Order.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\projector\ProjectorFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pusher\Pusher.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pusher\PusherBoris.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pusher\PusherBorisNR.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pusher\PusherFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pusher\PusherHigueraCary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pusher\PusherPhoton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pusher\PusherPonderomotiveBoris.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pusher\PusherPonderomotivePositionBoris.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pusher\PusherVay.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\radiation\Radiation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\radiation\RadiationCorrLandauLifshitz.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\radiation\RadiationDiagRadiationSpectrum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\radiation\RadiationFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\radiation\RadiationLandauLifshitz.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\radiation\RadiationMonteCarlo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\radiation\RadiationNiel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\radiation\RadiationTables.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\radiation\RadiationTablesDefault.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\radiation\RadiationTools.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\smileimpi\AsyncMPIbuffers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\smileimpi\SmileiMPI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\smileimpi\SmileiMPI_test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\species\Species.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\species\SpeciesFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\species\SpeciesMetrics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\species\SpeciesV.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\species\SpeciesVAdaptive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\species\SpeciesVAdaptiveMixedSort.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tools\codeConstants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tools\H5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tools\PyTools.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tools\Random.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tools\tabulatedFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tools\Timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tools\Timers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tools\Tools.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tools\userFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tools\backward.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tools\tables\H5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tools\tables\MultiphotonBreitWheeler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tools\tables\NonlinearInverseComptonScattering.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tools\tables\Tools.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\index.html" />
+    <None Include="doc\sphinx\smilei_theme\layout.html" />
+    <None Include="doc\sphinx\smilei_theme\search.html" />
+  </ItemGroup>
+</Project>
