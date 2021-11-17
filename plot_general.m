@@ -1,5 +1,5 @@
 clear;
-general = importdata('./output1/scalars.txt');
+general = importdata('./output/scalars.txt');
 N=size(general,1);
 
 v = 0.9;

@@ -49,6 +49,8 @@ public:
                 histogram = new Histogram_jz();
             } else if( deposited_quantity == "weight_ekin" ) {
                 histogram = new Histogram_ekin();
+			} else if( deposited_quantity == "weight_ekin_moving" ) {
+                histogram = new Histogram_ekin_moving();
             } else if( deposited_quantity == "weight_p" ) {
                 histogram = new Histogram_p();
             } else if( deposited_quantity == "weight_px" ) {
@@ -268,6 +270,8 @@ public:
                 axis = new HistogramAxis_gamma();
             } else if( type == "ekin" ) {
                 axis = new HistogramAxis_ekin();
+			} else if( type == "ekin_moving" ) {
+                axis = new HistogramAxis_ekin_moving();
             } else if( type == "vx" ) {
                 axis = new HistogramAxis_vx();
             } else if( type == "vy" ) {

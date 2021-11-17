@@ -217,3 +217,14 @@ DiagParticleBinning(#7
         ["ekin", 0.1, 1000, 200, "logscale", "edge_inclusive"]
     ]
 )
+
+DiagParticleBinning(#8
+    deposited_quantity = "weight",
+    every = diag_every,
+    time_average = 1,
+    species = ["eon1"],
+    axes = [
+        ["x", 0., grid_length[0], number_of_patches[0] * cells_per_patch[0]/20],
+        ["ekin_moving", 0.1, 1000, 200, "logscale", "edge_inclusive"]
+    ]
+)
