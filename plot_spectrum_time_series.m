@@ -1,11 +1,11 @@
 clear;
-directory_name = './output_theta0-90_gamma0.3sigma0.0002/';
-file_name = 'ParticleBinning63';
+directory_name = './output/';
+file_name = 'ParticleBinning6';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
 Ndata = size(info.Datasets,1);
-Ndata = 11;
+%Ndata = 11;
 name = info.Datasets(Ndata).Name;
 fp= hdf5read(full_name, name);
 
@@ -23,28 +23,28 @@ samplingFactor = 20;
 startx(1:Ns) = 0; 
 endx(1:Ns) = 0; 
 
-startx(1) = 0/samplingFactor+1;
-endx(1) = 5000/samplingFactor;
+startx(1) = 5000/samplingFactor+1;
+endx(1) = 12000/samplingFactor;
 
-startx(2) = 5000/samplingFactor+1;
-endx(2) = 10000/samplingFactor;
+startx(2) = 19000/samplingFactor+1;
+endx(2) = 26000/samplingFactor;
 
-startx(3) = 10000/samplingFactor+1;
-endx(3) = 15000/samplingFactor;
+startx(3) = 30000/samplingFactor+1;
+endx(3) = 37000/samplingFactor;
 
-startx(4) = 17000/samplingFactor+1;
-endx(4) = 22000/samplingFactor;
+startx(4) = 43000/samplingFactor+1;
+endx(4) = 50000/samplingFactor;
 
-startx(5) = 23000/samplingFactor+1;
-endx(5) = 28000/samplingFactor;
+startx(5) = 55000/samplingFactor+1;
+endx(5) = 62000/samplingFactor;
 
 
-%startx(1)= 5000/samplingFactor;
-%endx(1) = fix(10000/samplingFactor);
-%for i =2:Ns,
-%    startx(i) = endx(i-1);
-%    endx(i) = startx(i)+fix(5000/samplingFactor);
-%end;
+startx(1)= 100000/samplingFactor;
+endx(1) = fix(150000/samplingFactor);
+for i =2:Ns,
+   startx(i) = startx(1);
+   endx(i) = endx(1);
+end;
 
 minE = 0.001;
 maxE = 1000;
@@ -61,10 +61,11 @@ for i = 2:Np,
     de(i) = energy(i) - energy(i-1);
 end;
 
+Nt(1:Ns) = 0;
 for k=1:Ns,
     norm = 0;
-    Nt = fix(1 + (Ndata-1)*k/Ns);
-    name = info.Datasets(Nt).Name;
+    Nt(k) = fix(1 + (Ndata-1)*k/Ns);
+    name = info.Datasets(Nt(k)).Name;
     fp= hdf5read(full_name, name);
     for i=1:Np,
         for j=startx(k):endx(k),
@@ -81,14 +82,14 @@ figure(2);
 hold on;
 set(gca, 'YScale', 'log');
 set(gca, 'XScale', 'log');
-for k = 2:Ns,
-    plot(energy(1:Np)+1,Fp(1:Np,k),'color',Color{k-1});
+for k = 1:Ns,
+    plot(energy(1:Np)+1,Fp(1:Np,k),'color',Color{k});
 end;
 title('F(E)');
 xlabel('E/m_e c^2');
 ylabel('F(E)E^2');
 %legend('far downstream', 'downstream', 'front', 'upstream', 'far upstream', 'far far upstream','Location','northwest');
-%legend('1', '2', '3', '4', '5', '6','Location','northwest');
+legend('1', '2', '3', '4', '5','Location','northwest');
 %legend('700 {\omega}_{pi}^{-1}', '1400 {\omega}_{pi}^{-1}', '2100 {\omega}_{pi}^{-1}', '2800 {\omega}_{pi}^{-1}', '3500 {\omega}_{pi}^{-1}','Location','northwest');
-legend('1400 {\omega}_{pi}^{-1}', '2100 {\omega}_{pi}^{-1}', '2800 {\omega}_{pi}^{-1}', '3500 {\omega}_{pi}^{-1}','Location','northwest');
+%legend('1400 {\omega}_{pi}^{-1}', '2100 {\omega}_{pi}^{-1}', '2800 {\omega}_{pi}^{-1}', '3500 {\omega}_{pi}^{-1}','Location','northwest');
 grid;

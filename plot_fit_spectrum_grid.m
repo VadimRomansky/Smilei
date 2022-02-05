@@ -1,10 +1,10 @@
 clear;
-directory_name = './output_theta0-90_gamma1.5sigma0.004/';
-file_name = 'ParticleBinning63';
+directory_name = './output/';
+file_name = 'ParticleBinning6';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
-%Ndata = size(info.Datasets,1);
+Ndata = size(info.Datasets,1);
 Ndata = 11;
 name1 = info.Datasets(1).Name;
 name2 = info.Datasets(Ndata).Name;
@@ -14,7 +14,7 @@ fp2 = hdf5read(full_name, name2);
 Np=size(fp1,1);
 Nx=size(fp1,2);
 
-minEe = 0.1;
+minEe = 0.001;
 maxEe = 1000;
 minEp = 0.1;
 maxEp = 5000;
@@ -129,8 +129,8 @@ end;
 startPowerP = 115;
 endPowerP = 135;
 
-startPowerE = 118;
-endPowerE = 138;
+startPowerE = 138;
+endPowerE = 147;
 
 startPower = startPowerE;
 endPower = endPowerE;

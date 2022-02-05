@@ -394,48 +394,6 @@ class HistogramAxis_ekin : public HistogramAxis
         }
     };
 };
-class HistogramAxis_ekin_moving : public HistogramAxis
-{
-    double vx;
-    double gamma;
-    HistogramAxis_ekin()
-    {
-        vx = 0.1;
-        gamma = 1.0/sqrt(1.0 - vx*vx);
-    }
-    ~HistogramAxis_ekin() {};
-    void calculate_locations( Species *s, double *array, int *index, unsigned int npart, SimWindow *simWindow )
-    {
-        // Matter Particles
-        if( s->mass_ > 0 ) {
-            for( unsigned int ipart = 0 ; ipart < npart ; ipart++ ) {
-                if( index[ipart]<0 ) {
-                    continue;
-                }
-                double E0 = s->mass_ *  sqrt( 1. + pow( s->particles->Momentum[0][ipart], 2 )
-                                                 + pow( s->particles->Momentum[1][ipart], 2 )
-                                                 + pow( s->particles->Momentum[2][ipart], 2 ) );
-                double px0 =   s->mass_ * s->particles->Momentum[0][ipart];
-                
-                double E1 = gamma*E0 - vx*gamma*px0;                         
-                array[ipart] = E1 - s->mass;
-            }
-        }
-        // Photons
-        else if( s->mass_ == 0 ) {
-            for( unsigned int ipart = 0 ; ipart < npart ; ipart++ ) {
-                if( index[ipart]<0 ) {
-                    continue;
-                }
-                double E0 = sqrt( pow( s->particles->Momentum[0][ipart], 2 )
-                                     + pow( s->particles->Momentum[1][ipart], 2 )
-                                     + pow( s->particles->Momentum[2][ipart], 2 ) );
-                double px0 = s->particles->Momentum[0][ipart];
-                array[ipart] = gamma*E0 - vx*gamma*px0; ;
-            }
-        }
-    };
-};
 class HistogramAxis_vx : public HistogramAxis
 {
     ~HistogramAxis_vx() {};
@@ -805,51 +763,6 @@ class Histogram_ekin : public Histogram
                                * ( sqrt( pow( s->particles->Momentum[0][ipart], 2 )
                                          + pow( s->particles->Momentum[1][ipart], 2 )
                                          + pow( s->particles->Momentum[2][ipart], 2 ) ) );
-            }
-        }
-    };
-};
-class Histogram_ekin_moving : public Histogram
-{
-	double vx;
-	double gamma;
-	Histogram_ekin_moving()
-	{
-		vx = 0;.1;
-		gamma = 1.0/sqrt(1.0 - vx*vx);
-	}
-    ~Histogram_ekin_moving() {};
-    void valuate( Species *s, double *array, int *index )
-    {
-        unsigned int npart = s->getNbrOfParticles();
-        // Matter Particles
-        if( s->mass_ > 0 ) {
-            for( unsigned int ipart = 0 ; ipart < npart ; ipart++ ) {
-                if( index[ipart]<0 ) {
-                    continue;
-                }
-                double E0 = s->mass_ *   sqrt( 1. + pow( s->particles->Momentum[0][ipart], 2 )
-                                                 + pow( s->particles->Momentum[1][ipart], 2 )
-                                                 + pow( s->particles->Momentum[2][ipart], 2 ) );
-                double px0 =   s->mass_ * s->particles->Momentum[0][ipart];
-                
-                double E1 = gamma*E0 - vx*gamma*px0;                         
-                array[ipart] = s->particles->Weight[ipart]*(E1 - s->mass);
-            }
-        }
-        // Photons
-        else if( s->mass_ == 0 ) {
-            for( unsigned int ipart = 0 ; ipart < npart ; ipart++ ) {
-                if( index[ipart]<0 ) {
-                    continue;
-                }
-                double E0 = sqrt( 1. + pow( s->particles->Momentum[0][ipart], 2 )
-                                                 + pow( s->particles->Momentum[1][ipart], 2 )
-                                                 + pow( s->particles->Momentum[2][ipart], 2 ) );
-                double px0 =  s->particles->Momentum[0][ipart];
-                
-                double E1 = gamma*E0 - vx*gamma*px0;                         
-                array[ipart] = s->particles->Weight[ipart]*E1;
             }
         }
     };
