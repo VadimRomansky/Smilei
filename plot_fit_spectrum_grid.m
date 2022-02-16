@@ -5,7 +5,7 @@ file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
 Ndata = size(info.Datasets,1);
-Ndata = 11;
+%Ndata = 24;
 name1 = info.Datasets(1).Name;
 name2 = info.Datasets(Ndata).Name;
 fp1= hdf5read(full_name, name1);
@@ -15,7 +15,7 @@ Np=size(fp1,1);
 Nx=size(fp1,2);
 
 minEe = 0.001;
-maxEe = 1000;
+maxEe = 5000;
 minEp = 0.1;
 maxEp = 5000;
 minE = minEe;
@@ -28,12 +28,21 @@ me = mp/mass_ratio;
 
 m = me;
 
+startPowerP = 115;
+endPowerP = 135;
+
+startPowerE = 149;
+endPowerE = 159;
+
+startPower = startPowerE;
+endPower = endPowerE;
+
 gam = 1.048;
 beta = sqrt(1 - 1/(gam*gam));
 c = 2.99792458*10^10;
 Te = 2.6*10^9;
-Temin = 10^8;
-Temax = 2*10^12;
+Temin = 10^7;
+Temax = 2*10^11;
 Tp = 2*10^11;
 Tpmin = 10^9;
 Tpmax = 10^13;
@@ -61,8 +70,8 @@ Fp2(1:Np)=0;
 
 samplingFactor = 20;
 
-startx = fix(23000/samplingFactor)+1;
-endx = fix(28000/samplingFactor);
+startx = fix(1000/samplingFactor)+1;
+endx = fix(2000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,
@@ -81,7 +90,45 @@ for i = 1:Np,
     Fp2(i) = Fp2(i)*norm/normp;
 end;
 
-index1 = 10;
+%for debug
+%Fp2(Np)=10^-10;
+
+%remove zeros
+for i = 2:Np-1,
+    if(Fp2(i) <= 0) & (Fp2(i-1) > 0) & (Fp2(i+1) > 0)
+        Fp2(i) = 0.5*(Fp2(i-1)+Fp2(i+1));
+    end;
+end;
+
+maxNonZero = 0;
+for j = Np:-1:1,
+    if(Fp2(j) > 0)
+        maxNonZero = j;
+        break;
+    end;
+end;
+minNonZero = Np;
+for i = 1:Np
+    if(Fp2(i) > 0)
+        minNonZero = i;
+        break;
+    end;
+end;
+
+%for i = minNonZero:maxNonZero-1,
+%    if(Fp2(i) <= 0)
+%        nextNonZero = i+1;
+%        while(Fp2(nextNonZero)<=0)
+%            nextNonZero = nextNonZero + 1;
+%        end;
+%        s = (log(Fp2(i-1))- log(Fp2(nextNonZero)))/(log(me*energy(i-1)+m) - log(me*energy(nextNonZero)+m));
+%        for j = i:nextNonZero-1,
+%            Fp2(j) = Fp2(i-1)*power((me*energy(j)+m)/(me*energy(i-1)+m),s);
+%        end;
+%    end;
+%end;
+
+index1 = 5;
 index2 = 80;
 
 Tleft = Tmin;
@@ -126,15 +173,6 @@ for i = 1:Np,
     Fjuttner(i) = (1.0/(theta*bes))*exp1*gam*gam*beta;
 end;
 
-startPowerP = 115;
-endPowerP = 135;
-
-startPowerE = 138;
-endPowerE = 147;
-
-startPower = startPowerE;
-endPower = endPowerE;
-
 Fpa(1:Np) = 0;
 
 Fpa(startPower) = Fp2(startPower);
@@ -147,6 +185,7 @@ polyfity(1:endPower-startPower + 1) = 0;
 
 for i = 1:endPower-startPower + 1,
     polyfitx(i) = log((me*energy(i+startPower - 1)+m));
+    %polyfitx(i) = log((me*energy(i+startPower - 1)));
     polyfity(i) = log(Fp2(i+startPower - 1));
 end;
 p = polyfit(polyfitx, polyfity, 1);
@@ -154,8 +193,8 @@ p = polyfit(polyfitx, polyfity, 1);
 %ap = exp(log(Fpa(startPower)) - gammap*log((me*energy(startPower)+m)));
 
 for i = startPower-5:endPower+5,
-    %Fpa(i) = ap*((me*energy(i)+m)^gammap);
     Fpa(i) = exp(polyval(p, log(me*energy(i)+m)));
+    %Fpa(i) = exp(polyval(p, log(me*energy(i))));
 end;
 
 
@@ -164,11 +203,19 @@ figure(1);
 hold on;
 set(gca, 'YScale', 'log');
 set(gca, 'XScale', 'log');
+%xlim([1.0 1000]);
+%ylim([10^-10 10]);
 plot(energy(1:Np)+m/me,Fp2(1:Np),'red','LineWidth',2);
 plot(energy(1:Np)+m/me, Fjuttner(1:Np),'blue','LineWidth',2);
 plot(energy(1:Np)+m/me,Fpa(1:Np),'green','LineWidth',2);
 plot(energy(startPower) + m/me,Fp2(startPower),'o','Color','red');
 plot(energy(endPower) + m/me,Fp2(endPower),'o','Color','red');
+
+%plot(energy(1:Np),Fp2(1:Np),'red','LineWidth',2);
+%plot(energy(1:Np), Fjuttner(1:Np),'blue','LineWidth',2);
+%plot(energy(1:Np),Fpa(1:Np),'green','LineWidth',2);
+%plot(energy(startPower),Fp2(startPower),'o','Color','red');
+%plot(energy(endPower),Fp2(endPower),'o','Color','red');
 title('F(E)');
 xlabel('E/me c^2');
 ylabel('F(E)');

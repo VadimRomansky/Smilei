@@ -12,20 +12,28 @@ fp= hdf5read(full_name, name);
 Color = {'red','blue','green','black','magenta', [1.0,0.6,0]};
 
 N=size(fp,1);
-Ns = 5;
-Ny = 200;
+Ns = 6;
+Nt(1:Ns) = 0;
+Nt = [1,5,10,15,20,24];
+xsw(1:Ns)=0;
+Ny = 100;
 dx = 0.2;
 x(1:N) = (1:N)*dx;
 
 Fp(1:N,1:Ns) = 0;
-Nt(1:Ns) = 0;
 
 for k=1:Ns,
-    Nt(k) = fix(1 + (Ndata-1)*k/Ns);
     name = info.Datasets(Nt(k)).Name;
     fp= hdf5read(full_name, name)/(Ny*dx*dx);
     for i=1:N,
         Fp(i,k)=fp(i);
+    end;
+
+    for j = N:-1:1,
+        if (fp(j) > 2)
+            xsw(k) = j;
+            break;
+        end;
     end;
 end;
 
