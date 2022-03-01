@@ -5,7 +5,7 @@ file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
 Ndata = size(info.Datasets,1);
-Ndata = 10;
+%Ndata = 10;
 %Ndata = 100;
 %Ndata = 1;
 name = info.Datasets(Ndata).Name;
@@ -23,7 +23,7 @@ Nx=size(fp,2);
 Ns=6;
 
 minEe = 0.001;
-maxEe = 1000;
+maxEe = 5000;
 minEp = 0.1;
 maxEp = 5000;
 minE = minEe;
@@ -37,22 +37,22 @@ samplingFactor = 20;
 startx(1:Ns) = 0; 
 endx(1:Ns) = 0; 
 
-startx(1) = 1000/samplingFactor+1;
+startx(1) = 10000/samplingFactor+1;
 endx(1) = startx(1) + 5000/samplingFactor;
 
-startx(2) = 5000/samplingFactor;
+startx(2) = 20000/samplingFactor;
 endx(2) = startx(2) + 5000/samplingFactor;
 
-startx(3) = 10000/samplingFactor;
+startx(3) = 40000/samplingFactor;
 endx(3) = startx(3) + 5000/samplingFactor;
 
-startx(4) = 15000/samplingFactor;
+startx(4) = 60000/samplingFactor;
 endx(4) = startx(4) + 5000/samplingFactor;
 
-startx(5) = 20000/samplingFactor;
+startx(5) = 80000/samplingFactor;
 endx(5) = startx(5) + 5000/samplingFactor;
 
-startx(6) = 25000/samplingFactor;
+startx(6) = 120000/samplingFactor;
 endx(6) = startx(6) + 5000/samplingFactor;
 
 %startx(1)= 5000/samplingFactor;

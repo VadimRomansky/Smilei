@@ -5,7 +5,7 @@ file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
 Ndata = size(info.Datasets,1);
-%Ndata = 7;
+%Ndata = 3;
 name1 = info.Datasets(1).Name;
 name2 = info.Datasets(fix(Ndata/2)).Name;
 name3 = info.Datasets(Ndata).Name;
@@ -14,9 +14,9 @@ fp2 = hdf5read(full_name, name2);
 fp3 = hdf5read(full_name, name3);
 N=size(fp1,1);
 
-dx = 0.2;
+dx = 0.1;
 factor = 1.0/(dx*dx);
-Ny = 200;
+Ny = 50;
 
 xsw(1:Ndata) = 0;
 t(1:Ndata) = 0;
@@ -41,7 +41,8 @@ for i = 2:Ndata,
 end;
 
 figure(1);
-plot(1:N,fp1(1:N)*factor/Ny,'red',1:N,fp2(1:N)*factor/Ny,'green',1:N,fp3(1:N)*factor/Ny,'blue');
+%plot((1:N)*dx,fp1(1:N)*factor/Ny,'red',(1:N)*dx,fp2(1:N)*factor/Ny,'green',(1:N)*dx,fp3(1:N)*factor/Ny,'blue');
+plot((1:N),fp1(1:N)*factor/Ny,'red',(1:N),fp2(1:N)*factor/Ny,'green',(1:N),fp3(1:N)*factor/Ny,'blue');
 grid;
 
 figure(2);

@@ -1,17 +1,17 @@
 clear;
-directory_name = './output_theta0-90_gamma0.3sigma0.0002/';
+directory_name = './output/';
 file_name = 'ParticleBinning6';
 file_ending = '.h5';
 
-Number = {1,3,5};
+Number = {0,1,5};
 Color = {'red','blue','green','black','cyan','magenta','yellow',[0.75,0,0.67],[0.5,0.5,0.0],[.98,.5,.44]};
 LegendTitle = {'{\theta} = 0', '{\theta} = 10','{\theta} = 20', '{\theta} = 30', '{\theta} = 40', '{\theta} = 50','{\theta} = 60', '{\theta} = 70', '{\theta} = 80', '{\theta} = 90'};
 
-Nd = 3;
-full_name = strcat(directory_name, file_name, num2str(Number{1}), file_ending);
+Nd = 2;
+full_name = strcat(directory_name, file_name, num2str(Number{2}), file_ending);
 
 info = h5info(full_name);
-%Ndata = size(info.Datasets,1);
+Ndata = size(info.Datasets,1);
 Ndata = 11;
 name = info.Datasets(Ndata).Name;
 fp= hdf5read(full_name, name);
@@ -47,11 +47,11 @@ Fp(1:Nd,1:Np)=0;
 samplingFactor = 20;
 
 for i = 1:Nd,
-    startx(i) = fix(23000/samplingFactor)+1;
-    endx(i) = fix(28000/samplingFactor);
+    startx(i) = fix(100000/samplingFactor)+1;
+    endx(i) = fix(120000/samplingFactor);
 end;
-startx(2) = fix(23000/samplingFactor)+1;
-endx(2) = fix(28000/samplingFactor);
+%startx(2) = fix(23000/samplingFactor)+1;
+%endx(2) = fix(28000/samplingFactor);
 
 for k = 1:Nd,
     full_name = strcat(directory_name, file_name, num2str(Number{k}), file_ending);

@@ -42,8 +42,8 @@ Fp(1:Nd,1:Np)=0;
 samplingFactor = 20;
 
 for i = 1:Nd,
-    startx(i) = fix(17000/samplingFactor)+1;
-    endx(i) = fix(22000/samplingFactor);
+    startx(i) = fix(100000/samplingFactor)+1;
+    endx(i) = fix(120000/samplingFactor);
 end;
 
 for k = 1:Nd,

@@ -5,9 +5,9 @@ file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
 Ndata = size(info.Datasets,1);
-%Ndata = 1;
+%Ndata = 15;
 name1 = info.Datasets(1).Name;
-name2 = info.Datasets(5).Name;
+name2 = info.Datasets(fix(Ndata/2)).Name;
 name3 = info.Datasets(Ndata).Name;
 
 fp1= hdf5read(full_name, name1);
@@ -46,8 +46,8 @@ Fp3(1:Np)=0;
 
 samplingFactor = 20;
 
-startx = fix(100/samplingFactor)+1;
-endx = fix(2000/samplingFactor);
+startx = fix(1000/samplingFactor)+1;
+endx = fix(150000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,
@@ -86,7 +86,7 @@ xlabel('Ekin/me c^2');
 ylabel('F(E)');
 name = strcat('approximation gamma = ',num2str(gammap-2));
 %legend('Fe', name,'Location','southeast');
-legend('t=1000','t=500','t=0')
+%legend('t=1000','t=500','t=0')
 grid;
 
 dlmwrite('Ee0.dat',energy,'delimiter',' ');

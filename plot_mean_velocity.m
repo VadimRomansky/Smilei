@@ -1,16 +1,17 @@
 clear;
 directory_name = './output/';
-file_name = 'ParticleBinning8';
+file_name = 'ParticleBinning9';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
 Ndata = size(info.Datasets,1);
 %Ndata = 20;
-name = info.Datasets(1).Name;
+name = info.Datasets(Ndata).Name;
 fp= hdf5read(full_name, name);
 
 Np=size(fp,1);
 Nx=size(fp,2);
+samplingfactor = 20;
 
 minV = -1.0;
 maxV = 1.0;
@@ -23,6 +24,7 @@ for k = 1:Ndata,
     name = info.Datasets(k).Name;
     fp= hdf5read(full_name, name);
     particles = 0;
+    %for i = 40000/samplingfactor:50000/samplingfactor,
     for i = 1:Nx,
         for j = 1:Np,
             vx = minV + (j-0.5)*dv;

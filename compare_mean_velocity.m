@@ -1,12 +1,13 @@
 clear;
-directory_name = './output1/';
+directory_name = './output_dx0.1_gamma1.05_bouchard_diffT/';
 file_name = 'ParticleBinning8';
 file_ending = '.h5';
 
 Number = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 Color = {'red','blue','green','black','cyan','magenta','yellow',[0.75,0,0.67],[0.5,0.5,0.0],[.98,.5,.44]};
 %LegendTitle = {'{\theta} = 0', '{\theta} = 10','{\theta} = 20', '{\theta} = 30', '{\theta} = 40', '{\theta} = 50','{\theta} = 60', '{\theta} = 70', '{\theta} = 80', '{\theta} = 90'};
-LegendTitle = {'{\gamma} = 1.05','{\gamma} = 1.5','{\gamma} = 3', '{\gamma} = 7','{\gamma} = 10','{\gamma} = 20'};
+%LegendTitle = {'{\gamma} = 1.05','{\gamma} = 1.5','{\gamma} = 3', '{\gamma} = 7','{\gamma} = 10','{\gamma} = 20'};
+LegendTitle = {'T = 0.00001','T = 0.0001','T = 0.001', 'T = 0.01','T = 0.1','T = 0.5'};
 
 Nd = 6;
 
@@ -39,7 +40,7 @@ for l = 1:Nd,
         for i = 1:Nx,
             for j = 1:Np,
                 vx = minV + (j-0.5)*dv;
-                meanV(k,l) = meanV(k,l) + vx*fp(j,i);
+                meanV(k,l) = meanV(k,l) - vx*fp(j,i);
                 particles = particles+fp(j,i);
                 n(k,l) = n(k,l) + fp(j,i);
             end;
@@ -57,10 +58,12 @@ set(0, 'DefaultLineLineWidth', 2);
 
 figure(1);
 hold on;
+%xlim([1.0 1000]);
+ylim([0 0.35]);
 for l = 1:Nd,
     plot(time(1:Ndata),meanV(1:Ndata,l),Color{l});
 end;
-legend(LegendTitle{Number{1}+1}, LegendTitle{Number{2}+1}, LegendTitle{Number{3}+1}, LegendTitle{Number{4}+1}, LegendTitle{Number{5}+1}, LegendTitle{Number{6}+1},'Location','northwest');
+legend(LegendTitle{Number{1}+1}, LegendTitle{Number{2}+1}, LegendTitle{Number{3}+1}, LegendTitle{Number{4}+1}, LegendTitle{Number{5}+1}, LegendTitle{Number{6}+1},'Location','southwest');
 title('V_x');
 xlabel('t');
 ylabel('V_x');
@@ -71,7 +74,7 @@ hold on;
 for l = 1:Nd,
     plot(time(1:Ndata),n(1:Ndata,l),Color{l});
 end;
-legend(LegendTitle{Number{1}+1}, LegendTitle{Number{2}+1}, LegendTitle{Number{3}+1}, LegendTitle{Number{4}+1}, LegendTitle{Number{5}+1}, LegendTitle{Number{6}+1},'Location','northwest');
+legend(LegendTitle{Number{1}+1}, LegendTitle{Number{2}+1}, LegendTitle{Number{3}+1}, LegendTitle{Number{4}+1}, LegendTitle{Number{5}+1}, LegendTitle{Number{6}+1},'Location','southwest');
 title('N');
 xlabel('t');
 ylabel('N');

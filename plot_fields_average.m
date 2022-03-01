@@ -34,7 +34,7 @@ Bza(1:Nx,1:Ns) = 0;
 Bnorma(1:Nx,1:Ns) = 0;
 
 for k=1:Ns,
-    Nt = fix(Ndata*k/Ns);
+    Nt = fix((Ndata-1)*k/Ns)+1;
     name2x = strcat(info.Groups.Groups(Nt).Name, '/Bx');
     name2y = strcat(info.Groups.Groups(Nt).Name, '/By');
     name2z = strcat(info.Groups.Groups(Nt).Name, '/Bz');

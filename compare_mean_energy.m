@@ -6,7 +6,8 @@ file_ending = '.h5';
 Number = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 Color = {'red','blue','green','black','cyan','magenta','yellow',[0.75,0,0.67],[0.5,0.5,0.0],[.98,.5,.44]};
 %LegendTitle = {'{\theta} = 0', '{\theta} = 10','{\theta} = 20', '{\theta} = 30', '{\theta} = 40', '{\theta} = 50','{\theta} = 60', '{\theta} = 70', '{\theta} = 80', '{\theta} = 90'};
-LegendTitle = {'{\gamma} = 1.05', '{\gamma} = 1.5','{\gamma} = 3', '{\gamma} = 7','{\gamma} = 10','{\gamma} = 20'};
+%LegendTitle = {'{\gamma} = 1.05', '{\gamma} = 1.5','{\gamma} = 3', '{\gamma} = 7','{\gamma} = 10','{\gamma} = 20'};
+LegendTitle = {'T = 0.00001','T = 0.0001','T = 0.001', 'T = 0.01','T = 0.1','T = 0.5'};
 
 Nd = 6;
 
@@ -73,7 +74,7 @@ hold on;
 for l = 1:Nd,
     plot(time(1:Ndata),meanE(1:Ndata,l)/meanE(1,l),Color{l});
 end;
-legend(LegendTitle{Number{1}+1}, LegendTitle{Number{2}+1}, LegendTitle{Number{3}+1}, LegendTitle{Number{4}+1}, LegendTitle{Number{5}+1}, LegendTitle{Number{5}+1},'Location','northwest');
+legend(LegendTitle{Number{1}+1}, LegendTitle{Number{2}+1}, LegendTitle{Number{3}+1}, LegendTitle{Number{4}+1}, LegendTitle{Number{5}+1}, LegendTitle{Number{6}+1},'Location','northwest');
 title('E_{kin}');
 xlabel('t');
 ylabel('E_{kin}/E0');
