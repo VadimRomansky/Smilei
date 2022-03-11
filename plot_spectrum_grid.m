@@ -5,7 +5,7 @@ file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
 Ndata = size(info.Datasets,1);
-%Ndata = 15;
+%Ndata = 1;
 name1 = info.Datasets(1).Name;
 name2 = info.Datasets(fix(Ndata/2)).Name;
 name3 = info.Datasets(Ndata).Name;
@@ -46,8 +46,8 @@ Fp3(1:Np)=0;
 
 samplingFactor = 20;
 
-startx = fix(1000/samplingFactor)+1;
-endx = fix(150000/samplingFactor);
+startx = fix(50000/samplingFactor)+1;
+endx = fix(60000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,

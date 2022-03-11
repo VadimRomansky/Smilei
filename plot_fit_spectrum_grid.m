@@ -5,7 +5,7 @@ file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
 Ndata = size(info.Datasets,1);
-%Ndata = 1;
+Ndata = 23;
 name1 = info.Datasets(1).Name;
 name2 = info.Datasets(Ndata).Name;
 fp1= hdf5read(full_name, name1);
@@ -70,7 +70,7 @@ Fp2(1:Np)=0;
 
 samplingFactor = 20;
 
-startx = fix(1000/samplingFactor)+1;
+startx = fix(10000/samplingFactor)+1;
 endx = fix(55000/samplingFactor);
 
 for i=1:Np,
@@ -206,10 +206,10 @@ set(gca, 'XScale', 'log');
 %xlim([1.0 1000]);
 %ylim([10^-10 10]);
 plot(energy(1:Np)+m/me,Fp2(1:Np),'red','LineWidth',2);
-plot(energy(1:Np)+m/me, Fjuttner(1:Np),'blue','LineWidth',2);
-plot(energy(1:Np)+m/me,Fpa(1:Np),'green','LineWidth',2);
-plot(energy(startPower) + m/me,Fp2(startPower),'o','Color','red');
-plot(energy(endPower) + m/me,Fp2(endPower),'o','Color','red');
+%plot(energy(1:Np)+m/me, Fjuttner(1:Np),'blue','LineWidth',2);
+%plot(energy(1:Np)+m/me,Fpa(1:Np),'green','LineWidth',2);
+%plot(energy(startPower) + m/me,Fp2(startPower),'o','Color','red');
+%plot(energy(endPower) + m/me,Fp2(endPower),'o','Color','red');
 
 %plot(energy(1:Np),Fp2(1:Np),'red','LineWidth',2);
 %plot(energy(1:Np), Fjuttner(1:Np),'blue','LineWidth',2);
@@ -220,7 +220,7 @@ title('F(E)');
 xlabel('E/me c^2');
 ylabel('F(E)');
 name = strcat('powerlaw \gamma = ',num2str(p(1)));
-legend('Fe', 'maxwell-juttner',name,'Location','southeast');
+%legend('Fe', 'maxwell-juttner',name,'Location','southeast');
 grid;
 
 output(1:167,1:4) = 0;
