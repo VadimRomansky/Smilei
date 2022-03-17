@@ -1,6 +1,6 @@
 clear;
 directory_name = './output/';
-file_name = 'ParticleBinning6';
+file_name = 'ParticleBinning7';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
@@ -21,13 +21,13 @@ minEe = 0.001;
 maxEe = 5000;
 minEp = 0.1;
 maxEp = 5000;
-minE = minEe;
-maxE = maxEe;
+minE = minEp;
+maxE = maxEp;
 factor = (maxE/minE)^(1.0/(Np-1));
 
 me = 1;
 mp = 100;
-m = me;
+m = mp;
 
 energy(1:Np) = 0;
 de(1:Np) = 0;
@@ -46,8 +46,8 @@ Fp3(1:Np)=0;
 
 samplingFactor = 20;
 
-startx = fix(50000/samplingFactor)+1;
-endx = fix(60000/samplingFactor);
+startx = fix(1000/samplingFactor)+1;
+endx = fix(15000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,
@@ -80,13 +80,14 @@ figure(1);
 %plot(energy(1:Np),Fp2(1:Np),'red', energy(startPowerP:endPowerP), Fpa(startPowerP:endPowerP),'blue');
 %loglog(energy(1:Np),Fp2(1:Np),'red');
 %loglog(me*energy(1:Np)+m,Fp3(1:Np),'red', me*energy(1:Np)+m,Fp2(1:Np),'green',me*energy(1:Np)+m,Fp1(1:Np),'blue');
-loglog(energy(1:Np),Fp3(1:Np),'red', energy(1:Np),Fp2(1:Np),'green',energy(1:Np),Fp1(1:Np),'blue');
+loglog(energy(1:Np),Fp1(1:Np),'red', energy(1:Np),Fp2(1:Np),'green',energy(1:Np),Fp3(1:Np),'blue');
 title('F(E)');
 xlabel('Ekin/me c^2');
 ylabel('F(E)');
 name = strcat('approximation gamma = ',num2str(gammap-2));
 %legend('Fe', name,'Location','southeast');
-%legend('t=1000','t=500','t=0')
+legend('t=0','t=T/2','t=T')
+%legend('t=0','t=500','t=1000')
 grid;
 
 dlmwrite('Ee0.dat',energy,'delimiter',' ');

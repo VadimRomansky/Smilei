@@ -5,7 +5,7 @@ file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
 Ndata = size(info.Datasets,1);
-Ndata = 23;
+Ndata = 1;
 name1 = info.Datasets(1).Name;
 name2 = info.Datasets(Ndata).Name;
 fp1= hdf5read(full_name, name1);
@@ -28,11 +28,11 @@ me = mp/mass_ratio;
 
 m = me;
 
-startPowerP = 115;
-endPowerP = 135;
+startPowerP = 125;
+endPowerP = 145;
 
-startPowerE = 129;
-endPowerE = 139;
+startPowerE = 149;
+endPowerE = 159;
 
 startPower = startPowerE;
 endPower = endPowerE;
@@ -42,10 +42,10 @@ beta = sqrt(1 - 1/(gam*gam));
 c = 2.99792458*10^10;
 Te = 2.6*10^9;
 Temin = 10^7;
-Temax = 2*10^11;
+Temax = 2*10^12;
 Tp = 2*10^11;
 Tpmin = 10^9;
-Tpmax = 10^13;
+Tpmax = 10^12;
 
 T = Te;
 Tmax = Temax;
@@ -70,8 +70,10 @@ Fp2(1:Np)=0;
 
 samplingFactor = 20;
 
-startx = fix(10000/samplingFactor)+1;
-endx = fix(55000/samplingFactor);
+shockx = 16000;
+
+startx = fix((shockx - 2560)/samplingFactor)+1;
+endx = fix((shockx - 320)/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,
@@ -128,8 +130,8 @@ end;
 %    end;
 %end;
 
-index1 = 5;
-index2 = 80;
+index1 = 50;
+index2 = 100;
 
 Tleft = Tmin;
 Tright = Tmax;
@@ -166,12 +168,15 @@ end;
 T = (Tleft + Tright)/2;
 theta = kB*T/(m*c*c);
 bes = besselk(2, 1/theta);
+Fshifted(1:Np) = 0;
 for i = 1:Np,   
     gam = energy(i)*me/m + 1;
     beta = sqrt(1.0 - 1.0/(gam*gam));
     exp1 = exp(-gam/theta);       
     Fjuttner(i) = (1.0/(theta*bes))*exp1*gam*gam*beta;
+    Fshifted(i) = juttner_shifted(gam, 0.127, 0.75);
 end;
+
 
 Fpa(1:Np) = 0;
 
@@ -206,10 +211,11 @@ set(gca, 'XScale', 'log');
 %xlim([1.0 1000]);
 %ylim([10^-10 10]);
 plot(energy(1:Np)+m/me,Fp2(1:Np),'red','LineWidth',2);
-%plot(energy(1:Np)+m/me, Fjuttner(1:Np),'blue','LineWidth',2);
-%plot(energy(1:Np)+m/me,Fpa(1:Np),'green','LineWidth',2);
-%plot(energy(startPower) + m/me,Fp2(startPower),'o','Color','red');
-%plot(energy(endPower) + m/me,Fp2(endPower),'o','Color','red');
+plot(energy(1:Np)+m/me, Fjuttner(1:Np),'blue','LineWidth',2);
+plot(energy(1:Np)+m/me,Fpa(1:Np),'green','LineWidth',2);
+plot(energy(1:Np)+m/me, Fshifted(1:Np), 'black', 'LineWidth',2);
+plot(energy(startPower) + m/me,Fp2(startPower),'o','Color','red');
+plot(energy(endPower) + m/me,Fp2(endPower),'o','Color','red');
 
 %plot(energy(1:Np),Fp2(1:Np),'red','LineWidth',2);
 %plot(energy(1:Np), Fjuttner(1:Np),'blue','LineWidth',2);
@@ -220,7 +226,7 @@ title('F(E)');
 xlabel('E/me c^2');
 ylabel('F(E)');
 name = strcat('powerlaw \gamma = ',num2str(p(1)));
-%legend('Fe', 'maxwell-juttner',name,'Location','southeast');
+legend('Fe', 'maxwell-juttner',name,'juttner shifted','Location','southeast');
 grid;
 
 output(1:167,1:4) = 0;
