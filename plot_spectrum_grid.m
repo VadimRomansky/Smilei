@@ -1,6 +1,6 @@
 clear;
 directory_name = './output/';
-file_name = 'ParticleBinning7';
+file_name = 'ParticleBinning6';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
@@ -21,13 +21,13 @@ minEe = 0.001;
 maxEe = 5000;
 minEp = 0.1;
 maxEp = 5000;
-minE = minEp;
-maxE = maxEp;
+minE = minEe;
+maxE = maxEe;
 factor = (maxE/minE)^(1.0/(Np-1));
 
 me = 1;
 mp = 100;
-m = mp;
+m = me;
 
 energy(1:Np) = 0;
 de(1:Np) = 0;
@@ -79,8 +79,9 @@ set(0, 'DefaultLineLineWidth', 2);
 figure(1);
 %plot(energy(1:Np),Fp2(1:Np),'red', energy(startPowerP:endPowerP), Fpa(startPowerP:endPowerP),'blue');
 %loglog(energy(1:Np),Fp2(1:Np),'red');
-%loglog(me*energy(1:Np)+m,Fp3(1:Np),'red', me*energy(1:Np)+m,Fp2(1:Np),'green',me*energy(1:Np)+m,Fp1(1:Np),'blue');
-loglog(energy(1:Np),Fp1(1:Np),'red', energy(1:Np),Fp2(1:Np),'green',energy(1:Np),Fp3(1:Np),'blue');
+%loglog(me*energy(1:Np)+m,Fp1(1:Np),'red', me*energy(1:Np)+m,Fp2(1:Np),'green',me*energy(1:Np)+m,Fp3(1:Np),'blue');
+loglog(me*energy(1:Np)/m+1,Fp1(1:Np),'red', me*energy(1:Np)/m+1,Fp2(1:Np),'green',me*energy(1:Np)/m+1,Fp3(1:Np),'blue');
+%loglog(energy(1:Np),Fp1(1:Np),'red', energy(1:Np),Fp2(1:Np),'green',energy(1:Np),Fp3(1:Np),'blue');
 title('F(E)');
 xlabel('Ekin/me c^2');
 ylabel('F(E)');

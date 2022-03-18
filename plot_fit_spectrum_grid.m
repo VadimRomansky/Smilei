@@ -174,7 +174,12 @@ for i = 1:Np,
     beta = sqrt(1.0 - 1.0/(gam*gam));
     exp1 = exp(-gam/theta);       
     Fjuttner(i) = (1.0/(theta*bes))*exp1*gam*gam*beta;
-    Fshifted(i) = juttner_shifted(gam, 0.127, 0.75);
+    Fshifted(i) = juttner_shifted_integrated(gam, 0.127, sqrt(1.0 - 1.0/2.25));
+end;
+
+normShifted = 0;
+for i = 1:Np,
+    normShifted = normShifted + Fshifted(i)*de(i)*me/m;
 end;
 
 

@@ -1,21 +1,14 @@
-function [result] = juttner_shifted(G,theta,beta)
+function [result] = juttner_shifted(G, mu,theta,beta)
 beta2 = beta*beta;
 G2 = G*G;
+mu2 = mu*mu;
 Gsqrt = sqrt(G2 - 1);
 gamma = 1.0/sqrt(1.0 - beta2);
 gamma2 = gamma*gamma;
-gamma4 = gamma2*gamma2;
-denom = theta*(gamma2 - 1.0);
 bes = besselk(2, 1/theta);
-koef1 = 1.0/(theta*bes);
-koef2 = sqrt(theta)/((gamma2 - 1.0)*sqrt(gamma2 - 1.0));
-exp1 = exp((-2*beta*gamma2*(gamma2 - 1)*Gsqrt*G + (-beta2 - G2 + 1)*gamma4 + ((1 - 2*G2 + 2)*beta2 - 2)*gamma2 + beta2*(G2 - 1) + 1)/denom);
-koef3 = gamma*G*sqrt(pi)*(-beta2*gamma + gamma2 - 1);
-erf1 = erf((G*beta*gamma2 - Gsqrt*gamma + Gsqrt)/sqrt(denom));
-erf2 = erf((G*beta*gamma2 + Gsqrt*gamma - Gsqrt)/sqrt(denom));
-exp2 = exp((2*gamma2*(gamma2 - 1)*Gsqrt*G*beta + (G2*gamma4 + gamma2*Gsqrt)*beta2 + Gsqrt*gamma4 + (2 - G2)*gamma2 + G2 - 1)/denom);
-koef4 = sqrt(theta*(gamma2 - 1));
-exp3 = exp((gamma2*(beta2*(G2 - 1) + G2))/denom);
-exp4 = exp((gamma2*(4*Gsqrt*gamma2*beta*G + beta2*(G2 - 1) - 4*G*Gsqrt*beta + G2))/denom);
-result = -koef1*koef2*exp1*(koef3*(erf1 - erf2)*exp2 + koef4*(exp3 - exp4));
+
+A = (G2-1)*(gamma2*mu2+beta2*gamma2+1-mu2)+beta2*gamma2-2*beta*gamma2*mu*G*Gsqrt;
+J = (G-Gsqrt*beta*mu)*gamma*Gsqrt/sqrt(A*(A+1));
+newG = sqrt(A+1);
+result = (2.0*pi*newG*sqrt(newG*newG-1)/(4*pi*theta*bes))*exp(-newG/theta)*J;
 end
