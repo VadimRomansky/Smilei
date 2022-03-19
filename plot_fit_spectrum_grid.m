@@ -70,9 +70,9 @@ Fp2(1:Np)=0;
 
 samplingFactor = 20;
 
-shockx = 16000;
+shockx = 26000;
 
-startx = fix((shockx - 2560)/samplingFactor)+1;
+startx = fix((shockx - 15240)/samplingFactor)+1;
 endx = fix((shockx - 320)/samplingFactor);
 
 for i=1:Np,
@@ -169,17 +169,26 @@ T = (Tleft + Tright)/2;
 theta = kB*T/(m*c*c);
 bes = besselk(2, 1/theta);
 Fshifted(1:Np) = 0;
+gam(1:Np) = 1.0;
 for i = 1:Np,   
-    gam = energy(i)*me/m + 1;
-    beta = sqrt(1.0 - 1.0/(gam*gam));
-    exp1 = exp(-gam/theta);       
-    Fjuttner(i) = (1.0/(theta*bes))*exp1*gam*gam*beta;
-    Fshifted(i) = juttner_shifted_integrated(gam, 0.127, sqrt(1.0 - 1.0/2.25));
+    gam(i) = energy(i)*me/m + 1;
+    beta = sqrt(1.0 - 1.0/(gam(i)*gam(i)));
+    exp1 = exp(-gam(i)/theta);       
+    Fjuttner(i) = (1.0/(theta*bes))*exp1*gam(i)*gam(i)*beta;
+    Fshifted(i) = juttner_shifted_integrated(gam(i), 0.127, sqrt(1.0 - 1.0/2.25));
 end;
 
 normShifted = 0;
 for i = 1:Np,
     normShifted = normShifted + Fshifted(i)*de(i)*me/m;
+end;
+
+x0(1:2)=[0.1,0.75];
+error = evaluate_error(Fp2, 0.127, sqrt(1.0 - 1.0/2.25), gam, Np, index1, index2);
+fun = @(x)evaluate_error(Fp2,x(1),x(2), gam, Np, index1, index2);
+[x,fval] = fminunc(fun,x0);
+for i = 1:Np,   
+    Fshifted(i) = juttner_shifted_integrated(gam(i), x(1), x(2));
 end;
 
 
@@ -213,8 +222,8 @@ figure(1);
 hold on;
 set(gca, 'YScale', 'log');
 set(gca, 'XScale', 'log');
-%xlim([1.0 1000]);
-%ylim([10^-10 10]);
+xlim([1.0 1000]);
+ylim([10^-10 1]);
 plot(energy(1:Np)+m/me,Fp2(1:Np),'red','LineWidth',2);
 plot(energy(1:Np)+m/me, Fjuttner(1:Np),'blue','LineWidth',2);
 plot(energy(1:Np)+m/me,Fpa(1:Np),'green','LineWidth',2);
@@ -231,7 +240,9 @@ title('F(E)');
 xlabel('E/me c^2');
 ylabel('F(E)');
 name = strcat('powerlaw \gamma = ',num2str(p(1)));
-legend('Fe', 'maxwell-juttner',name,'juttner shifted','Location','southeast');
+%legend('Fe', 'maxwell-juttner',name,'Location','southeast');
+name2 = strcat('juttner \theta = ', num2str(x(1)),' \beta = ', num2str(x(2)));
+legend('Fe', 'maxwell-juttner',name, name2,'Location','southeast');
 grid;
 
 output(1:167,1:4) = 0;
