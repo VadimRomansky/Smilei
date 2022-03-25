@@ -4,15 +4,15 @@ file_name = 'ParticleBinning';
 file_ending = '.h5';
 
 Number = {6,7,8};
-Color = {'blue','red','green'};
-LegendTitle = {'electrons', 'positrons','protons'};
+Color = {'blue','red','magenta'};
+LegendTitle = {'electrons', 'protons','positrons'};
 
 Nd = 3;
 full_name = strcat(directory_name, file_name, num2str(Number{1}), file_ending);
 
 info = h5info(full_name);
 Ndata = size(info.Datasets,1);
-Ndata = 10;
+Ndata = 20;
 name = info.Datasets(Ndata).Name;
 fp= hdf5read(full_name, name);
 
@@ -21,8 +21,8 @@ Nx=size(fp,2);
 
 minE(1:Nd) = 0;
 minE(1) = 0.001;
-minE(2) = 0.001;
-minE(3) = 0.1;
+minE(2) = 0.1;
+minE(3) = 0.001;
 maxE(1:Nd) = 0;
 maxE(1)= 5000;
 maxE(2) = 5000;
@@ -32,7 +32,7 @@ mp = 1.67*10^-24;
 mass_ratio = 100;
 me = mp/mass_ratio;
 
-m(1:Nd) = [me, me, mp];
+m(1:Nd) = [me, mp, me];
 
 energy(1:Np,1:Nd) = 0;
 de(1:Np,1:Nd) = 0;
@@ -57,8 +57,8 @@ Fp(1:Nd,1:Np)=0;
 samplingFactor = 20;
 
 for i = 1:Nd,
-    startx(i) = fix(90000/samplingFactor)+1;
-    endx(i) = fix(110000/samplingFactor);
+    startx(i) = fix(70000/samplingFactor)+1;
+    endx(i) = fix(130000/samplingFactor);
 end;
 %startx(2) = fix(23000/samplingFactor)+1;
 %endx(2) = fix(28000/samplingFactor);
@@ -108,12 +108,12 @@ figure(1);
 hold on;
 set(gca, 'YScale', 'log');
 set(gca, 'XScale', 'log');
-title ('F(E)');
-xlabel ('E/{m_e c^2}');
-ylabel ('F(E)');
+title ('F({\gamma})');
+xlabel ('{\gamma}*m/m_e');
+ylabel ('F({\gamma})');
 for j=1:Nd,
     %plot (energy(1:Np,j)+m(j)/me,Fp(j, 1:Np),'color',Color{j});
-    plot (1+energy(1:Np,j),Fp(j, 1:Np),'color',Color{j});
+    plot (energy(1:Np,j) + m(j)/mp,Fp(j, 1:Np),'color',Color{j});
 end;
 
 legend(LegendTitle{1}, LegendTitle{2}, LegendTitle{3},'Location','northwest');
