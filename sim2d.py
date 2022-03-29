@@ -1,12 +1,14 @@
 import math
 import numpy as np
-
+from numpy import s_
 ## ./smilei sim2d.py | tee "sim_log_$(date +'%F_%H-%M').txt"
 
+#gamma
+gamma = 1.5
 # Mean velocity
-mean_velocity = 0.75
+mean_velocity = np.sqrt(1.0-1.0/(gamma*gamma))
 # Electron temperature
-T0 = 0.01
+T0 = 0.1
 Te = T0
 # Ion temperature
 Ti = T0
@@ -14,22 +16,22 @@ Ti = T0
 Zi = 1
 # Density
 n0 = 1
-#Plasma parameter
-beta = 0.25
 #sigma
 sigma = 0.004
+#theta
+theta=0.0*np.pi/180.0
 # Debye length
 #Debye_length = 1. / np.sqrt( n0 / Te + Zi * n0 / Ti )
 #ion mass
 mp = 100.0
 # Cell length
-cell_length = [0.1, 0.1]
+cell_length = [0.2, 0.2]
 # Number of patches
-number_of_patches = [128, 2]
+number_of_patches = [4096, 4]
 # Cells per patches (patch shape)
-cells_per_patch = [1000., 100.]
+cells_per_patch = [100., 100.]
 # Grid length
-grid_length = [12800.,20.]
+grid_length = [81920.,80.]
 for i in range(2):
     grid_length[i] = number_of_patches[i] * cell_length[i] * cells_per_patch[i]
 # Number of particles per cell
@@ -37,15 +39,15 @@ particles_per_cell = 4
 # Position init
 position_initialization = 'random'
 # Timestep (Courant condition)
-timestep = 0.45/np.sqrt(1./ cell_length[0]**2 + 1./ cell_length[1]**2)
+timestep = 0.5*cell_length[0]
 # Total simulation timeremove
-simulation_time = 10000          # duration of the simulation
+simulation_time = 180000          # duration of the simulation
 # Period of output for the diags
-xdiag = 20
-vdiag = 20
-diag_step = 10000
+xdiag = 40
+vdiag = 40
+diag_step = 80000
 #diag_step = 70 # after including the interrupt
-diag_every = 1000
+diag_every = 80000
 
 Main(
     geometry = "2Dcartesian",
@@ -109,25 +111,43 @@ Species(
 	],
 )
 
+#ParticleInjector(
+#    name      = "injector1",
+#    species   = "pon1",
+#    box_side  = "xmax",
+#)
+
+#ParticleInjector(
+#    name      = "injector2",
+#    species   = "eon1",
+#    box_side  = "xmax",
+#    position_initialization = "injector1"
+#)
+
 ExternalField(
    field = "Bx",
-   profile = np.sqrt(sigma*mp*n0*1.5)
+   profile = np.sqrt(sigma*mp*n0*gamma)*np.cos(theta)
 )
 
 ExternalField(
-   field = "By",
-   profile = np.sqrt(sigma*mp*n0*1.5)
+   field = "Bz",
+   profile = np.sqrt(sigma*mp*n0*gamma)*np.sin(theta)
 )
 
 ExternalField(
-   field = "Ez",
-   profile = np.sqrt(sigma*mp*n0*1.5)*mean_velocity
+   field = "Ey",
+   profile = -np.sqrt(sigma*mp*n0*gamma)*np.sin(theta)*mean_velocity
 )
 
 CurrentFilter(
     model = "binomial",
     passes = [8],
     kernelFIR = [0.25,0.5,0.25]
+)
+
+FieldFilter(
+    model = "Friedman",
+    theta = 0.1,
 )
 
 
@@ -161,7 +181,7 @@ DiagParticleBinning( #2
     time_average = 1,
     species = ["eon1"],
     axes = [
-        ["ekin", 0.01, 1000, 1000, "logscale"],
+        ["ekin", 0.001, 5000, 1000, "logscale"],
     ]
 )
 
@@ -171,7 +191,7 @@ DiagParticleBinning( #3
     time_average = 1,
     species = ["pon1"],
     axes = [
-        ["ekin", 1, 1000, 1000, "logscale"],
+        ["ekin", 0.1, 5000, 1000, "logscale"],
     ]
 )
     
@@ -203,7 +223,7 @@ DiagParticleBinning(#6
     species = ["eon1"],
     axes = [
         ["x", 0., grid_length[0], number_of_patches[0] * cells_per_patch[0]/20],
-        ["ekin", 0.1, 1000, 200, "logscale", "edge_inclusive"]
+        ["ekin", 0.001, 5000, 200, "logscale", "edge_inclusive"]
     ]
 )
 
@@ -214,6 +234,40 @@ DiagParticleBinning(#7
     species = ["pon1"],
     axes = [
         ["x", 0., grid_length[0], number_of_patches[0] * cells_per_patch[0]/20],
-        ["ekin", 0.1, 1000, 200, "logscale", "edge_inclusive"]
+        ["ekin", 0.1, 5000, 200, "logscale", "edge_inclusive"]
     ]
 )
+
+DiagFields(
+    #8
+    #name = "fields",
+    every = diag_every,
+    time_average = 1,
+    fields = ["Ex", "Ey", "Ez","Bx", "By", "Bz"],
+    subgrid = s_[::4, ::4]
+)	
+
+DiagParticleBinning(
+    #9,
+    deposited_quantity = "weight",
+    every = diag_every,
+    time_average = 1,
+    species = ["pon1"],
+    axes = [
+        ["x", 0., grid_length[0], number_of_patches[0] * cells_per_patch[0]/20],
+        ["vx", -1.0, 1.0, 200, "edge_inclusive"]
+    ]
+)
+
+DiagParticleBinning(
+    #10,
+    deposited_quantity = "weight",
+    every = diag_every,
+    time_average = 1,
+    species = ["eon1"],
+    axes = [
+        ["x", 0., grid_length[0], number_of_patches[0] * cells_per_patch[0]/20],
+        ["vx", -1.0, 1.0, 200, "edge_inclusive"]
+    ]
+)
+

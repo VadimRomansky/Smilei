@@ -12,7 +12,7 @@ full_name = strcat(directory_name, file_name, num2str(Number{1}), file_ending);
 
 info = h5info(full_name);
 Ndata = size(info.Datasets,1);
-Ndata = 20;
+Ndata = 30;
 name = info.Datasets(Ndata).Name;
 fp= hdf5read(full_name, name);
 
@@ -57,8 +57,8 @@ Fp(1:Nd,1:Np)=0;
 samplingFactor = 20;
 
 for i = 1:Nd,
-    startx(i) = fix(70000/samplingFactor)+1;
-    endx(i) = fix(130000/samplingFactor);
+    startx(i) = fix(240000/samplingFactor)+1;
+    endx(i) = fix(280000/samplingFactor);
 end;
 %startx(2) = fix(23000/samplingFactor)+1;
 %endx(2) = fix(28000/samplingFactor);
