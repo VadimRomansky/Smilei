@@ -1,9 +1,9 @@
 clear;
-directory_name = './output_theta0-90_gamma1.5sigma0.004/';
+directory_name = './output_gamma1.5_sigma0.004_theta0-90_old/';
 file_name = 'ParticleBinning6';
 file_ending = '.h5';
 
-Number = {1, 3, 4, 6, 9};
+Number = {0, 3, 4, 6, 9};
 Color = {'red','blue','green','black','cyan','magenta','yellow',[0.75,0,0.67],[0.5,0.5,0.0],[.98,.5,.44]};
 LegendTitle = {'{\theta} = 0', '{\theta} = 10','{\theta} = 20', '{\theta} = 30', '{\theta} = 40', '{\theta} = 50','{\theta} = 60', '{\theta} = 70', '{\theta} = 80', '{\theta} = 90'};
 
@@ -44,7 +44,7 @@ samplingFactor = 20;
 
 for i = 1:Nd,
     startx(i) = fix(15000/samplingFactor)+1;
-    endx(i) = fix(20000/samplingFactor);
+    endx(i) = fix(40000/samplingFactor);
 end;
 %startx(2) = fix(27000/samplingFactor)+1;
 %endx(2) = fix(32000/samplingFactor);

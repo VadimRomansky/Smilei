@@ -31,8 +31,8 @@ m = me;
 startPowerP = 125;
 endPowerP = 145;
 
-startPowerE = 109;
-endPowerE = 119;
+startPowerE = 119;
+endPowerE = 129;
 
 startPower = startPowerE;
 endPower = endPowerE;
@@ -75,8 +75,8 @@ shockx = 38000;
 startx = fix((shockx - 2560)/samplingFactor)+1;
 endx = fix((shockx - 320)/samplingFactor);
 
-startx = fix(150000/samplingFactor)+1;
-endx = fix(160000/samplingFactor);
+startx = fix(300000/samplingFactor)+1;
+endx = fix(350000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,

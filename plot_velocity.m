@@ -1,6 +1,6 @@
 clear;
 directory_name = './output/';
-file_name = 'ParticleBinning8';
+file_name = 'ParticleBinning10';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
@@ -24,7 +24,7 @@ meanV(1:Nx,1:3) = 0;
 concentration(1:Nx,1:3) = 0;
 samplingfactor = 20;
 %for i = 1:Nx,
- for i = 150000/samplingfactor:160000/samplingfactor,
+ for i = 400000/samplingfactor:420000/samplingfactor,
     for j = 1:Np,
         vx = minV + (j-0.5)*dv;
         meanV(i,1) = meanV(i,1) + vx*fp1(j,i);

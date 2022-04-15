@@ -8,7 +8,7 @@ info = h5info(full_name);
 Color = {'red','blue','green','black','magenta', [1.0,0.6,0]};
 %h5disp(full_name);
 Ndata = size(info.Groups.Groups,1);
-Ndata = 1;
+Ndata = 5;
 %datasets = info.Groups.Groups(1).Datasets;
 %name1x = strcat(info.Groups.Groups(1).Name, '/Bx');
 %name1y = strcat(info.Groups.Groups(1).Name, '/By');
@@ -63,6 +63,13 @@ for k=1:Ns,
             Exa(i,k) = Exa(i,k) + Ex(j,i)/Ny;
             Eya(i,k) = Eya(i,k) + Ey(j,i)/Ny;
             Eza(i,k) = Eza(i,k) + Ez(j,i)/Ny;
+
+%             Bxa(i,k) = Bxa(i,k) + Bx(i,j)/Ny;
+%             Bya(i,k) = Bya(i,k) + By(i,j)/Ny;
+%             Bza(i,k) = Bza(i,k) + Bz(i,j)/Ny;
+%             Exa(i,k) = Exa(i,k) + Ex(i,j)/Ny;
+%             Eya(i,k) = Eya(i,k) + Ey(i,j)/Ny;
+%             Eza(i,k) = Eza(i,k) + Ez(i,j)/Ny;
             Bnorma(i,k) = Bnorma(i,k) + By(j,i)*By(j,i) + Bz(j,i)*Bz(j,i);
         end;
         Bnorma(i,k) = sqrt(Bnorma(i,k)/Ny);
