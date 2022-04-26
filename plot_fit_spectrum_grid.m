@@ -15,7 +15,7 @@ Np=size(fp1,1);
 Nx=size(fp1,2);
 
 minEe = 0.001;
-maxEe = 5000;
+maxEe = 50000;
 minEp = 0.1;
 maxEp = 5000;
 minE = minEe;
@@ -31,8 +31,8 @@ m = me;
 startPowerP = 125;
 endPowerP = 145;
 
-startPowerE = 119;
-endPowerE = 129;
+startPowerE = 149;
+endPowerE = 159;
 
 startPower = startPowerE;
 endPower = endPowerE;
@@ -75,8 +75,8 @@ shockx = 38000;
 startx = fix((shockx - 2560)/samplingFactor)+1;
 endx = fix((shockx - 320)/samplingFactor);
 
-startx = fix(300000/samplingFactor)+1;
-endx = fix(350000/samplingFactor);
+startx = fix(350000/samplingFactor)+1;
+endx = fix(450000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,
@@ -225,7 +225,7 @@ figure(1);
 hold on;
 set(gca, 'YScale', 'log');
 set(gca, 'XScale', 'log');
-xlim([1.0 1000]);
+xlim([1.0 10000]);
 ylim([10^-10 1]);
 plot(energy(1:Np)+m/me,Fp2(1:Np),'red','LineWidth',2);
 plot(energy(1:Np)+m/me, Fjuttner(1:Np),'blue','LineWidth',2);

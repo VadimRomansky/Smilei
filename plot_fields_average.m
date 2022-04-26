@@ -1,5 +1,5 @@
 clear;
-directory_name = './output/';
+directory_name = './output_gamma0.3_sigma0.0002_theta80/';
 file_name = 'Fields0';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
@@ -8,7 +8,7 @@ info = h5info(full_name);
 Color = {'red','blue','green','black','magenta', [1.0,0.6,0]};
 %h5disp(full_name);
 Ndata = size(info.Groups.Groups,1);
-Ndata = 5;
+Ndata = 1;
 %datasets = info.Groups.Groups(1).Datasets;
 %name1x = strcat(info.Groups.Groups(1).Name, '/Bx');
 %name1y = strcat(info.Groups.Groups(1).Name, '/By');

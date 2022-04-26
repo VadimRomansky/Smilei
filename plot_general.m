@@ -1,5 +1,5 @@
 clear;
-general = importdata('./output/scalars.txt');
+general = importdata('./output_gamma0.3_sigma0.0002_theta80/scalars.txt');
 N=size(general,1);
 
 v = 0.9;
