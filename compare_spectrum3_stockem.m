@@ -57,8 +57,8 @@ Fp(1:Nd,1:Np)=0;
 samplingFactor = 20;
 
 for i = 1:Nd,
-    startx(i) = fix(550000/samplingFactor)+1;
-    endx(i) = fix(600000/samplingFactor);
+    startx(i) = fix(300000/samplingFactor)+1;
+    endx(i) = fix(380000/samplingFactor);
 end;
 %startx(2) = fix(23000/samplingFactor)+1;
 %endx(2) = fix(28000/samplingFactor);
@@ -112,8 +112,8 @@ title ('F({\gamma})');
 xlabel ('{\gamma}*m/m_e');
 ylabel ('F({\gamma})');
 for j=1:Nd,
-    %plot (energy(1:Np,j)+m(j)/me,Fp(j, 1:Np),'color',Color{j});
-    plot (energy(1:Np,j) + m(j)/mp,Fp(j, 1:Np),'color',Color{j});
+    plot (energy(1:Np,j)+m(j)/me,Fp(j, 1:Np),'color',Color{j});
+    %plot (energy(1:Np,j) + m(j)/mp,Fp(j, 1:Np),'color',Color{j});
 end;
 
 legend(LegendTitle{1}, LegendTitle{2}, LegendTitle{3},'Location','northwest');
