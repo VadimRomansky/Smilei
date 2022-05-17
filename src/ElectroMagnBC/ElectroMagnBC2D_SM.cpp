@@ -42,6 +42,14 @@ ElectroMagnBC2D_SM::ElectroMagnBC2D_SM( Params &params, Patch *patch, unsigned i
         B_val[axis1_].resize( n_p[axis1_], 0. ); // primal in the other direction
         B_val[2     ].resize( n_d[axis1_], 0. ); // dual in the other direction
     }
+
+    // Buffers to save E field
+    E_val.resize( 3 );
+    if( patch->isBoundary( i_boundary_ ) ) {
+        E_val[axis0_].resize( n_p[axis1_], 0. ); // dual in the first direction
+        E_val[axis1_].resize( n_d[axis1_], 0. ); // primal in the other direction
+        E_val[2     ].resize( n_p[axis1_], 0. ); // dual in the other direction
+    }
     
     // -----------------------------------------------------
     // Parameters for the Silver-Mueller boundary conditions
@@ -69,25 +77,51 @@ void ElectroMagnBC2D_SM::save_fields( Field *my_field, Patch *patch )
     if( patch->isBoundary( i_boundary_ ) ) {
         
         unsigned int xyz = 0;
-        if( field2D->name=="Bx" ) {
-            xyz = 0;
-        } else if( field2D->name=="By" ) {
-            xyz = 1;
-        } else if( field2D->name=="Bz" ) {
-            xyz = 2;
-        }
-        
-        if( axis0_ == 0 ) {
-            for( unsigned int j=0; j<B_val[xyz].size(); j++ ) {
-                B_val[xyz][j]=( *field2D )( iB_[xyz], j );
+        if((field2D->name=="Bx") || (field2D->name=="By") || (field2D->name=="Bz")) {
+            if (field2D->name == "Bx") {
+                xyz = 0;
+            } else if (field2D->name == "By") {
+                xyz = 1;
+            } else if (field2D->name == "Bz") {
+                xyz = 2;
             }
-        } else {
-            for( unsigned int i=0; i<B_val[xyz].size(); i++ ) {
-                B_val[xyz][i]=( *field2D )( i, iB_[xyz] );
+
+            if (axis0_ == 0) {
+                for (unsigned int j = 0; j < B_val[xyz].size(); j++) {
+                    B_val[xyz][j] = (*field2D)(iB_[xyz], j);
+                }
+            } else {
+                for (unsigned int i = 0; i < B_val[xyz].size(); i++) {
+                    B_val[xyz][i] = (*field2D)(i, iB_[xyz]);
+                }
+            }
+
+            return;
+        }
+
+        if((field2D->name=="Ex") || (field2D->name=="Ey") || (field2D->name=="Ez")) {
+            if (field2D->name == "Ex") {
+                xyz = 0;
+            } else if (field2D->name == "Ey") {
+                xyz = 1;
+            } else if (field2D->name == "Ez") {
+                xyz = 2;
+            }
+
+            if (axis0_ == 0) {
+                for (unsigned int j = 0; j < E_val[xyz].size(); j++) {
+                    E_val[xyz][j] = (*field2D)(iB_[xyz], j);
+                }
+            } else {
+                for (unsigned int i = 0; i < E_val[xyz].size(); i++) {
+                    E_val[xyz][i] = (*field2D)(i, iB_[xyz]);
+                }
             }
         }
-        
+
+        return;
     }
+    printf("unknown field name\n");
 }
 
 void ElectroMagnBC2D_SM::disableExternalFields()
@@ -131,7 +165,7 @@ void ElectroMagnBC2D_SM::apply( ElectroMagn *EMfields, double time_dual, Patch *
         if( axis0_ == 0 ) { // for By^(d,p)
             for( unsigned int j=patch->isBoundary(axis1_,0) ; j<n_p[axis1_]-patch->isBoundary(axis1_,1) ; j++ ) {
                 ( *B[1] )( iB_[1], j )
-                    = Alpha_  *   ( *E[2] )( iB_[0]      , j )
+                    = Alpha_  *   (( *E[2] )( iB_[0]      , j ) - E_val[2][j])
                     + Beta_   * ( ( *B[1] )( iB_[1]-sign_, j )-B_val[1][j] )
                     + Gamma_  * b1[j]
                     + Delta_  * ( ( *B[0] )( iB_[0], j+1 )-B_val[0][j+1] )
@@ -141,7 +175,7 @@ void ElectroMagnBC2D_SM::apply( ElectroMagn *EMfields, double time_dual, Patch *
         } else { // for Bx^(p,d)
             for( unsigned int j=patch->isBoundary(axis1_,0) ; j<n_p[axis1_]-patch->isBoundary(axis1_,1) ; j++ ) {
                 ( *B[0] )( j, iB_[0] )
-                    = -Alpha_ *   ( *E[2] )( j, iB_[1]        )
+                    = -Alpha_ *   (( *E[2] )( j, iB_[1]        ) - E_val[2][j])
                     + Beta_   * ( ( *B[0] )( j, iB_[0]-sign_ )-B_val[0][j] )
                     + Gamma_  * b1[j]
                     + Delta_  * ( ( *B[1] )( j+1, iB_[1] )-B_val[1][j+1] )
@@ -164,7 +198,7 @@ void ElectroMagnBC2D_SM::apply( ElectroMagn *EMfields, double time_dual, Patch *
         if( axis0_ == 0 ) {
             for( unsigned int j=patch->isBoundary(axis1_,0) ; j<n_d[axis1_]-patch->isBoundary(axis1_,1) ; j++ ) {
                 ( *B[2] )( iB_[2], j )
-                    = -Alpha_ *   ( *E[1] )( iB_[0]      , j )
+                    = -Alpha_ *   (( *E[1] )( iB_[0]      , j ) - E_val[1][j])
                     + Beta_   * ( ( *B[2] )( iB_[2]-sign_, j )- B_val[2][j] )
                     + Gamma_  * b2[j]
                     + B_val[2][j];
@@ -172,7 +206,7 @@ void ElectroMagnBC2D_SM::apply( ElectroMagn *EMfields, double time_dual, Patch *
         } else {
             for( unsigned int j=patch->isBoundary(axis1_,0) ; j<n_d[axis1_]-patch->isBoundary(axis1_,1) ; j++ ) {
                 ( *B[2] )( j, iB_[2] )
-                    = Alpha_ *   ( *E[0] )( j, iB_[1]       )
+                    = Alpha_ *   (( *E[0] )( j, iB_[1]       ) - E_val[0][j])
                     + Beta_  * ( ( *B[2] )( j, iB_[2]-sign_ )- B_val[2][j] )
                     + Gamma_ * b2[j]
                     + B_val[2][j];

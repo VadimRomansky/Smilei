@@ -5,7 +5,7 @@ file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
 Ndata = size(info.Datasets,1);
-%Ndata = 10;
+Ndata = 25;
 name1 = info.Datasets(1).Name;
 name2 = info.Datasets(fix(Ndata/2)+1).Name;
 name3 = info.Datasets(Ndata).Name;
@@ -16,13 +16,13 @@ N=size(fp1,1);
 
 dx = 0.1;
 factor = 1.0/(dx*dx);
-Ny = 20;
+Ny = 200;
 
 xsw(1:Ndata) = 0;
 t(1:Ndata) = 0;
 
 for i = 1:Ndata,
-    t(i) = (i-1)*0.09*80000;
+    t(i) = (i-1)*dx*0.5*40000;
     name = info.Datasets(i).Name;
     fp = hdf5read(full_name, name)*factor/Ny;
     for j = N:-1:1,
@@ -50,17 +50,29 @@ plot((1:N),fp2(1:N)*factor/Ny,'green');
 plot((1:N),fp3(1:N)*factor/Ny,'blue');
 grid;
 
-% figure(2);
-% plot(t(1:Ndata), xsw(1:Ndata));
-% grid;
-% 
-% figure(3);
-% plot(t(1:Ndata), vsw(1:Ndata));
-% grid;
-% 
-% figure(4);
-% plot(t(1:Ndata), vsw1(1:Ndata));
-% grid;
+figure(2);
+hold on;
+title ('xsw');
+xlabel ('t');
+ylabel ('xsw');
+plot(t(1:Ndata), xsw(1:Ndata));
+grid;
+
+figure(3);
+hold on;
+title ('vsw');
+xlabel ('t');
+ylabel ('vsw');
+plot(t(1:Ndata), vsw(1:Ndata));
+grid;
+
+figure(4);
+hold on;
+title ('<vsw>');
+xlabel ('t');
+ylabel ('<vsw>');
+plot(t(1:Ndata), vsw1(1:Ndata));
+grid;
 
 output(1:Ndata-1,4) = 0;
 for i = 1:Ndata-1,

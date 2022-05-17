@@ -6,7 +6,7 @@ full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
 %h5disp(full_name);
 Ndata = size(info.Groups.Groups,1);
-Ndata = 1;
+%Ndata = 1;
 %datasets = info.Groups.Groups(1).Datasets;
 name1x = strcat(info.Groups.Groups(1).Name, '/Bx');
 name1y = strcat(info.Groups.Groups(1).Name, '/By');

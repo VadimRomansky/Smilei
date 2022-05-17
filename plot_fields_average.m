@@ -8,7 +8,7 @@ info = h5info(full_name);
 Color = {'red','blue','green','black','magenta', [1.0,0.6,0]};
 %h5disp(full_name);
 Ndata = size(info.Groups.Groups,1);
-Ndata = 5;
+%Ndata = 1;
 %datasets = info.Groups.Groups(1).Datasets;
 %name1x = strcat(info.Groups.Groups(1).Name, '/Bx');
 %name1y = strcat(info.Groups.Groups(1).Name, '/By');
@@ -111,7 +111,7 @@ grid ;
 figure(4);
 hold on;
 for k = 1:Ns,
-    plot((1:Nx), smooth(Bnorma(1:Nx,k),100),'color',Color{k});
+    plot((1:Nx), Bnorma(1:Nx,k),'color',Color{k});
 end;
 legend('700 {\omega}_{pi}^{-1}', '1400 {\omega}_{pi}^{-1}', '2100 {\omega}_{pi}^{-1}', '2800 {\omega}_{pi}^{-1}', '3500 {\omega}_{pi}^{-1}','Location','northwest');
 %legend('600 wpi^{-1}', '1200 wpi^{-1}', '1800 wpi^{-1}', '2400 wpi^{-1}', '3000 wpi^{-1}', '3600 wpi^{-1}','Location','northwest');
