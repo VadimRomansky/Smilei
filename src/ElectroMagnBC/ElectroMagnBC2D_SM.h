@@ -28,6 +28,9 @@ public:
     
     //! Save external fields for silver muller EM Boundary condition
     std::vector<std::vector<double> > B_val;
+
+    //! Save external electric fields for silver muller EM Boundary condition
+    std::vector<std::vector<double> > E_val;
     
 private:
 

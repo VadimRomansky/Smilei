@@ -1,11 +1,11 @@
 clear;
 directory_name = './output/';
-file_name = 'ParticleBinning6';
+file_name = 'ParticleBinning7';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
 Ndata = size(info.Datasets,1);
-Ndata = 9;
+Ndata = 6;
 name1 = info.Datasets(1).Name;
 name2 = info.Datasets(Ndata).Name;
 fp1= hdf5read(full_name, name1);
@@ -18,15 +18,15 @@ minEe = 0.001;
 maxEe = 1000;
 minEp = 0.1;
 maxEp = 5000;
-minE = minEe;
-maxE = maxEe;
+minE = minEp;
+maxE = maxEp;
 factor = (maxE/minE)^(1.0/(Np-1));
 
 mp = 1.67*10^-24;
 mass_ratio = 100;
 me = mp/mass_ratio;
 
-m = me;
+m = mp;
 
 startPowerP = 125;
 endPowerP = 145;
@@ -44,7 +44,7 @@ Te = 2.6*10^9;
 Temin = 10^7;
 Temax = 2*10^12;
 Tp = 2*10^11;
-Tpmin = 10^9;
+Tpmin = 10^8;
 Tpmax = 10^12;
 
 T = Te;
@@ -75,8 +75,8 @@ shockx = 38000;
 startx = fix((shockx - 2560)/samplingFactor)+1;
 endx = fix((shockx - 320)/samplingFactor);
 
-startx = fix(5000/samplingFactor)+1;
-endx = fix(15000/samplingFactor);
+startx = fix(1000/samplingFactor)+1;
+endx = fix(20000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,
@@ -133,8 +133,8 @@ end;
 %    end;
 %end;
 
-index1 = 3;
-index2 = 20;
+index1 = 15;
+index2 = 30;
 
 Tleft = Tmin;
 Tright = Tmax;
@@ -169,7 +169,7 @@ for j = 1:20,
     end;
 end;
 T = (Tleft + Tright)/2;
-%T = 7*10^11;
+%T = 3*10^10;
 theta = kB*T/(m*c*c);
 bes = besselk(2, 1/theta);
 Fshifted(1:Np) = 0;
@@ -187,14 +187,14 @@ for i = 1:Np,
     normShifted = normShifted + Fshifted(i)*de(i)*me/m;
 end;
 
-x0(1:2)=[0.1,0.75];
+x0(1:2)=[0.1,0.1];
 error = evaluate_error(Fp2, 0.127, sqrt(1.0 - 1.0/2.25), gam, Np, index1, index2);
 fun = @(x)evaluate_error(Fp2,x(1),x(2), gam, Np, index1, index2);
 [x,fval] = fminunc(fun,x0);
 for i = 1:Np,   
     Fshifted(i) = juttner_shifted_integrated(gam(i), x(1), x(2));
 end;
-
+T3=x(1)*m*c*c/kB;
 
 Fpa(1:Np) = 0;
 
