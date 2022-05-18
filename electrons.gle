@@ -14,11 +14,11 @@ begin graph
   ylabels log off
   d1 lstyle 1 lwidth 0.12 color blue
   d2 lstyle 1 lwidth 0.12 color red
-  d3 lstyle 1 lwidth 0.12 color green
+  %d3 lstyle 1 lwidth 0.12 color green
 end graph
 begin key
    pos tr
    text "F(E)" line lstyle 1 lwidth 0.12 color blue
    text "Maxwell-Juttner" line lstyle 1 lwidth 0.12 color red
-   text "E^{-s}" line lstyle 1 lwidth 0.12 color green
+   %text "E^{-s}" line lstyle 1 lwidth 0.12 color green
 end key

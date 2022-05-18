@@ -1,5 +1,5 @@
 clear;
-directory_name = './output/';
+directory_name = './output_gamma0.3_sigma0.0002_theta30_inplane/';
 file_name = 'ParticleBinning6';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
@@ -18,7 +18,7 @@ Np=size(fp1,1);
 Nx=size(fp1,2);
 
 minEe = 0.001;
-maxEe = 5000;
+maxEe = 1000;
 minEp = 0.1;
 maxEp = 5000;
 minE = minEe;
@@ -46,8 +46,8 @@ Fp3(1:Np)=0;
 
 samplingFactor = 20;
 
-startx = fix(150000/samplingFactor)+1;
-endx = fix(160000/samplingFactor);
+startx = fix(10000/samplingFactor)+1;
+endx = fix(20000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,

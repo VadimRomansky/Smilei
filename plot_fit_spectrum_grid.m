@@ -5,7 +5,7 @@ file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
 Ndata = size(info.Datasets,1);
-%Ndata = 1;
+Ndata = 9;
 name1 = info.Datasets(1).Name;
 name2 = info.Datasets(Ndata).Name;
 fp1= hdf5read(full_name, name1);
@@ -15,7 +15,7 @@ Np=size(fp1,1);
 Nx=size(fp1,2);
 
 minEe = 0.001;
-maxEe = 50000;
+maxEe = 1000;
 minEp = 0.1;
 maxEp = 5000;
 minE = minEe;
@@ -75,8 +75,8 @@ shockx = 38000;
 startx = fix((shockx - 2560)/samplingFactor)+1;
 endx = fix((shockx - 320)/samplingFactor);
 
-startx = fix(350000/samplingFactor)+1;
-endx = fix(450000/samplingFactor);
+startx = fix(5000/samplingFactor)+1;
+endx = fix(15000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,
@@ -133,8 +133,8 @@ end;
 %    end;
 %end;
 
-index1 = 50;
-index2 = 100;
+index1 = 3;
+index2 = 20;
 
 Tleft = Tmin;
 Tright = Tmax;
@@ -169,6 +169,7 @@ for j = 1:20,
     end;
 end;
 T = (Tleft + Tright)/2;
+%T = 7*10^11;
 theta = kB*T/(m*c*c);
 bes = besselk(2, 1/theta);
 Fshifted(1:Np) = 0;

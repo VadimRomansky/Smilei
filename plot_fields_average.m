@@ -1,14 +1,14 @@
 clear;
-directory_name = './output_gamma0.3_sigma0.0002_theta80/';
+directory_name = './output/';
 file_name = 'Fields0';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
 
-Color = {'red','blue','green','black','magenta', [1.0,0.6,0]};
+Color = {'red','green','blue','black','magenta', [1.0,0.6,0]};
 %h5disp(full_name);
 Ndata = size(info.Groups.Groups,1);
-Ndata = 1;
+%Ndata = 20;
 %datasets = info.Groups.Groups(1).Datasets;
 %name1x = strcat(info.Groups.Groups(1).Name, '/Bx');
 %name1y = strcat(info.Groups.Groups(1).Name, '/By');
@@ -31,7 +31,7 @@ Bz= hdf5read(full_name, name2z);
 Ny=size(Bx,1);
 Nx=size(Bx,2);
 
-Ns = 5;
+Ns = 3;
 
 Bxa(1:Nx,1:Ns) = 0;
 Bya(1:Nx,1:Ns) = 0;
@@ -40,9 +40,9 @@ Exa(1:Nx,1:Ns) = 0;
 Eya(1:Nx,1:Ns) = 0;
 Eza(1:Nx,1:Ns) = 0;
 Bnorma(1:Nx,1:Ns) = 0;
-
+Ntimes = {1, fix(Ndata/2), Ndata};
 for k=1:Ns,
-    Nt = fix((Ndata-1)*k/Ns)+1;
+    Nt = Ntimes{k};
     name2x = strcat(info.Groups.Groups(Nt).Name, '/Bx');
     name2y = strcat(info.Groups.Groups(Nt).Name, '/By');
     name2z = strcat(info.Groups.Groups(Nt).Name, '/Bz');
