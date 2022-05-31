@@ -363,7 +363,7 @@ class TrackParticles(Diagnostic):
 							elif seltype[k] == "all(": selection *= selectionAtTimeT * existing
 						stack.append(selection)
 					# Merge all stack items according to the operations
-					selectedParticles = self._np.union1d( selectedParticles, eval(operation).nonzero()[0] )
+					selectedParticles = self._np.union1d( selectedParticles, eval(operation).nonzero()[0].astype("uint64") )
 			else:
 				# Execute the selector item
 				selectedParticles = self._np.array([], dtype="uint64")
@@ -678,10 +678,9 @@ class TrackParticles(Diagnostic):
 		if self._sort:
 			for axis, factor in zip(self.axes, self._factors):
 				if timestep is None:
-					data[axis] = self._rawData[axis]
+					data[axis] = self._rawData[axis] * factor
 				else:
-					data[axis] = self._rawData[axis][indexOfRequestedTime]
-				data[axis] *= factor
+					data[axis] = self._rawData[axis][indexOfRequestedTime]  * factor
 		else:
 			for t in ts:
 				data[t] = {}
