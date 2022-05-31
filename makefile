@@ -13,12 +13,10 @@
 # BOOST_ROOT_DIR   : the local path to the boost library
 # TABLES_BUILD_DIR : build directory for databases (default ./tools/tables/build)
 
-BUILD_DIR ?= build
-SMILEICXX ?= mpicxx
-PYTHONEXE ?= python
-HDF5_ROOT_DIR ?= $(HDF5_ROOT)
+BUILD_DIR ?= /home/vadim/Smilei/build
+SMILEICXX ?= /home/vadim/mpich-install/bin/mpicxx
+HDF5_ROOT_DIR ?= /home/vadim/HDF5
 BOOST_ROOT_DIR ?= $(BOOST_ROOT)
-BUILD_DIR ?= build
 PYTHONEXE ?= python3
 TABLES_BUILD_DIR ?= tools/tables/build
 

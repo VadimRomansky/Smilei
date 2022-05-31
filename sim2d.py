@@ -27,11 +27,11 @@ mp = 100.0
 # Cell length
 cell_length = [0.2, 0.2]
 # Number of patches
-number_of_patches = [4096, 4]
+number_of_patches = [2, 1]
 # Cells per patches (patch shape)
-cells_per_patch = [100., 100.]
+cells_per_patch = [500., 10.]
 # Grid length
-grid_length = [81920.,80.]
+grid_length = [200.,2.]
 for i in range(2):
     grid_length[i] = number_of_patches[i] * cell_length[i] * cells_per_patch[i]
 # Number of particles per cell
@@ -41,13 +41,13 @@ position_initialization = 'random'
 # Timestep (Courant condition)
 timestep = 0.5*cell_length[0]
 # Total simulation timeremove
-simulation_time = 180000          # duration of the simulation
+simulation_time = 100          # duration of the simulation
 # Period of output for the diags
 xdiag = 40
 vdiag = 40
-diag_step = 80000
+diag_step = 10
 #diag_step = 70 # after including the interrupt
-diag_every = 80000
+diag_every = 10
 
 Main(
     geometry = "2Dcartesian",
@@ -111,18 +111,18 @@ Species(
 	],
 )
 
-#ParticleInjector(
-#    name      = "injector1",
-#    species   = "pon1",
-#    box_side  = "xmax",
-#)
+ParticleInjector(
+    name      = "injector1",
+    species   = "pon1",
+    box_side  = "xmax",
+)
 
-#ParticleInjector(
-#    name      = "injector2",
-#    species   = "eon1",
-#    box_side  = "xmax",
-#    position_initialization = "injector1"
-#)
+ParticleInjector(
+    name      = "injector2",
+    species   = "eon1",
+    box_side  = "xmax",
+    position_initialization = "injector1"
+)
 
 ExternalField(
    field = "Bx",
