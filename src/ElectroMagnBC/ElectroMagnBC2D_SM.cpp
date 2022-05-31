@@ -25,14 +25,23 @@ ElectroMagnBC2D_SM::ElectroMagnBC2D_SM( Params &params, Patch *patch, unsigned i
     
     // Index where to set the field along axis 0
     iB_.resize( 3 );
+    iE_.resize( 3 );
     if( sign_ < 0 ) {
         iB_[0] = 0;
         iB_[1] = 0;
         iB_[2] = 0;
+
+        iE_[0] = 0;
+        iE_[1] = 0;
+        iE_[2] = 0;
     } else {
         iB_[axis0_] = n_p[axis0_] - 1;
         iB_[axis1_] = n_d[axis0_] - 1;
         iB_[2     ] = n_d[axis0_] - 1;
+
+        iE_[axis0_] = n_p[axis0_] - 2;
+        iE_[axis1_] = n_d[axis0_] - 2;
+        iE_[2     ] = n_d[axis0_] - 2;
     }
     
     // Buffers to save B field
@@ -110,11 +119,13 @@ void ElectroMagnBC2D_SM::save_fields( Field *my_field, Patch *patch )
 
             if (axis0_ == 0) {
                 for (unsigned int j = 0; j < E_val[xyz].size(); j++) {
-                    E_val[xyz][j] = (*field2D)(iB_[xyz], j);
+                    E_val[xyz][j] = (*field2D)(iE_[xyz], j);
+                    //E_val[xyz][j] = 0;
                 }
             } else {
                 for (unsigned int i = 0; i < E_val[xyz].size(); i++) {
-                    E_val[xyz][i] = (*field2D)(i, iB_[xyz]);
+                    E_val[xyz][i] = (*field2D)(i, iE_[xyz]);
+                    //E_val[xyz][i] = 0;
                 }
             }
         }
@@ -129,6 +140,10 @@ void ElectroMagnBC2D_SM::disableExternalFields()
     B_val[0].resize( 0 );
     B_val[1].resize( 0 );
     B_val[2].resize( 0 );
+
+    E_val[0].resize( 0 );
+    E_val[1].resize( 0 );
+    E_val[2].resize( 0 );
 }
 
 

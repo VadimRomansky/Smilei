@@ -41,6 +41,7 @@ private:
     unsigned int axis0_, axis1_;
     int sign_;
     std::vector<unsigned int> iB_;
+    std::vector<unsigned int> iE_;
 };
 
 #endif

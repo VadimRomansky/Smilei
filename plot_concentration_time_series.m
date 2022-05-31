@@ -14,15 +14,16 @@ Color = {'red','blue','green','black','magenta', [1.0,0.6,0]};
 N=size(fp,1);
 Ns = 6;
 Nt(1:Ns) = 0;
-Nt = [1,5,10,15,20,24];
+%Nt = [1,5,10,15,20,24];
 xsw(1:Ns)=0;
-Ny = 100;
+Ny = 200;
 dx = 0.2;
 x(1:N) = (1:N)*dx;
 
 Fp(1:N,1:Ns) = 0;
 
 for k=1:Ns,
+    Nt(k) = fix((k-1)*Ndata/Ns +1);
     name = info.Datasets(Nt(k)).Name;
     fp= hdf5read(full_name, name)/(Ny*dx*dx);
     for i=1:N,
@@ -48,7 +49,7 @@ ylabel('N');
 grid;
 
 output(1:N/5,1:(Ns+1)) = 0;
-for i = 1:N/5,
+for i = 1:50000,
     output(i,1) = x(i);
     for j = 1:Ns,
         output(i,j+1) = Fp(i,j);

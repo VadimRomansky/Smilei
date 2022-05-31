@@ -6,7 +6,7 @@ full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
 %h5disp(full_name);
 Ndata = size(info.Groups.Groups,1);
-%Ndata = 20;
+%Ndata = 3;
 %datasets = info.Groups.Groups(1).Datasets;
 name1x = strcat(info.Groups.Groups(1).Name, '/Bx');
 name1y = strcat(info.Groups.Groups(1).Name, '/By');
@@ -66,69 +66,25 @@ set(0,'DefaultFigureColormap',feval('jet'));
 % ylabel ('y \omega_e /c');
 % zlabel ('B/B_0');
 % grid ;
+factor = 8;
+smallNx = fix(Nx/factor);
+smallNy = fix(Ny/factor);
+startx = 0;
+smallBx(1:smallNy,1:smallNx) = 0;
+smallBy(1:smallNy,1:smallNx) = 0;
+for i=1:smallNy,
+    for j = 1:smallNx,
+        smallBx(i,j)=Bx(factor*i,startx+factor*j);
+        smallBy(i,j)=By(factor*i,startx+factor*j);
+    end;
+end;
 
 figure(3);
-colormap Jet;
-[X, Y] = meshgrid(1:Nx, 1:Ny);
-surf(X, Y, Bx);
-shading interp;
-title ('Bx');
+quiver((1:smallNx)*factor,(1:smallNy)*factor,smallBx,smallBy)
+title ('Bx-By');
 xlabel ('x');
 ylabel ('y');
-zlabel ('Bx');
+zlabel ('Bx-By');
 grid ;
 
-figure(4);
-colormap Jet;
-[X, Y] = meshgrid(1:Nx, 1:Ny);
-surf(X, Y, By);
-shading interp;
-title ('By');
-xlabel ('x');
-ylabel ('y');
-zlabel ('By');
-grid ;
 
-figure(5);
-colormap Jet;
-[X, Y] = meshgrid(1:Nx, 1:Ny);
-surf(X, Y, Bz);
-shading interp;
-title ('Bz');
-xlabel ('x');
-ylabel ('y');
-zlabel ('Bz');
-grid ;
-
-figure(6);
-colormap Jet;
-[X, Y] = meshgrid(1:Nx, 1:Ny);
-surf(X, Y, Ex);
-shading interp;
-title ('Ex');
-xlabel ('x');
-ylabel ('y');
-zlabel ('Ex');
-grid ;
-
-figure(7);
-colormap Jet;
-[X, Y] = meshgrid(1:Nx, 1:Ny);
-surf(X, Y, Ey);
-shading interp;
-title ('Ey');
-xlabel ('x');
-ylabel ('y');
-zlabel ('Ey');
-grid ;
-
-figure(8);
-colormap Jet;
-[X, Y] = meshgrid(1:Nx, 1:Ny);
-surf(X, Y, Ez);
-shading interp;
-title ('Ez');
-xlabel ('x');
-ylabel ('y');
-zlabel ('Ez');
-grid ;

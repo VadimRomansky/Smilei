@@ -57,8 +57,8 @@ Fp(1:Nd,1:Np)=0;
 samplingFactor = 20;
 
 for i = 1:Nd,
-    startx(i) = fix(350000/samplingFactor)+1;
-    endx(i) = fix(450000/samplingFactor);
+    startx(i) = fix(300000/samplingFactor)+1;
+    endx(i) = fix(400000/samplingFactor);
 end;
 %startx(2) = fix(23000/samplingFactor)+1;
 %endx(2) = fix(28000/samplingFactor);
