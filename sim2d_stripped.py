@@ -10,9 +10,9 @@ mean_velocity = np.sqrt(1.0-1.0/(gamma*gamma))
 # Ion charge
 Zi = 1
 #right density
-n2 = 1
+n2 = 1.0/2.2
 # left density
-n1 = 2.2
+n1 = 1.0
 #sigma
 sigma = 10
 #theta
@@ -28,7 +28,7 @@ T3 = sigma/(2.0*eta)
 # left cold
 T1 = 0.01
 # right temperature
-T2 = 0.001
+T2 = 0.01
 #lambda
 lambd = 640*np.sqrt(gamma)
 #alpha
@@ -41,19 +41,19 @@ delta = 2*np.pi*Delta/lambd
 me = 1.0
 mp = 100.0
 # Cell length
-cell_length = [0.1, 0.1]
+cell_length = [0.05, 0.05]
 # Number of patches
 number_of_patches = [1024, 1]
 # Cells per patches (patch shape)
-cells_per_patch = [600., 20.]
+cells_per_patch = [300., 20.]
 # Grid length
-grid_length = [61440.,2.]
+grid_length = [30720.,2.]
 for i in range(2):
     grid_length[i] = number_of_patches[i] * cell_length[i] * cells_per_patch[i]
 # Number of particles per cell
 particles_per_cell = 4
 # Position init
-position_initialization = 'random'
+position_initialization = 'regular'
 # Timestep (Courant condition)
 timestep = 0.5* cell_length[0]
 # Total simulation timeremove
@@ -61,15 +61,14 @@ simulation_time = 30000          # duration of the simulation
 # Period of output for the diags
 xdiag = 40
 vdiag = 40
-diag_step = 40000
-#diag_step = 70 # after including the interrupt
-diag_every = 40000
+diag_step = 20000
+diag_every = 20000
 
 Bn = np.sqrt(sigma*me*n1*gamma)*np.cos(theta)
 Bt1 = np.sqrt(sigma*me*n1*gamma)*np.sin(theta)
 Et = np.sqrt(sigma*me*n1*gamma)*np.sin(theta)*mean_velocity
 
-beatah = (np.sqrt(sigma)/(eta*gamma))/(omega_p*Delta)
+betah = (np.sqrt(sigma)/(eta*gamma))/(omega_p*Delta)
 
 Main(
     geometry = "2Dcartesian",
@@ -92,8 +91,10 @@ Main(
 
 # Initial plasma shape
 fm = constant(n1)
+ratio = 0.5
+
 def dzeta(x):
-    return (alpha + np.cos(2*pi*x/lambd))/delta
+    return (alpha + np.cos(2*np.pi*x/lambd))/delta
 
 def leftProfile(x,y):
     if(x < ratio*grid_length[0]):
@@ -115,13 +116,13 @@ def hotProfile(x,y):
 
 def velz_e_Profile(x,y):
     if (x < ratio * grid_length[0]):
-        return (betah/gamma)*np.sign(np.sin(2*pi*x/lambd))
+        return (betah/gamma)*np.sign(np.sin(2*np.pi*x/lambd))
     else:
         return 0
 
 def velz_p_Profile(x, y):
     if (x < ratio * grid_length[0]):
-        return -(betah/gamma) * np.sign(np.sin(2 * pi * x / lambd))
+        return -(betah/gamma) * np.sign(np.sin(2 * np.pi * x / lambd))
     else:
         return 0
 
@@ -136,8 +137,6 @@ def Ez(x,y):
         return -Bt1*np.tanh(dzeta(x))*mean_velocity
     else:
         return 0
-
-ratio = 0.5
 
 Npart = int(particles_per_cell*number_of_patches[0]*number_of_patches[1]*cells_per_patch[0]*cells_per_patch[1])
 NpartLeft = int(Npart*ratio)
@@ -230,7 +229,7 @@ Species(
 Species(
 	name = 'electrons_right',
 	#position_initialization = coordse1,
-    position_initialization = position_initialization,
+        position_initialization = 'protons1',
 	momentum_initialization = 'maxwell-juettner',
 	ionization_model = 'none',
 	particles_per_cell = particles_per_cell,
@@ -251,7 +250,7 @@ Species(
 Species(
 	name = 'electrons_hot',
 	#position_initialization = coordse2,
-    position_initialization = position_initialization,
+        position_initialization = 'positrons_hot',
 	momentum_initialization = 'maxwell-juettner',
 	ionization_model = 'none',
 	particles_per_cell = particles_per_cell,
@@ -272,7 +271,7 @@ Species(
 Species(
 	name = 'electrons_cold',
 	#position_initialization = coordse2,
-        position_initialization = position_initialization,
+        position_initialization = 'positrons_cold',
 	momentum_initialization = 'maxwell-juettner',
 	ionization_model = 'none',
 	particles_per_cell = particles_per_cell,

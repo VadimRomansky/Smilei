@@ -20,9 +20,11 @@ xlabel ('t');
 ylabel ('E');
 grid;
 
+Nspecies = 2;
+
 
 %note - numbers are shifted due number of species!!!!
-startExField = 54;
+startExField = 16 + 5*Nspecies + 6 + 2;
 figure(5);
 hold on;
 plot(general(1:N,1), general(1:N,startExField),'red');
@@ -42,12 +44,36 @@ figure(6);
 hold on;
 plot(general(1:N,1), general(1:N,startEnergy),'red');
 plot(general(1:N,1), general(1:N,startEnergy+5),'green');
-plot(general(1:N,1), general(1:N,startEnergy+10),'blue');
-plot(general(1:N,1), general(1:N,startEnergy+15),'black');
-plot(general(1:N,1), general(1:N,startEnergy+20),'magenta');
-plot(general(1:N,1), general(1:N,startEnergy+25),'cyan');
+if(Nspecies > 2)
+    plot(general(1:N,1), general(1:N,startEnergy+10),'blue');
+end;
+if(Nspecies > 3)
+    plot(general(1:N,1), general(1:N,startEnergy+15),'black');
+end;
+if(Nspecies > 4)
+    plot(general(1:N,1), general(1:N,startEnergy+20),'magenta');
+end;
+if(Nspecies > 5)
+    plot(general(1:N,1), general(1:N,startEnergy+25),'cyan');
+end;
 title ('Species kin energy');
 legend('protons', 'positrons cold', 'positrons hot', 'electrons right', 'electrons hot', 'electrons cold');
 xlabel ('t');
 ylabel ('E_k');
+grid;
+
+
+startElmEnergy = 16 + 5*Nspecies;
+figure(7);
+hold on;
+plot(general(1:N,1), general(1:N,startElmEnergy),'red');
+plot(general(1:N,1), general(1:N,startElmEnergy+1),'green');
+plot(general(1:N,1), general(1:N,startElmEnergy+2),'blue');
+plot(general(1:N,1), general(1:N,startElmEnergy+3),'black');
+plot(general(1:N,1), general(1:N,startElmEnergy+4),'magenta');
+plot(general(1:N,1), general(1:N,startElmEnergy+5),'cyan');
+title ('Uelm');
+legend('UEx', 'UEy', 'UEz','UBx','UBy', 'UBz');
+xlabel ('t');
+ylabel ('E');
 grid;
