@@ -1,11 +1,12 @@
 clear;
+%directory_name = './output_gamma0.3_sigma0.0002_theta30/';
 directory_name = './output/';
-file_name = 'ParticleBinning0';
+file_name = 'ParticleBinning1';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
 Ndata = size(info.Datasets,1);
-%Ndata = 7;
+%Ndata = 1;
 name1 = info.Datasets(1).Name;
 name2 = info.Datasets(fix(Ndata/2)+1).Name;
 name3 = info.Datasets(Ndata).Name;
@@ -50,17 +51,17 @@ plot((1:N),fp2(1:N)*factor/Ny,'green');
 plot((1:N),fp3(1:N)*factor/Ny,'blue');
 grid;
 
-figure(2);
-plot(t(1:Ndata), xsw(1:Ndata));
-grid;
-
-figure(3);
-plot(t(1:Ndata), vsw(1:Ndata));
-grid;
-
-figure(4);
-plot(t(1:Ndata), vsw1(1:Ndata));
-grid;
+% figure(2);
+% plot(t(1:Ndata), xsw(1:Ndata));
+% grid;
+% 
+% figure(3);
+% plot(t(1:Ndata), vsw(1:Ndata));
+% grid;
+% 
+% figure(4);
+% plot(t(1:Ndata), vsw1(1:Ndata));
+% grid;
 
 output(1:Ndata-1,4) = 0;
 for i = 1:Ndata-1,

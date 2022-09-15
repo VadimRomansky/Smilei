@@ -1,6 +1,6 @@
 clear;
 directory_name = './output/';
-file_name = 'ParticleBinning6';
+file_name = 'ParticleBinning2';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
@@ -53,8 +53,9 @@ end;
 set(0, 'DefaultLineLineWidth', 2);
 figure(1);
 [X, Y] = meshgrid(1:Nx, energy);
-h = pcolor(X, Y, fp);
+h = pcolor(X, Y, log(fp));
 set(gca, 'YScale', 'log');
+%set(gca, 'ZScale', 'log');
 set(h, 'EdgeColor', 'none')
 shading interp;
 colormap('jet');

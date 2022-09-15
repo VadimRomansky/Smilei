@@ -1,11 +1,12 @@
 clear;
-directory_name = './output_gamma0.3_sigma0.0002_theta30_inplane/';
-file_name = 'ParticleBinning6';
+%directory_name = './output_gamma0.3_sigma0.0002_theta30/';
+directory_name = './output/';
+file_name = 'ParticleBinning4';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
 Ndata = size(info.Datasets,1);
-%Ndata = 10;
+%Ndata = 11;
 name1 = info.Datasets(1).Name;
 name2 = info.Datasets(fix(Ndata/2)+1).Name;
 name3 = info.Datasets(Ndata).Name;
@@ -18,16 +19,16 @@ Np=size(fp1,1);
 Nx=size(fp1,2);
 
 minEe = 0.001;
-maxEe = 1000;
+maxEe = 50000;
 minEp = 0.1;
-maxEp = 5000;
-minE = minEe;
-maxE = maxEe;
+maxEp = 50000;
+minE = minEp;
+maxE = maxEp;
 factor = (maxE/minE)^(1.0/(Np-1));
 
 me = 1;
 mp = 100;
-m = me;
+m = mp;
 
 energy(1:Np) = 0;
 de(1:Np) = 0;
@@ -46,8 +47,8 @@ Fp3(1:Np)=0;
 
 samplingFactor = 20;
 
-startx = fix(10000/samplingFactor)+1;
-endx = fix(20000/samplingFactor);
+startx = fix(1000/samplingFactor)+1;
+endx = fix(100000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,
@@ -92,4 +93,22 @@ legend('t=0','t=T/2','t=T')
 grid;
 
 dlmwrite('Ee0.dat',energy,'delimiter',' ');
-dlmwrite('Fs0.dat',Fp2,'delimiter',' ');
+dlmwrite('Fs0dat',Fp3,'delimiter',' ');
+dlmwrite('Ee1.dat',energy,'delimiter',' ');
+dlmwrite('Fs1.dat',Fp3,'delimiter',' ');
+dlmwrite('Ee2.dat',energy,'delimiter',' ');
+dlmwrite('Fs2.dat',Fp3,'delimiter',' ');
+dlmwrite('Ee3.dat',energy,'delimiter',' ');
+dlmwrite('Fs3.dat',Fp3,'delimiter',' ');
+dlmwrite('Ee4.dat',energy,'delimiter',' ');
+dlmwrite('Fs4.dat',Fp3,'delimiter',' ');
+dlmwrite('Ee5.dat',energy,'delimiter',' ');
+dlmwrite('Fs5.dat',Fp3,'delimiter',' ');
+dlmwrite('Ee6.dat',energy,'delimiter',' ');
+dlmwrite('Fs6.dat',Fp3,'delimiter',' ');
+dlmwrite('Ee7.dat',energy,'delimiter',' ');
+dlmwrite('Fs7.dat',Fp3,'delimiter',' ');
+dlmwrite('Ee8.dat',energy,'delimiter',' ');
+dlmwrite('Fs8.dat',Fp3,'delimiter',' ');
+dlmwrite('Ee9.dat',energy,'delimiter',' ');
+dlmwrite('Fs9.dat',Fp3,'delimiter',' ');

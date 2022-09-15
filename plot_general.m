@@ -20,11 +20,12 @@ xlabel ('t');
 ylabel ('E');
 grid;
 
+%note - different in different smilei versions
 Nspecies = 2;
 
 
 %note - numbers are shifted due number of species!!!!
-startExField = 16 + 5*Nspecies + 6 + 2;
+startExField = 16 + 5*Nspecies + 6 + 3;
 figure(5);
 hold on;
 plot(general(1:N,1), general(1:N,startExField),'red');
@@ -39,7 +40,7 @@ xlabel ('t');
 ylabel ('B');
 grid;
 
-startEnergy = 19;
+startEnergy = 20;
 figure(6);
 hold on;
 plot(general(1:N,1), general(1:N,startEnergy),'red');
@@ -63,7 +64,7 @@ ylabel ('E_k');
 grid;
 
 
-startElmEnergy = 16 + 5*Nspecies;
+startElmEnergy = 17 + 5*Nspecies;
 figure(7);
 hold on;
 plot(general(1:N,1), general(1:N,startElmEnergy),'red');

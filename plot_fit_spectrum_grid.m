@@ -1,11 +1,12 @@
 clear;
 directory_name = './output/';
-file_name = 'ParticleBinning7';
+%directory_name = './output/';
+file_name = 'ParticleBinning3';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
 Ndata = size(info.Datasets,1);
-Ndata = 6;
+%Ndata = 11;
 name1 = info.Datasets(1).Name;
 name2 = info.Datasets(Ndata).Name;
 fp1= hdf5read(full_name, name1);
@@ -15,27 +16,27 @@ Np=size(fp1,1);
 Nx=size(fp1,2);
 
 minEe = 0.001;
-maxEe = 1000;
+maxEe = 50000;
 minEp = 0.1;
-maxEp = 5000;
-minE = minEp;
-maxE = maxEp;
+maxEp = 50000;
+minE = minEe;
+maxE = maxEe;
 factor = (maxE/minE)^(1.0/(Np-1));
 
 mp = 1.67*10^-24;
 mass_ratio = 100;
 me = mp/mass_ratio;
 
-m = mp;
+m = me;
 
 startPowerP = 125;
-endPowerP = 145;
+endPowerP = 135;
 
-startPowerE = 149;
-endPowerE = 159;
+startPowerE = 137;
+endPowerE = 148;
 
-startPower = startPowerE;
-endPower = endPowerE;
+startPower = startPowerP;
+endPower = endPowerP;
 
 gam = 1.048;
 beta = sqrt(1 - 1/(gam*gam));
@@ -75,8 +76,8 @@ shockx = 38000;
 startx = fix((shockx - 2560)/samplingFactor)+1;
 endx = fix((shockx - 320)/samplingFactor);
 
-startx = fix(1000/samplingFactor)+1;
-endx = fix(20000/samplingFactor);
+startx = fix(50000/samplingFactor)+1;
+endx = fix(1000000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,
@@ -133,8 +134,8 @@ end;
 %    end;
 %end;
 
-index1 = 15;
-index2 = 30;
+index1 = 40;
+index2 = 70;
 
 Tleft = Tmin;
 Tright = Tmax;

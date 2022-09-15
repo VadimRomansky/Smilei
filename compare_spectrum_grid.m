@@ -74,94 +74,15 @@ end;
 legend(LegendTitle{1}, LegendTitle{2}, LegendTitle{3}, LegendTitle{4}, LegendTitle{5}, LegendTitle{6}, LegendTitle{7}, LegendTitle{8}, LegendTitle{9}, LegendTitle{10},'Location','northwest');
 grid ;
 
-tempOutput(1:Np, 1:2) = 0;
-for i = 1:Np,
-    %tempOutput(i) = Fp(1,i);
-    tempOutput(i,1) = energy(i)/100;
-    tempOutput(i,2) = Fp(1,i)*100;
-end;
+for k = 0:Nd-1,
+    tempOutput(1:Np, 1:2) = 0;
+    for i = 1:Np,
+        %tempOutput(i) = Fp(1,i);
+        tempOutput(i,1) = energy(i)/100;
+        tempOutput(i,2) = Fp(k,i)*100;
+    end;
 
-dlmwrite('Ap0.dat',tempOutput,'delimiter',' ');
-%dlmwrite('Ep0.dat',energy/100,'delimiter',' ');
-%dlmwrite('Fp0.dat',tempOutput*100,'delimiter',' ');
-
-for i = 1:Np,
-    %tempOutput(i) = Fp(2,i);
-    tempOutput(i,1) = energy(i)/100;
-    tempOutput(i,2) = Fp(2,i)*100;
+    dlmwrite('Ap' + num2str(k) + 'dat',tempOutput,'delimiter',' ');
+    %dlmwrite('Ep0.dat',energy/100,'delimiter',' ');
+    %dlmwrite('Fp0.dat',tempOutput*100,'delimiter',' ');
 end;
-dlmwrite('Ap1.dat',tempOutput,'delimiter',' ');
-%dlmwrite('Ep1.dat',energy/100,'delimiter',' ');
-%dlmwrite('Fp1.dat',tempOutput*100,'delimiter',' ');
-
-for i = 1:Np,
-    %tempOutput(i) = Fp(3,i);
-    tempOutput(i,1) = energy(i)/100;
-    tempOutput(i,2) = Fp(3,i)*100;
-end;
-dlmwrite('Ap2.dat',tempOutput,'delimiter',' ');
-%dlmwrite('Ep2.dat',energy/100,'delimiter',' ');
-%dlmwrite('Fp2.dat',tempOutput*100,'delimiter',' ');
-
-for i = 1:Np,
-    %tempOutput(i) = Fp(4,i);
-    tempOutput(i,1) = energy(i)/100;
-    tempOutput(i,2) = Fp(4,i)*100;
-end;
-dlmwrite('Ap3.dat',tempOutput,'delimiter',' ');
-%dlmwrite('Ep3.dat',energy/100,'delimiter',' ');
-%dlmwrite('Fp3.dat',tempOutput*100,'delimiter',' ');
-
-for i = 1:Np,
-    %tempOutput(i) = Fp(5,i);
-    tempOutput(i,1) = energy(i)/100;
-    tempOutput(i,2) = Fp(5,i)*100;
-end;
-dlmwrite('Ap4.dat',tempOutput,'delimiter',' ');
-%dlmwrite('Ep4.dat',energy/100,'delimiter',' ');
-%dlmwrite('Fp4.dat',tempOutput*100,'delimiter',' ');
-
-for i = 1:Np,
-    %tempOutput(i) = Fp(6,i);
-    tempOutput(i,1) = energy(i)/100;
-    tempOutput(i,2) = Fp(6,i)*100;
-end;
-dlmwrite('Ap5.dat',tempOutput,'delimiter',' ');
-%dlmwrite('Ep5.dat',energy/100,'delimiter',' ');
-%dlmwrite('Fp5.dat',tempOutput*100,'delimiter',' ');
-
-for i = 1:Np,
-    %tempOutput(i) = Fp(7,i);
-    tempOutput(i,1) = energy(i)/100;
-    tempOutput(i,2) = Fp(7,i)*100;
-end;
-dlmwrite('Ap6.dat',tempOutput,'delimiter',' ');
-%dlmwrite('Ep6.dat',energy/100,'delimiter',' ');
-%dlmwrite('Fp6.dat',tempOutput*100,'delimiter',' ');
-
-for i = 1:Np,
-    %tempOutput(i) = Fp(8,i);
-    tempOutput(i,1) = energy(i)/100;
-    tempOutput(i,2) = Fp(8,i)*100;
-end;
-dlmwrite('Ap7.dat',tempOutput,'delimiter',' ');
-%dlmwrite('Ep7.dat',energy/100,'delimiter',' ');
-%dlmwrite('Fp7.dat',tempOutput*100,'delimiter',' ');
-
-for i = 1:Np,
-    %tempOutput(i) = Fp(9,i);
-    tempOutput(i,1) = energy(i)/100;
-    tempOutput(i,2) = Fp(9,i)*100;
-end;
-dlmwrite('Ap8.dat',tempOutput,'delimiter',' ');
-%dlmwrite('Ep8.dat',energy/100,'delimiter',' ');
-%dlmwrite('Fp8.dat',tempOutput*100,'delimiter',' ');
-
-for i = 1:Np,
-    %tempOutput(i) = Fp(10,i);
-    tempOutput(i,1) = energy(i)/100;
-    tempOutput(i,2) = Fp(10,i)*100;
-end;
-dlmwrite('Ap9.dat',tempOutput,'delimiter',' ');
-%dlmwrite('Ep9.dat',energy/100,'delimiter',' ');
-%dlmwrite('Fp9.dat',tempOutput*100,'delimiter',' ');

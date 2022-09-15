@@ -119,13 +119,13 @@ void ElectroMagnBC2D_SM::save_fields( Field *my_field, Patch *patch )
 
             if (axis0_ == 0) {
                 for (unsigned int j = 0; j < E_val[xyz].size(); j++) {
-                    E_val[xyz][j] = (*field2D)(iE_[xyz], j);
-                    //E_val[xyz][j] = 0;
+                    //E_val[xyz][j] = (*field2D)(iE_[xyz], j);
+                    E_val[xyz][j] = 0;
                 }
             } else {
                 for (unsigned int i = 0; i < E_val[xyz].size(); i++) {
-                    E_val[xyz][i] = (*field2D)(i, iE_[xyz]);
-                    //E_val[xyz][i] = 0;
+                    //E_val[xyz][i] = (*field2D)(i, iE_[xyz]);
+                    E_val[xyz][i] = 0;
                 }
             }
         }

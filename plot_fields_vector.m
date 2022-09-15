@@ -66,7 +66,7 @@ set(0,'DefaultFigureColormap',feval('jet'));
 % ylabel ('y \omega_e /c');
 % zlabel ('B/B_0');
 % grid ;
-factor = 8;
+factor = 2;
 smallNx = fix(Nx/factor);
 smallNy = fix(Ny/factor);
 startx = 0;
