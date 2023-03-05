@@ -1,12 +1,12 @@
 clear;
 directory_name = './output/';
 %directory_name = './output/';
-file_name = 'ParticleBinning3';
+file_name = 'ParticleBinning6';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
 Ndata = size(info.Datasets,1);
-%Ndata = 11;
+Ndata = 14;
 name1 = info.Datasets(1).Name;
 name2 = info.Datasets(Ndata).Name;
 fp1= hdf5read(full_name, name1);
@@ -16,9 +16,9 @@ Np=size(fp1,1);
 Nx=size(fp1,2);
 
 minEe = 0.001;
-maxEe = 50000;
+maxEe = 1000;
 minEp = 0.1;
-maxEp = 50000;
+maxEp = 1000;
 minE = minEe;
 maxE = maxEe;
 factor = (maxE/minE)^(1.0/(Np-1));
@@ -32,11 +32,11 @@ m = me;
 startPowerP = 125;
 endPowerP = 135;
 
-startPowerE = 137;
-endPowerE = 148;
+startPowerE = 136;
+endPowerE = 143;
 
-startPower = startPowerP;
-endPower = endPowerP;
+startPower = startPowerE;
+endPower = endPowerE;
 
 gam = 1.048;
 beta = sqrt(1 - 1/(gam*gam));
@@ -76,8 +76,8 @@ shockx = 38000;
 startx = fix((shockx - 2560)/samplingFactor)+1;
 endx = fix((shockx - 320)/samplingFactor);
 
-startx = fix(50000/samplingFactor)+1;
-endx = fix(1000000/samplingFactor);
+startx = fix(20000/samplingFactor)+1;
+endx = fix(40000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,
@@ -100,26 +100,26 @@ end;
 %Fp2(Np)=10^-10;
 
 %remove zeros
-for i = 2:Np-1,
-    if(Fp2(i) <= 0) & (Fp2(i-1) > 0) & (Fp2(i+1) > 0)
-        Fp2(i) = 0.5*(Fp2(i-1)+Fp2(i+1));
-    end;
-end;
-
-maxNonZero = 0;
-for j = Np:-1:1,
-    if(Fp2(j) > 0)
-        maxNonZero = j;
-        break;
-    end;
-end;
-minNonZero = Np;
-for i = 1:Np
-    if(Fp2(i) > 0)
-        minNonZero = i;
-        break;
-    end;
-end;
+% for i = 2:Np-1,
+%     if(Fp2(i) <= 0) & (Fp2(i-1) > 0) & (Fp2(i+1) > 0)
+%         Fp2(i) = 0.5*(Fp2(i-1)+Fp2(i+1));
+%     end;
+% end;
+% 
+% maxNonZero = 0;
+% for j = Np:-1:1,
+%     if(Fp2(j) > 0)
+%         maxNonZero = j;
+%         break;
+%     end;
+% end;
+% minNonZero = Np;
+% for i = 1:Np
+%     if(Fp2(i) > 0)
+%         minNonZero = i;
+%         break;
+%     end;
+% end;
 
 %for i = minNonZero:maxNonZero-1,
 %    if(Fp2(i) <= 0)
@@ -229,12 +229,12 @@ set(gca, 'YScale', 'log');
 set(gca, 'XScale', 'log');
 xlim([1.0 10000]);
 ylim([10^-10 1]);
-plot(energy(1:Np)+m/me,Fp2(1:Np),'red','LineWidth',2);
-plot(energy(1:Np)+m/me, Fjuttner(1:Np),'blue','LineWidth',2);
-plot(energy(1:Np)+m/me,Fpa(1:Np),'green','LineWidth',2);
-plot(energy(1:Np)+m/me, Fshifted(1:Np), 'black', 'LineWidth',2);
-plot(energy(startPower) + m/me,Fp2(startPower),'o','Color','red');
-plot(energy(endPower) + m/me,Fp2(endPower),'o','Color','red');
+plot(me*energy(1:Np)/m+1,Fp2(1:Np),'red','LineWidth',2);
+plot(me*energy(1:Np)/m+1, Fjuttner(1:Np),'blue','LineWidth',2);
+plot(me*energy(1:Np)/m+1,Fpa(1:Np),'green','LineWidth',2);
+plot(me*energy(1:Np)/m+1, Fshifted(1:Np), 'black', 'LineWidth',2);
+plot(me*energy(startPower)/m + 1,Fp2(startPower),'o','Color','red');
+plot(me*energy(endPower)/m + 1,Fp2(endPower),'o','Color','red');
 
 %plot(energy(1:Np),Fp2(1:Np),'red','LineWidth',2);
 %plot(energy(1:Np), Fjuttner(1:Np),'blue','LineWidth',2);
