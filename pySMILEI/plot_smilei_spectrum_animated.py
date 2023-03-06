@@ -13,8 +13,8 @@ def plot_smilei_spectrum_animated(ntot, file_name, xmin, xmax):
     l = list(file.keys())
 
     V = np.array(file.get(l[ntot])).T
-    Nx = V.shape[0]
-    Np = V.shape[1]
+    Nx = V.shape[1]
+    Np = V.shape[0]
 
     minEe = 0.001;
     maxEe = 5000;
