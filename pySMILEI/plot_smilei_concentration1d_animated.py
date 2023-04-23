@@ -3,7 +3,7 @@ from matplotlib.animation import FuncAnimation
 import matplotlib.pyplot as plt
 import numpy as np
 import h5py
-def plot_smilei_concentration1d_animated(ntot, file_name):
+def plot_smilei_concentration1d_animated(ntot, file_name, prefix=''):
     f1 = plt.figure(figsize=[10,8])
     ax = f1.add_subplot(111)
 
@@ -43,7 +43,7 @@ def plot_smilei_concentration1d_animated(ntot, file_name):
 
     # plt.show()
 
-    f = r"smilei_concentration1d.gif"
+    f = r"smilei_concentration1d" + prefix + ".gif"
     writergif = animation.PillowWriter(fps=4)
     anim.save(f, writer=writergif)
 

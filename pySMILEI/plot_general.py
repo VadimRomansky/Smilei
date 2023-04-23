@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import h5py
 
-def plot_general(file_name, Nspecies):
+def plot_general(file_name, prefix, Nspecies):
     f1 = plt.figure(figsize=[10, 8])
     ax = f1.add_subplot(111)
 
@@ -35,4 +35,4 @@ def plot_general(file_name, Nspecies):
     ax.set_ylabel(r'E', fontsize=18)
     ax.minorticks_on()
     ax.legend(labels)
-    plt.savefig('smilei_general.png')
+    plt.savefig('smilei_general' + prefix + '.png')

@@ -3,7 +3,7 @@ from matplotlib.animation import FuncAnimation
 import matplotlib.pyplot as plt
 import numpy as np
 import h5py
-def plot_smilei_spectrum_animated(ntot, file_name, xmin, xmax):
+def plot_smilei_spectrum_animated(ntot, file_name, prefix, xmin, xmax):
     f1 = plt.figure(figsize=[10,8])
     ax = f1.add_subplot(111)
 
@@ -51,6 +51,8 @@ def plot_smilei_spectrum_animated(ntot, file_name, xmin, xmax):
         if (np.amax(f) > maxF):
             maxF = np.amax(f)
 
+    minF = maxF / 1E14
+
     ax.plot(energy, f)  # plotting fluid data.
     ax.set_xlabel(r'Ekin/me c^2', fontsize=18)
     ax.set_ylabel(r'F', fontsize=18)
@@ -62,6 +64,8 @@ def plot_smilei_spectrum_animated(ntot, file_name, xmin, xmax):
         print(frame_number)
         ax.clear()
         ax.set_ylim([minF, maxF])
+        ax.set_xlabel(r'Ekin/me c^2', fontsize=18)
+        ax.set_ylabel(r'F', fontsize=18)
         ax.set_xscale('log')
         ax.set_yscale('log')
         V = np.array(file.get(l[frame_number])).T
@@ -76,6 +80,6 @@ def plot_smilei_spectrum_animated(ntot, file_name, xmin, xmax):
 
     # plt.show()
 
-    f = r"smilei_distribution.gif"
+    f = r"smilei_distribution" + prefix + ".gif"
     writergif = animation.PillowWriter(fps=4)
     anim.save(f, writer=writergif)

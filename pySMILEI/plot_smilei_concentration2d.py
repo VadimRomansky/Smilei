@@ -3,7 +3,7 @@ from matplotlib.animation import FuncAnimation
 import matplotlib.pyplot as plt
 import numpy as np
 import h5py
-def plot_smilei_concentration2d(ntot, file_name, xmin, xmax, ymin, ymax):
+def plot_smilei_concentration2d(ntot, file_name, prefix, xmin, xmax, ymin, ymax):
     f1 = plt.figure(figsize=[10,8])
     ax = f1.add_subplot(111)
 
@@ -29,5 +29,5 @@ def plot_smilei_concentration2d(ntot, file_name, xmin, xmax, ymin, ymax):
     ax.set_xlabel(r'R', fontsize=18)
     ax.set_ylabel(r'Z', fontsize=18)
     ax.minorticks_on()
-    plt.savefig('smilei_concentration2d.png')
+    plt.savefig('smilei_concentration2d' + prefix + '.png')
 
