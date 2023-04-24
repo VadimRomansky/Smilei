@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import h5py
 def plot_smilei_fields_animated(ntot, file_name, parameter_name, xmin, xmax, ymin, ymax):
+    print("plot fields animated")
     f1 = plt.figure(figsize=[10,8])
     ax = f1.add_subplot(111)
 

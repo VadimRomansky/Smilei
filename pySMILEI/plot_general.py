@@ -5,6 +5,7 @@ import numpy as np
 import h5py
 
 def plot_general(file_name, prefix, Nspecies):
+    print("plot general")
     f1 = plt.figure(figsize=[10, 8])
     ax = f1.add_subplot(111)
 

@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import h5py
 def plot_smilei_concentration1d_animated(ntot, file_name, prefix=''):
+    print("plot concentration 1d animated")
     f1 = plt.figure(figsize=[10,8])
     ax = f1.add_subplot(111)
 
