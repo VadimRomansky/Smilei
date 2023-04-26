@@ -3,7 +3,7 @@ from matplotlib.animation import FuncAnimation
 import matplotlib.pyplot as plt
 import numpy as np
 import h5py
-def plot_smilei_spectrum_animated(ntot, file_name, prefix, xmin, xmax):
+def plot_smilei_spectrum_animated(ntot, file_name, prefix, mass, xmin, xmax):
     print("plot spectrum animated")
     f1 = plt.figure(figsize=[10,8])
     ax = f1.add_subplot(111)
@@ -38,21 +38,24 @@ def plot_smilei_spectrum_animated(ntot, file_name, prefix, xmin, xmax):
     f = np.zeros([Np])
     for i in range(Np):
         for j in range(xmin,xmax):
-            f[i] = f[i] + V[i][j]/de[i]
+            f[i] = f[i] + V[i][j]*(energy[i] + mass) * (energy[i] + mass)/de[i]
+
     minF = np.amin(f)
     maxF = np.amax(f)
 
     for i in range(ntot):
+        f = np.zeros([Np])
         V = np.array(file.get(l[i])).T
         for k in range(Np):
             for j in range(xmin, xmax):
-                f[k] = f[k] + V[k][j] / de[k]
+                f[k] = f[k] + V[k][j] *(energy[k] + mass) * (energy[k] + mass) / de[k]
         if (np.amin(f) < minF):
             minF = np.amin(f)
         if (np.amax(f) > maxF):
             maxF = np.amax(f)
 
-    minF = maxF / 1E14
+    maxF = 2*maxF
+    minF = maxF / 1E6
 
     ax.plot(energy, f)  # plotting fluid data.
     ax.set_xlabel(r'Ekin/me c^2', fontsize=18)
@@ -66,14 +69,14 @@ def plot_smilei_spectrum_animated(ntot, file_name, prefix, xmin, xmax):
         ax.clear()
         ax.set_ylim([minF, maxF])
         ax.set_xlabel(r'Ekin/me c^2', fontsize=18)
-        ax.set_ylabel(r'F', fontsize=18)
+        ax.set_ylabel(r'F * E * E', fontsize=18)
         ax.set_xscale('log')
         ax.set_yscale('log')
         V = np.array(file.get(l[frame_number])).T
         f = np.zeros([Np])
         for i in range(Np):
             for j in range(xmin, xmax):
-                f[i] = f[i] + V[i][j] / de[i]
+                f[i] = f[i] + V[i][j] *(energy[i] + mass) * (energy[i] + mass)/ de[i]
         im2 = ax.plot(energy, f)
         return im2
 
