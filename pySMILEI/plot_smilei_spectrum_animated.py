@@ -36,19 +36,30 @@ def plot_smilei_spectrum_animated(ntot, file_name, prefix, mass, xmin, xmax):
         de[i] = energy[i]-energy[i-1]
 
     f = np.zeros([Np])
+    norm = 0
     for i in range(Np):
         for j in range(xmin,xmax):
             f[i] = f[i] + V[i][j]*(energy[i] + mass) * (energy[i] + mass)/de[i]
+            norm = norm+V[i][j]
+
+    for i in range(Np):
+        f[i] = f[i]/norm
 
     minF = np.amin(f)
     maxF = np.amax(f)
 
     for i in range(ntot):
         f = np.zeros([Np])
+        norm = 0
         V = np.array(file.get(l[i])).T
         for k in range(Np):
             for j in range(xmin, xmax):
                 f[k] = f[k] + V[k][j] *(energy[k] + mass) * (energy[k] + mass) / de[k]
+                norm = norm + V[k][j]
+
+        for k in range(Np):
+            f[k] = f[k]/Np
+
         if (np.amin(f) < minF):
             minF = np.amin(f)
         if (np.amax(f) > maxF):
@@ -74,9 +85,15 @@ def plot_smilei_spectrum_animated(ntot, file_name, prefix, mass, xmin, xmax):
         ax.set_yscale('log')
         V = np.array(file.get(l[frame_number])).T
         f = np.zeros([Np])
+        norm = 0
         for i in range(Np):
             for j in range(xmin, xmax):
                 f[i] = f[i] + V[i][j] *(energy[i] + mass) * (energy[i] + mass)/ de[i]
+                norm = norm +V[i][j]
+
+        for i in range(Np):
+            f[i] = f[i]/norm
+
         im2 = ax.plot(energy, f)
         return im2
 
