@@ -47,8 +47,8 @@ Fp3(1:Np)=0;
 
 samplingFactor = 20;
 
-startx = fix(3000/samplingFactor)+1;
-endx = fix(40000/samplingFactor);
+startx = fix(10000/samplingFactor)+1;
+endx = fix(20000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,
@@ -93,7 +93,7 @@ legend('t=0','t=T/2','t=T')
 grid;
 
 dlmwrite('Ee0.dat',energy,'delimiter',' ');
-dlmwrite('Fs0dat',Fp3,'delimiter',' ');
+dlmwrite('Fs0.dat',Fp3,'delimiter',' ');
 dlmwrite('Ee1.dat',energy,'delimiter',' ');
 dlmwrite('Fs1.dat',Fp3,'delimiter',' ');
 dlmwrite('Ee2.dat',energy,'delimiter',' ');
