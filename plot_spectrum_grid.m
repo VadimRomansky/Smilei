@@ -1,7 +1,7 @@
 clear;
 %directory_name = './output_gamma0.3_sigma0.0002_dx0.2_theta0-90/';
 directory_name = './output/';
-file_name = 'ParticleBinning6';
+file_name = 'ParticleBinning7';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
@@ -22,8 +22,8 @@ minEe = 0.00001;
 maxEe = 1000;
 minEp = 0.1;
 maxEp = 5000;
-minE = minEe;
-maxE = maxEe;
+minE = minEp;
+maxE = maxEp;
 factor = (maxE/minE)^(1.0/(Np-1));
 
 me = 1;
@@ -47,8 +47,8 @@ Fp3(1:Np)=0;
 
 samplingFactor = 20;
 
-startx = fix(1/samplingFactor)+1;
-endx = fix(100/samplingFactor);
+startx = fix(100/samplingFactor)+1;
+endx = fix(1000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,

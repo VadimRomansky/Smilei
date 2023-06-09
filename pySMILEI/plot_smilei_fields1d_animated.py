@@ -3,10 +3,16 @@ from matplotlib.animation import FuncAnimation
 import matplotlib.pyplot as plt
 import numpy as np
 import h5py
-def plot_smilei_fields1d_animated(ntot, file_name, parameter_name, Nmin, Nmax):
+def plot_smilei_fields1d_animated(ntot, file_name, parameter_name, Nmin, Nmax, sampling, dx):
     print("plot fields 1d")
-    f1 = plt.figure(figsize=[10,8])
+    plt.rcParams.update({'font.size': 40})
+    plt.rcParams['text.usetex'] = True
+    plt.rcParams['axes.linewidth'] = 4
+    f1 = plt.figure(figsize=[12, 10])
     ax = f1.add_subplot(111)
+    ax.tick_params(axis='x', size=10, width=4)
+    ax.tick_params(axis='y', size=10, width=4)
+    ax.minorticks_on()
 
     file = h5py.File(file_name, 'r')
     print("Keys: %s" % file.keys())
@@ -36,12 +42,11 @@ def plot_smilei_fields1d_animated(ntot, file_name, parameter_name, Nmin, Nmax):
 
     x = np.zeros([Nx])
     for i in range(Nx):
-        x[i] = i
+        x[i] = i*sampling*dx
 
-    ax.plot(x, V1)
-    ax.set_xlabel(r'X', fontsize=18)
-    ax.set_ylabel(r'n', fontsize=18)
-    ax.minorticks_on()
+    ax.plot(x, V1, linewidth = 4)
+    ax.set_xlabel(r'$X \omega_e/c$', fontsize=40,fontweight='bold')
+    ax.set_ylabel(r'$B$', fontsize=40,fontweight='bold')
 
     def update(frame_number):
         print(frame_number)

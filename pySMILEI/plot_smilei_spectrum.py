@@ -3,14 +3,16 @@ from matplotlib.animation import FuncAnimation
 import matplotlib.pyplot as plt
 import numpy as np
 import h5py
-def plot_smilei_spectrum(ntot, file_name, prefix, xmin, xmax):
+def plot_smilei_spectrum(ntot, file_name, prefix, minE, maxE, xmin, xmax):
     print("plot spectrum")
     plt.rcParams.update({'font.size': 40})
     plt.rcParams['text.usetex'] = True
     plt.rcParams['axes.linewidth'] = 4
-    f1 = plt.figure(figsize=[10,8])
+    f1 = plt.figure(figsize=[10,10])
     ax = f1.add_subplot(111)
-
+    ax.tick_params(axis='x', size=10, width=4)
+    ax.tick_params(axis='y', size=10, width=4)
+    ax.minorticks_on()
 
     file = h5py.File(file_name, 'r')
     print("Keys: %s" % file.keys())
@@ -21,13 +23,6 @@ def plot_smilei_spectrum(ntot, file_name, prefix, xmin, xmax):
 
     Nx = V.shape[0]
     Np = V.shape[1]
-
-    minEe = 0.001;
-    maxEe = 5000;
-    minEp = 0.1;
-    maxEp = 5000;
-    minE = minEe;
-    maxE = maxEe;
 
     factor = (maxE / minE) ** (1.0 / (Np - 1));
 
@@ -49,11 +44,10 @@ def plot_smilei_spectrum(ntot, file_name, prefix, xmin, xmax):
     maxF = np.amax(f)
     minF = maxF / 1E14
 
-    ax.plot(energy, f)  # plotting fluid data.
-    ax.set_xlabel(r'$E_{kin}/me c^2$', fontsize=18)
-    ax.set_ylabel(r'$F(E_{kin})$', fontsize=18)
+    ax.plot(energy, f, linewidth=4)  # plotting fluid data.
+    ax.set_xlabel(r'$E_{kin}/m_e c^2$', fontsize=40,fontweight='bold')
+    ax.set_ylabel(r'$F(E_{kin})$', fontsize=40,fontweight='bold')
     ax.set_xscale('log')
     ax.set_yscale('log')
-    ax.minorticks_on()
     plt.savefig('smilei_distribution' + prefix + '.png', bbox_inches='tight')
 

@@ -15,7 +15,8 @@ dx = [0.2,0.2]
 Npatches = [256, 16]
 Ncells = [100, 100]
 grid_length = [0,0]
-samplingFactor = 20
+samplingPart = 20
+samplingFields = 4
 for i in range(2):
     grid_length[i] = dx[i]*Npatches[i]*Ncells[i]
 
@@ -26,20 +27,45 @@ ntot = get_smilei_number(path + "ParticleBinning0.h5")-1
 print("ntot = ",ntot)
 plot_general(path + "scalars.txt","",2)
 
+plot_smilei_fields_animated(ntot, path + "Fields0.h5", "Bx", 0, grid_length[0], 0, grid_length[1])
 plot_smilei_fields_animated(ntot, path + "Fields0.h5", "By", 0, grid_length[0], 0, grid_length[1])
 plot_smilei_fields_animated(ntot, path + "Fields0.h5", "Bz", 0, grid_length[0], 0, grid_length[1])
+plot_smilei_fields(ntot, path + "Fields0.h5", "Bx",  0, grid_length[0], 0, grid_length[1])
 plot_smilei_fields(ntot, path + "Fields0.h5", "By",  0, grid_length[0], 0, grid_length[1])
 plot_smilei_fields(ntot, path + "Fields0.h5", "Bz",  0, grid_length[0], 0, grid_length[1])
 
-plot_smilei_fields1d_animated(ntot, path + "Fields0.h5", "By", int(0.0*Npatches[0]*Ncells[0]/samplingFactor), int(1.0*Npatches[0]*Ncells[0]/samplingFactor))
-plot_smilei_fields1d_animated(ntot, path + "Fields0.h5", "Bz", int(0.0*Npatches[0]*Ncells[0]/samplingFactor), int(1.0*Npatches[0]*Ncells[0]/samplingFactor))
-plot_smilei_fields1d(ntot, path + "Fields0.h5", "By", int(0.0*Npatches[0]*Ncells[0]/samplingFactor), int(1.0*Npatches[0]*Ncells[0]/samplingFactor))
-plot_smilei_fields1d(ntot, path + "Fields0.h5", "Bz", int(0.0*Npatches[0]*Ncells[0]/samplingFactor), int(1.0*Npatches[0]*Ncells[0]/samplingFactor))
+plot_smilei_fields_animated(ntot, path + "Fields0.h5", "Ex", 0, grid_length[0], 0, grid_length[1])
+plot_smilei_fields_animated(ntot, path + "Fields0.h5", "Ey", 0, grid_length[0], 0, grid_length[1])
+plot_smilei_fields_animated(ntot, path + "Fields0.h5", "Ez", 0, grid_length[0], 0, grid_length[1])
+plot_smilei_fields(ntot, path + "Fields0.h5", "Ex",  0, grid_length[0], 0, grid_length[1])
+plot_smilei_fields(ntot, path + "Fields0.h5", "Ey",  0, grid_length[0], 0, grid_length[1])
+plot_smilei_fields(ntot, path + "Fields0.h5", "Ez",  0, grid_length[0], 0, grid_length[1])
 
-plot_smilei_spectrum(ntot,path + "ParticleBinning7.h5","protons", 0, int(0.25*Npatches[0]*Ncells[0]/samplingFactor))
-plot_smilei_spectrum_animated(ntot,path + "ParticleBinning7.h5","protons", 100,0,int(0.25*Npatches[0]*Ncells[0]/samplingFactor))
-plot_smilei_spectrum(ntot,path + "ParticleBinning6.h5","electrons", 0, int(0.25*Npatches[0]*Ncells[0]/samplingFactor))
-plot_smilei_spectrum_animated(ntot,path + "ParticleBinning6.h5","electrons", 1,0,int(0.25*Npatches[0]*Ncells[0]/samplingFactor))
+plot_smilei_fields1d_animated(ntot, path + "Fields0.h5", "Bx", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+plot_smilei_fields1d_animated(ntot, path + "Fields0.h5", "By", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+plot_smilei_fields1d_animated(ntot, path + "Fields0.h5", "Bz", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+plot_smilei_fields1d(ntot, path + "Fields0.h5", "Bx", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+plot_smilei_fields1d(ntot, path + "Fields0.h5", "By", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+plot_smilei_fields1d(ntot, path + "Fields0.h5", "Bz", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+
+plot_smilei_fields1d_animated(ntot, path + "Fields0.h5", "Ex", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+plot_smilei_fields1d_animated(ntot, path + "Fields0.h5", "Ey", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+plot_smilei_fields1d_animated(ntot, path + "Fields0.h5", "Ez", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+plot_smilei_fields1d(ntot, path + "Fields0.h5", "Ex", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+plot_smilei_fields1d(ntot, path + "Fields0.h5", "Ey", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+plot_smilei_fields1d(ntot, path + "Fields0.h5", "Ez", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+
+minEe = 0.00001;
+maxEe = 1000;
+minEp = 0.1;
+maxEp = 5000;
+minE = minEp;
+maxE = maxEp;
+
+#plot_smilei_spectrum(ntot,path + "Particl.h5","protons", minEp, maxEp, 0, int(0.25*Npatches[0]*Ncells[0]/samplingFactor))
+#plot_smilei_spectrum_animated(ntot,path + "ParticleBinning7.h5","protons", 100, minEp, maxEp,0,int(0.25*Npatches[0]*Ncells[0]/samplingFactor))
+plot_smilei_spectrum(ntot, path + "ParticleBinning6.h5","electrons", minEe, maxEe, 0, int(0.25 * Npatches[0] * Ncells[0] / samplingPart))
+plot_smilei_spectrum_animated(ntot, path + "ParticleBinning6.h5","electrons", 1, minEe, maxEe, 0, int(0.25 * Npatches[0] * Ncells[0] / samplingPart))
 
 #plot_smilei_concentration2d(ntot,path + "ParticleBinning2.h5","electrons", 0, grid_length[0], 0, grid_length[1])
 #plot_smilei_concentration2d_animated(ntot,path + "ParticleBinning2.h5","electrons", 0, grid_length[0], 0, grid_length[1])
@@ -48,7 +74,7 @@ plot_smilei_spectrum_animated(ntot,path + "ParticleBinning6.h5","electrons", 1,0
 #plot_smilei_concentration2d(ntot,path + "ParticleBinning3.h4","protons", 0, grid_length[0], 0, grid_length[1])
 #plot_smilei_concentration2d_animated(ntot,path + "ParticleBinning3.h5","protons", 0, grid_length[0], 0, grid_length[1])
 
-plot_smilei_concentration1d(ntot,path + "ParticleBinning0.h5","electrons")
-plot_smilei_concentration1d_animated(ntot,path + "ParticleBinning0.h5","electrons")
-plot_smilei_concentration1d(ntot,path + "ParticleBinning1.h5","protons")
-plot_smilei_concentration1d_animated(ntot,path + "ParticleBinning1.h5","protons")
+plot_smilei_concentration1d(ntot,path + "ParticleBinning0.h5", 1, dx[0], "electrons")
+plot_smilei_concentration1d_animated(ntot,path + "ParticleBinning0.h5", 1, dx[0],"electrons")
+plot_smilei_concentration1d(ntot,path + "ParticleBinning1.h5", 1, dx[0], "protons")
+plot_smilei_concentration1d_animated(ntot,path + "ParticleBinning1.h5", 1, dx[0], "protons")
