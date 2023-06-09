@@ -6,7 +6,7 @@ file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
 Ndata = size(info.Datasets,1);
-%Ndata = 15;
+%Ndata = 7;
 name1 = info.Datasets(1).Name;
 name2 = info.Datasets(fix(Ndata/2)+1).Name;
 name3 = info.Datasets(Ndata).Name;
@@ -18,8 +18,8 @@ fp3 = hdf5read(full_name, name3);
 Np=size(fp1,1);
 Nx=size(fp1,2);
 
-minEe = 0.001;
-maxEe = 5000;
+minEe = 0.00001;
+maxEe = 1000;
 minEp = 0.1;
 maxEp = 5000;
 minE = minEe;
@@ -47,8 +47,8 @@ Fp3(1:Np)=0;
 
 samplingFactor = 20;
 
-startx = fix(10000/samplingFactor)+1;
-endx = fix(20000/samplingFactor);
+startx = fix(1/samplingFactor)+1;
+endx = fix(100/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,
@@ -84,7 +84,8 @@ figure(1);
 loglog(me*energy(1:Np)/m+1,Fp1(1:Np),'red', me*energy(1:Np)/m+1,Fp2(1:Np),'green',me*energy(1:Np)/m+1,Fp3(1:Np),'blue');
 %loglog(energy(1:Np),Fp1(1:Np),'red', energy(1:Np),Fp2(1:Np),'green',energy(1:Np),Fp3(1:Np),'blue');
 title('F(E)');
-xlabel('Ekin/me c^2');
+%xlabel('Ekin/me c^2');
+xlabel('E/me c^2');
 ylabel('F(E)');
 name = strcat('approximation gamma = ',num2str(gammap-2));
 %legend('Fe', name,'Location','southeast');

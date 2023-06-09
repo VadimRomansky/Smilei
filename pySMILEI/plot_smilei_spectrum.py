@@ -5,6 +5,9 @@ import numpy as np
 import h5py
 def plot_smilei_spectrum(ntot, file_name, prefix, xmin, xmax):
     print("plot spectrum")
+    plt.rcParams.update({'font.size': 40})
+    plt.rcParams['text.usetex'] = True
+    plt.rcParams['axes.linewidth'] = 4
     f1 = plt.figure(figsize=[10,8])
     ax = f1.add_subplot(111)
 
@@ -47,10 +50,10 @@ def plot_smilei_spectrum(ntot, file_name, prefix, xmin, xmax):
     minF = maxF / 1E14
 
     ax.plot(energy, f)  # plotting fluid data.
-    ax.set_xlabel(r'Ekin/me c^2', fontsize=18)
-    ax.set_ylabel(r'F', fontsize=18)
+    ax.set_xlabel(r'$E_{kin}/me c^2$', fontsize=18)
+    ax.set_ylabel(r'$F(E_{kin})$', fontsize=18)
     ax.set_xscale('log')
     ax.set_yscale('log')
     ax.minorticks_on()
-    plt.savefig('smilei_distribution' + prefix + '.png')
+    plt.savefig('smilei_distribution' + prefix + '.png', bbox_inches='tight')
 
