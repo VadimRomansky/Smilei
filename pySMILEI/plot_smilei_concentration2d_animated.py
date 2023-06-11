@@ -16,7 +16,7 @@ def plot_smilei_concentration2d_animated(ntot, file_name, prefix, xmin, xmax, ym
     print("Keys: %s" % file.keys())
     l = list(file.keys())
 
-    V = np.array(file.get(l[ntot])).T
+    V = np.array(file.get(l[ntot-1])).T
     Nx = V.shape[0]
     Ny = V.shape[1]
     minV = np.min(V);

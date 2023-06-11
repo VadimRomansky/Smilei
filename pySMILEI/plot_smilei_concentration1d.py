@@ -18,7 +18,7 @@ def plot_smilei_concentration1d(ntot, file_name, sampling, dx, prefix=''):
     print("Keys: %s" % file.keys())
     l = list(file.keys())
 
-    V = np.array(file.get(l[ntot])).T
+    V = np.array(file.get(l[ntot-1])).T
     Nx = V.shape[0]
 
     x = np.zeros([Nx])
@@ -30,4 +30,5 @@ def plot_smilei_concentration1d(ntot, file_name, sampling, dx, prefix=''):
     ax.set_ylabel(r'$n$', fontsize=40,fontweight='bold')
     ax.minorticks_on()
     plt.savefig('smilei_concentration1d'+prefix +'.png', bbox_inches='tight')
+
 

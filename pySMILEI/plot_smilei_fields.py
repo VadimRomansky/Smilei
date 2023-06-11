@@ -17,7 +17,7 @@ def plot_smilei_fields(ntot, file_name, parameter_name, xmin, xmax, ymin, ymax):
     l = list(file.keys())
     a_group_key = list(file.keys())[0]
     data = list(file[a_group_key])
-    str = '/data/'+data[ntot] +'/' + parameter_name
+    str = '/data/'+data[ntot-1] +'/' + parameter_name
     V = np.array(file[str][:]).T
     minV = np.min(V);
     maxV = np.max(V);

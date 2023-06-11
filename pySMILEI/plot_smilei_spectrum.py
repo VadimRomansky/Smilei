@@ -18,7 +18,7 @@ def plot_smilei_spectrum(ntot, file_name, prefix, minE, maxE, xmin, xmax):
     print("Keys: %s" % file.keys())
     l = list(file.keys())
 
-    V = np.array(file.get(l[ntot]))
+    V = np.array(file.get(l[ntot-1]))
 
 
     Nx = V.shape[0]
@@ -42,7 +42,7 @@ def plot_smilei_spectrum(ntot, file_name, prefix, minE, maxE, xmin, xmax):
 
     minF = np.amin(f)
     maxF = np.amax(f)
-    minF = maxF / 1E14
+    minF = maxF / 1E18
 
     ax.plot(energy, f, linewidth=4)  # plotting fluid data.
     ax.set_xlabel(r'$E_{kin}/m_e c^2$', fontsize=40,fontweight='bold')

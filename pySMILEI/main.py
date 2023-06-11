@@ -13,7 +13,7 @@ from plot_smilei_spectrum_animated import plot_smilei_spectrum_animated
 
 dx = [0.2,0.2]
 Npatches = [256, 16]
-Ncells = [100, 100]
+Ncells = [75, 100]
 grid_length = [0,0]
 samplingPart = 20
 samplingFields = 4
@@ -22,7 +22,7 @@ for i in range(2):
 
 #path = "../output_shear_jet_gamma1.5_nj0.01_n1_sigma6/"
 path = "../output/"
-ntot = get_smilei_number(path + "ParticleBinning0.h5")-1
+ntot = get_smilei_number(path + "ParticleBinning0.h5")
 #ntot = 0
 print("ntot = ",ntot)
 plot_general(path + "scalars.txt","",2)
@@ -62,10 +62,14 @@ maxEp = 5000;
 minE = minEp;
 maxE = maxEp;
 
-#plot_smilei_spectrum(ntot,path + "Particl.h5","protons", minEp, maxEp, 0, int(0.25*Npatches[0]*Ncells[0]/samplingFactor))
-#plot_smilei_spectrum_animated(ntot,path + "ParticleBinning7.h5","protons", 100, minEp, maxEp,0,int(0.25*Npatches[0]*Ncells[0]/samplingFactor))
-plot_smilei_spectrum(ntot, path + "ParticleBinning6.h5","electrons", minEe, maxEe, 0, int(0.25 * Npatches[0] * Ncells[0] / samplingPart))
-plot_smilei_spectrum_animated(ntot, path + "ParticleBinning6.h5","electrons", 1, minEe, maxEe, 0, int(0.25 * Npatches[0] * Ncells[0] / samplingPart))
+spectrumStartX = int(1/samplingPart)
+spectrumEndX = int(3000/samplingPart)
+#spectrumEndX = int(0.25 * Npatches[0] * Ncells[0] / samplingPart)
+
+#plot_smilei_spectrum(ntot,path + "Particl.h5","protons", minEp, maxEp, spectrumStartX, spectrumEndX)
+#plot_smilei_spectrum_animated(ntot,path + "ParticleBinning7.h5","protons", 100, minEp, maxEp, spectrumStartX, spectrumEndX)
+plot_smilei_spectrum(ntot, path + "ParticleBinning6.h5","electrons", minEe, maxEe, spectrumStartX, spectrumEndX)
+plot_smilei_spectrum_animated(ntot, path + "ParticleBinning6.h5","electrons", 1, minEe, maxEe, spectrumStartX, spectrumEndX)
 
 #plot_smilei_concentration2d(ntot,path + "ParticleBinning2.h5","electrons", 0, grid_length[0], 0, grid_length[1])
 #plot_smilei_concentration2d_animated(ntot,path + "ParticleBinning2.h5","electrons", 0, grid_length[0], 0, grid_length[1])

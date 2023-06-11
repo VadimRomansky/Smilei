@@ -19,7 +19,7 @@ def plot_smilei_fields1d_animated(ntot, file_name, parameter_name, Nmin, Nmax, s
     l = list(file.keys())
     a_group_key = list(file.keys())[0]
     data = list(file[a_group_key])
-    str = '/data/'+data[ntot] +'/' + parameter_name
+    str = '/data/'+data[ntot-1] +'/' + parameter_name
     V = np.array(file[str][:])
     
     Nx = V.shape[0]

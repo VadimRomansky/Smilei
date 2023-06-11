@@ -20,7 +20,7 @@ def plot_smilei_spectrum_animated(ntot, file_name, prefix, mass, minE, maxE, xmi
     print("Keys: %s" % file.keys())
     l = list(file.keys())
 
-    V = np.array(file.get(l[ntot])).T
+    V = np.array(file.get(l[ntot-1])).T
     Nx = V.shape[1]
     Np = V.shape[0]
 
