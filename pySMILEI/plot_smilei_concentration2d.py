@@ -31,4 +31,5 @@ def plot_smilei_concentration2d(ntot, file_name, prefix, xmin, xmax, ymin, ymax)
     ax.set_ylabel(r'Z', fontsize=18)
     ax.minorticks_on()
     plt.savefig('smilei_concentration2d' + prefix + '.png')
+    plt.close()
 

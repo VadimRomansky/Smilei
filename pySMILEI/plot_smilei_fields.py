@@ -31,4 +31,5 @@ def plot_smilei_fields(ntot, file_name, parameter_name, xmin, xmax, ymin, ymax):
     ax.set_ylabel(r'Z', fontsize=18)
     ax.minorticks_on()
     plt.savefig('smilei_'+parameter_name+'.png')
+    plt.close()
 

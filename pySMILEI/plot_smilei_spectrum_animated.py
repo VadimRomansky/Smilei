@@ -68,9 +68,10 @@ def plot_smilei_spectrum_animated(ntot, file_name, prefix, mass, minE, maxE, xmi
             maxF = np.amax(f)
 
     maxF = 2*maxF
-    minF = maxF / 1E6
+    minF = maxF / 1E16
 
     ax.plot(energy, f)  # plotting fluid data.
+    ax.set_ylim([minF, maxF])
     ax.set_xlabel(r'$E_{kin}/m_e c^2$', fontsize=40,fontweight='bold')
     ax.set_ylabel(r'$F(E_{kin}$', fontsize=40,fontweight='bold')
     ax.set_xscale('log')
@@ -107,3 +108,4 @@ def plot_smilei_spectrum_animated(ntot, file_name, prefix, mass, minE, maxE, xmi
     f = r"smilei_distribution" + prefix + ".gif"
     writergif = animation.PillowWriter(fps=4)
     anim.save(f, writer=writergif)
+    plt.close()

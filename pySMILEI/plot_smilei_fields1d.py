@@ -36,4 +36,5 @@ def plot_smilei_fields1d(ntot, file_name, parameter_name, Nmin, Nmax, sampling, 
     ax.set_ylabel(r'$B$', fontsize=40,fontweight='bold')
     ax.minorticks_on()
     plt.savefig('smilei_1d_'+ parameter_name +'.png', bbox_inches='tight')
+    plt.close()
 

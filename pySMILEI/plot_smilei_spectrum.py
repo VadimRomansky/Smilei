@@ -41,13 +41,15 @@ def plot_smilei_spectrum(ntot, file_name, prefix, minE, maxE, xmin, xmax):
             f[i] = f[i] + V[j][i]/de[i]
 
     minF = np.amin(f)
-    maxF = np.amax(f)
-    minF = maxF / 1E18
+    maxF = 2*np.amax(f)
+    minF = maxF / 1E14
 
     ax.plot(energy, f, linewidth=4)  # plotting fluid data.
+    ax.set_ylim([minF, maxF])
     ax.set_xlabel(r'$E_{kin}/m_e c^2$', fontsize=40,fontweight='bold')
     ax.set_ylabel(r'$F(E_{kin})$', fontsize=40,fontweight='bold')
     ax.set_xscale('log')
     ax.set_yscale('log')
     plt.savefig('smilei_distribution' + prefix + '.png', bbox_inches='tight')
+    plt.close()
 

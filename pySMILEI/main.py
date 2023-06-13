@@ -1,4 +1,5 @@
 from get_smilei_number import get_smilei_number
+from get_sw_point import get_sw_point
 from plot_general import plot_general
 from plot_smilei_concentration1d import plot_smilei_concentration1d
 from plot_smilei_concentration1d_animated import plot_smilei_concentration1d_animated
@@ -62,21 +63,23 @@ maxEp = 5000;
 minE = minEp;
 maxE = maxEp;
 
-spectrumStartX = int(1/samplingPart)
-spectrumEndX = int(3000/samplingPart)
+swpoint = get_sw_point(ntot, path + "ParticleBinning1.h5");
+print('shock wave point = ', swpoint)
+spectrumStartX = int(0.5*swpoint/samplingPart)
+spectrumEndX = int(swpoint/samplingPart)
 #spectrumEndX = int(0.25 * Npatches[0] * Ncells[0] / samplingPart)
 
-#plot_smilei_spectrum(ntot,path + "Particl.h5","protons", minEp, maxEp, spectrumStartX, spectrumEndX)
-#plot_smilei_spectrum_animated(ntot,path + "ParticleBinning7.h5","protons", 100, minEp, maxEp, spectrumStartX, spectrumEndX)
+plot_smilei_spectrum(ntot,path + "ParticleBinning7.h5","protons", minEp, maxEp, spectrumStartX, spectrumEndX)
+plot_smilei_spectrum_animated(ntot,path + "ParticleBinning7.h5","protons", 100, minEp, maxEp, spectrumStartX, spectrumEndX)
 plot_smilei_spectrum(ntot, path + "ParticleBinning6.h5","electrons", minEe, maxEe, spectrumStartX, spectrumEndX)
 plot_smilei_spectrum_animated(ntot, path + "ParticleBinning6.h5","electrons", 1, minEe, maxEe, spectrumStartX, spectrumEndX)
 
-#plot_smilei_concentration2d(ntot,path + "ParticleBinning2.h5","electrons", 0, grid_length[0], 0, grid_length[1])
-#plot_smilei_concentration2d_animated(ntot,path + "ParticleBinning2.h5","electrons", 0, grid_length[0], 0, grid_length[1])
+plot_smilei_concentration2d(ntot,path + "ParticleBinning2.h5","electrons", 0, grid_length[0], 0, grid_length[1])
+plot_smilei_concentration2d_animated(ntot,path + "ParticleBinning2.h5","electrons", 0, grid_length[0], 0, grid_length[1])
 #plot_smilei_concentration2d(ntot,path + "ParticleBinning5.h5","positrons", 0, grid_length[0], 0, grid_length[1])
 #plot_smilei_concentration2d_animated(ntot,path + "ParticleBinning5.h5","positrons", 0, grid_length[0], 0, grid_length[1])
-#plot_smilei_concentration2d(ntot,path + "ParticleBinning3.h4","protons", 0, grid_length[0], 0, grid_length[1])
-#plot_smilei_concentration2d_animated(ntot,path + "ParticleBinning3.h5","protons", 0, grid_length[0], 0, grid_length[1])
+plot_smilei_concentration2d(ntot,path + "ParticleBinning3.h5","protons", 0, grid_length[0], 0, grid_length[1])
+plot_smilei_concentration2d_animated(ntot,path + "ParticleBinning3.h5","protons", 0, grid_length[0], 0, grid_length[1])
 
 plot_smilei_concentration1d(ntot,path + "ParticleBinning0.h5", 1, dx[0], "electrons")
 plot_smilei_concentration1d_animated(ntot,path + "ParticleBinning0.h5", 1, dx[0],"electrons")

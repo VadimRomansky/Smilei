@@ -20,15 +20,19 @@ def plot_smilei_concentration1d(ntot, file_name, sampling, dx, prefix=''):
 
     V = np.array(file.get(l[ntot-1])).T
     Nx = V.shape[0]
+    minV = np.min(V);
+    maxV = np.max(V);
 
     x = np.zeros([Nx])
     for i in range(Nx):
         x[i] = i*sampling*dx
 
     ax.plot(x, V, linewidth=4)
+    ax.set_ylim([minV, maxV])
     ax.set_xlabel(r'$X \omega_e/c$', fontsize=40,fontweight='bold')
     ax.set_ylabel(r'$n$', fontsize=40,fontweight='bold')
     ax.minorticks_on()
     plt.savefig('smilei_concentration1d'+prefix +'.png', bbox_inches='tight')
+    plt.close()
 
 

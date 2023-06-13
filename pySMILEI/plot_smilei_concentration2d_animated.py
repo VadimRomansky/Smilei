@@ -56,3 +56,4 @@ def plot_smilei_concentration2d_animated(ntot, file_name, prefix, xmin, xmax, ym
     f = r"smilei_concentration2d" + prefix + ".gif"
     writergif = animation.PillowWriter(fps=4)
     anim.save(f, writer=writergif)
+    plt.close()

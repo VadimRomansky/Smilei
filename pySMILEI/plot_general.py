@@ -55,3 +55,4 @@ def plot_general(file_name, prefix, Nspecies):
     ax.minorticks_on()
     ax.legend(labels, fontsize=30)
     plt.savefig('smilei_general' + prefix + '.png', bbox_inches='tight')
+    plt.close()

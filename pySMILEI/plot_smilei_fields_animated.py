@@ -58,3 +58,4 @@ def plot_smilei_fields_animated(ntot, file_name, parameter_name, xmin, xmax, ymi
     f = r"smilei_"+parameter_name+".gif"
     writergif = animation.PillowWriter(fps=4)
     anim.save(f, writer=writergif)
+    plt.close()
