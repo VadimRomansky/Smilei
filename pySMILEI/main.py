@@ -1,6 +1,7 @@
 from get_smilei_number import get_smilei_number
 from get_sw_point import get_sw_point
 from plot_general import plot_general
+from plot_shock_wave import plot_shock_wave
 from plot_smilei_concentration1d import plot_smilei_concentration1d
 from plot_smilei_concentration1d_animated import plot_smilei_concentration1d_animated
 from plot_smilei_concentration2d import plot_smilei_concentration2d
@@ -14,10 +15,13 @@ from plot_smilei_spectrum_animated import plot_smilei_spectrum_animated
 
 dx = [0.2,0.2]
 Npatches = [256, 16]
-Ncells = [75, 100]
+Ncells = [50, 100]
 grid_length = [0,0]
 samplingPart = 20
 samplingFields = 4
+dt = 0.5*dx[0]
+Nt = 20000
+
 for i in range(2):
     grid_length[i] = dx[i]*Npatches[i]*Ncells[i]
 
@@ -28,33 +32,33 @@ ntot = get_smilei_number(path + "ParticleBinning0.h5")
 print("ntot = ",ntot)
 plot_general(path + "scalars.txt","",2)
 
-plot_smilei_fields_animated(ntot, path + "Fields0.h5", "Bx", 0, grid_length[0], 0, grid_length[1])
-plot_smilei_fields_animated(ntot, path + "Fields0.h5", "By", 0, grid_length[0], 0, grid_length[1])
-plot_smilei_fields_animated(ntot, path + "Fields0.h5", "Bz", 0, grid_length[0], 0, grid_length[1])
-plot_smilei_fields(ntot, path + "Fields0.h5", "Bx",  0, grid_length[0], 0, grid_length[1])
-plot_smilei_fields(ntot, path + "Fields0.h5", "By",  0, grid_length[0], 0, grid_length[1])
-plot_smilei_fields(ntot, path + "Fields0.h5", "Bz",  0, grid_length[0], 0, grid_length[1])
-
-plot_smilei_fields_animated(ntot, path + "Fields0.h5", "Ex", 0, grid_length[0], 0, grid_length[1])
-plot_smilei_fields_animated(ntot, path + "Fields0.h5", "Ey", 0, grid_length[0], 0, grid_length[1])
-plot_smilei_fields_animated(ntot, path + "Fields0.h5", "Ez", 0, grid_length[0], 0, grid_length[1])
-plot_smilei_fields(ntot, path + "Fields0.h5", "Ex",  0, grid_length[0], 0, grid_length[1])
-plot_smilei_fields(ntot, path + "Fields0.h5", "Ey",  0, grid_length[0], 0, grid_length[1])
-plot_smilei_fields(ntot, path + "Fields0.h5", "Ez",  0, grid_length[0], 0, grid_length[1])
-
-plot_smilei_fields1d_animated(ntot, path + "Fields0.h5", "Bx", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
-plot_smilei_fields1d_animated(ntot, path + "Fields0.h5", "By", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
-plot_smilei_fields1d_animated(ntot, path + "Fields0.h5", "Bz", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
-plot_smilei_fields1d(ntot, path + "Fields0.h5", "Bx", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
-plot_smilei_fields1d(ntot, path + "Fields0.h5", "By", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
-plot_smilei_fields1d(ntot, path + "Fields0.h5", "Bz", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
-
-plot_smilei_fields1d_animated(ntot, path + "Fields0.h5", "Ex", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
-plot_smilei_fields1d_animated(ntot, path + "Fields0.h5", "Ey", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
-plot_smilei_fields1d_animated(ntot, path + "Fields0.h5", "Ez", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
-plot_smilei_fields1d(ntot, path + "Fields0.h5", "Ex", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
-plot_smilei_fields1d(ntot, path + "Fields0.h5", "Ey", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
-plot_smilei_fields1d(ntot, path + "Fields0.h5", "Ez", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+# plot_smilei_fields_animated(ntot, path + "Fields0.h5", "Bx", 0, grid_length[0], 0, grid_length[1])
+# plot_smilei_fields_animated(ntot, path + "Fields0.h5", "By", 0, grid_length[0], 0, grid_length[1])
+# plot_smilei_fields_animated(ntot, path + "Fields0.h5", "Bz", 0, grid_length[0], 0, grid_length[1])
+# plot_smilei_fields(ntot, path + "Fields0.h5", "Bx",  0, grid_length[0], 0, grid_length[1])
+# plot_smilei_fields(ntot, path + "Fields0.h5", "By",  0, grid_length[0], 0, grid_length[1])
+# plot_smilei_fields(ntot, path + "Fields0.h5", "Bz",  0, grid_length[0], 0, grid_length[1])
+#
+# plot_smilei_fields_animated(ntot, path + "Fields0.h5", "Ex", 0, grid_length[0], 0, grid_length[1])
+# plot_smilei_fields_animated(ntot, path + "Fields0.h5", "Ey", 0, grid_length[0], 0, grid_length[1])
+# plot_smilei_fields_animated(ntot, path + "Fields0.h5", "Ez", 0, grid_length[0], 0, grid_length[1])
+# plot_smilei_fields(ntot, path + "Fields0.h5", "Ex",  0, grid_length[0], 0, grid_length[1])
+# plot_smilei_fields(ntot, path + "Fields0.h5", "Ey",  0, grid_length[0], 0, grid_length[1])
+# plot_smilei_fields(ntot, path + "Fields0.h5", "Ez",  0, grid_length[0], 0, grid_length[1])
+#
+# plot_smilei_fields1d_animated(ntot, path + "Fields0.h5", "Bx", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+# plot_smilei_fields1d_animated(ntot, path + "Fields0.h5", "By", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+# plot_smilei_fields1d_animated(ntot, path + "Fields0.h5", "Bz", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+# plot_smilei_fields1d(ntot, path + "Fields0.h5", "Bx", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+# plot_smilei_fields1d(ntot, path + "Fields0.h5", "By", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+# plot_smilei_fields1d(ntot, path + "Fields0.h5", "Bz", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+#
+# plot_smilei_fields1d_animated(ntot, path + "Fields0.h5", "Ex", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+# plot_smilei_fields1d_animated(ntot, path + "Fields0.h5", "Ey", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+# plot_smilei_fields1d_animated(ntot, path + "Fields0.h5", "Ez", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+# plot_smilei_fields1d(ntot, path + "Fields0.h5", "Ex", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+# plot_smilei_fields1d(ntot, path + "Fields0.h5", "Ey", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+# plot_smilei_fields1d(ntot, path + "Fields0.h5", "Ez", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
 
 minEe = 0.00001;
 maxEe = 1000;
@@ -63,10 +67,12 @@ maxEp = 5000;
 minE = minEp;
 maxE = maxEp;
 
-swpoint = get_sw_point(ntot, path + "ParticleBinning1.h5");
+swpoint = get_sw_point(ntot, path + "ParticleBinning1.h5")
 print('shock wave point = ', swpoint)
-spectrumStartX = int(0.5*swpoint/samplingPart)
-spectrumEndX = int(swpoint/samplingPart)
+plot_shock_wave(ntot, path + "ParticleBinning1.h5", 2.0, dx[0], 1, dt, Nt)
+#spectrumStartX = int(0.5*swpoint/samplingPart)
+spectrumStartX = int(100/samplingPart)
+spectrumEndX = int(2*swpoint/samplingPart)
 #spectrumEndX = int(0.25 * Npatches[0] * Ncells[0] / samplingPart)
 
 plot_smilei_spectrum(ntot,path + "ParticleBinning7.h5","protons", minEp, maxEp, spectrumStartX, spectrumEndX)
