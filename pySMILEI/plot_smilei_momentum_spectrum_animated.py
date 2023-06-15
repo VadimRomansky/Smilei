@@ -3,8 +3,8 @@ from matplotlib.animation import FuncAnimation
 import matplotlib.pyplot as plt
 import numpy as np
 import h5py
-def plot_smilei_spectrum_animated(ntot, file_name, prefix, mass, minE, maxE, xmin, xmax):
-    print("plot spectrum animated")
+def plot_smilei_momentum_spectrum_animated(ntot, file_name, prefix, minE, maxE, xmin, xmax, mass):
+    print("plot momentum spectrum animated")
     plt.rcParams.update({'font.size': 40})
     plt.rcParams['text.usetex'] = True
     plt.rcParams['axes.linewidth'] = 4
@@ -27,10 +27,12 @@ def plot_smilei_spectrum_animated(ntot, file_name, prefix, mass, minE, maxE, xmi
     factor = (maxE / minE) ** (1.0 / (Np - 1));
 
     energy = np.zeros([Np])
+    momentum = np.zeros([Np])
     de = np.zeros([Np])
     energy[0] = minE
     for i in range(1,Np):
         energy[i] = energy[i-1]*factor
+        momentum[i] = np.sqrt((energy[i] + mass) * (energy[i] + mass) - mass * mass)
     de[0] = energy[1]-energy[0]
     for i in range(1,Np):
         de[i] = energy[i]-energy[i-1]
@@ -39,8 +41,7 @@ def plot_smilei_spectrum_animated(ntot, file_name, prefix, mass, minE, maxE, xmi
     norm = 0
     for i in range(Np):
         for j in range(xmin,xmax):
-            #f[i] = f[i] + V[i][j]*(energy[i] + mass) * (energy[i] + mass)/de[i]
-            f[i] = f[i] + V[i][j]/de[i]
+            f[i] = f[i] + (V[i][j]/de[i])*momentum[i]/(energy[i]+mass)
             norm = norm+V[i][j]
 
     for i in range(Np):
@@ -56,7 +57,7 @@ def plot_smilei_spectrum_animated(ntot, file_name, prefix, mass, minE, maxE, xmi
         for k in range(Np):
             for j in range(xmin, xmax):
                 #f[k] = f[k] + V[k][j] *(energy[k] + mass) * (energy[k] + mass) / de[k]
-                f[k] = f[k] + V[k][j]/ de[k]
+                f[i] = f[i] + (V[k][j]/de[i])*momentum[i]/(energy[i]+mass)
                 norm = norm + V[k][j]
 
         for k in range(Np):
@@ -72,8 +73,8 @@ def plot_smilei_spectrum_animated(ntot, file_name, prefix, mass, minE, maxE, xmi
 
     ax.plot(energy, f)  # plotting fluid data.
     ax.set_ylim([minF, maxF])
-    ax.set_xlabel(r'$E_{kin}/m_e c^2$', fontsize=40,fontweight='bold')
-    ax.set_ylabel(r'$F(E_{kin})$', fontsize=40,fontweight='bold')
+    ax.set_xlabel(r'$p/m_e c$', fontsize=40,fontweight='bold')
+    ax.set_ylabel(r'$F(p)$', fontsize=40,fontweight='bold')
     ax.set_xscale('log')
     ax.set_yscale('log')
     ax.minorticks_on()
@@ -82,8 +83,8 @@ def plot_smilei_spectrum_animated(ntot, file_name, prefix, mass, minE, maxE, xmi
         print(frame_number)
         ax.clear()
         ax.set_ylim([minF, maxF])
-        ax.set_xlabel(r'$E_{kin}/m_e c^2$', fontsize=40, fontweight='bold')
-        ax.set_ylabel(r'$F(E_{kin})$', fontsize=40, fontweight='bold')
+        ax.set_xlabel(r'$p/m_e c$', fontsize=40, fontweight='bold')
+        ax.set_ylabel(r'$F(p)$', fontsize=40, fontweight='bold')
         ax.set_xscale('log')
         ax.set_yscale('log')
         V = np.array(file.get(l[frame_number])).T
@@ -92,20 +93,20 @@ def plot_smilei_spectrum_animated(ntot, file_name, prefix, mass, minE, maxE, xmi
         for i in range(Np):
             for j in range(xmin, xmax):
                 #f[i] = f[i] + V[i][j] *(energy[i] + mass) * (energy[i] + mass)/ de[i]
-                f[i] = f[i] + V[i][j]/ de[i]
+                f[i] = f[i] + (V[i][j]/de[i])*momentum[i]/(energy[i]+mass)
                 norm = norm +V[i][j]
 
         for i in range(Np):
             f[i] = f[i]/norm
 
-        im2 = ax.plot(energy, f, linewidth=4)
+        im2 = ax.plot(momentum, f, linewidth=4)
         return im2
 
     anim = FuncAnimation(f1, update, interval=10, frames=ntot)
 
     # plt.show()
 
-    f = r"smilei_distribution" + prefix + ".gif"
+    f = r"smilei_momentum_distribution" + prefix + ".gif"
     writergif = animation.PillowWriter(fps=4)
     anim.save(f, writer=writergif)
     plt.close()

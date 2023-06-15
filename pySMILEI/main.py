@@ -10,6 +10,8 @@ from plot_smilei_fields_animated import plot_smilei_fields_animated
 from plot_smilei_fields import plot_smilei_fields
 from plot_smilei_fields1d_animated import plot_smilei_fields1d_animated
 from plot_smilei_fields1d import plot_smilei_fields1d
+from plot_smilei_momentum_spectrum import plot_smilei_momentum_spectrum
+from plot_smilei_momentum_spectrum_animated import plot_smilei_momentum_spectrum_animated
 from plot_smilei_spectrum import plot_smilei_spectrum
 from plot_smilei_spectrum_animated import plot_smilei_spectrum_animated
 
@@ -79,6 +81,12 @@ plot_smilei_spectrum(ntot,path + "ParticleBinning7.h5","protons", minEp, maxEp, 
 plot_smilei_spectrum_animated(ntot,path + "ParticleBinning7.h5","protons", 100, minEp, maxEp, spectrumStartX, spectrumEndX)
 plot_smilei_spectrum(ntot, path + "ParticleBinning6.h5","electrons", minEe, maxEe, spectrumStartX, spectrumEndX)
 plot_smilei_spectrum_animated(ntot, path + "ParticleBinning6.h5","electrons", 1, minEe, maxEe, spectrumStartX, spectrumEndX)
+
+plot_smilei_momentum_spectrum(ntot,path + "ParticleBinning7.h5","protons", minEp, maxEp, spectrumStartX, spectrumEndX, 100)
+plot_smilei_momentum_spectrum_animated(ntot,path + "ParticleBinning7.h5","protons", minEp, maxEp, spectrumStartX, spectrumEndX, 100)
+plot_smilei_momentum_spectrum(ntot, path + "ParticleBinning6.h5","electrons", minEe, maxEe, spectrumStartX, spectrumEndX, 1)
+plot_smilei_momentum_spectrum_animated(ntot, path + "ParticleBinning6.h5","electrons", minEe, maxEe, spectrumStartX, spectrumEndX, 1)
+
 
 plot_smilei_concentration2d(ntot,path + "ParticleBinning2.h5","electrons", 0, grid_length[0], 0, grid_length[1])
 plot_smilei_concentration2d_animated(ntot,path + "ParticleBinning2.h5","electrons", 0, grid_length[0], 0, grid_length[1])
