@@ -22,6 +22,8 @@ def plot_smilei_concentration1d(ntot, file_name, sampling, dx, prefix=''):
     Nx = V.shape[0]
     minV = np.min(V);
     maxV = np.max(V);
+    maxV = 1.5 * maxV
+    minV=0
 
     x = np.zeros([Nx])
     for i in range(Nx):

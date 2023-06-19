@@ -2,7 +2,7 @@ import numpy as np
 import h5py
 
 
-def get_sw_point(ntot, file_name):
+def get_sw_point(ntot, file_name, treshold):
     file = h5py.File(file_name, 'r')
     l = list(file.keys())
 
@@ -13,7 +13,7 @@ def get_sw_point(ntot, file_name):
 
     swpoint = Nx-1;
     for i in range(Nx-1,-1,-1):
-        if n[i] > 1.5*n0:
+        if n[i] > treshold*n0:
             return i
     print('shock wave not found')
     return 100

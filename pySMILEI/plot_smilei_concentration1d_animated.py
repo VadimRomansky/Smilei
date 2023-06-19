@@ -22,6 +22,7 @@ def plot_smilei_concentration1d_animated(ntot, file_name, sampling, dx, prefix='
     Nx = V.shape[0]
     minV = np.min(V);
     maxV = np.max(V);
+    minV=0
     for i in range(ntot):
         V = np.array(file.get(l[i])).T
         if (np.amin(V) < minV):
@@ -29,6 +30,7 @@ def plot_smilei_concentration1d_animated(ntot, file_name, sampling, dx, prefix='
         if (np.amax(V) > maxV):
             maxV = np.amax(V)
 
+    maxV = 1.5*maxV
     x = np.zeros([Nx])
     for i in range(Nx):
         x[i] = i*sampling*dx
@@ -36,6 +38,7 @@ def plot_smilei_concentration1d_animated(ntot, file_name, sampling, dx, prefix='
     ax.plot(x, V, linewidth=4)
     ax.set_xlabel(r'$X \omega_e/c$', fontsize=40,fontweight='bold')
     ax.set_ylabel(r'$n$', fontsize=40,fontweight='bold')
+    ax.set_ylim([minV, maxV])
     ax.minorticks_on()
 
     def update(frame_number):

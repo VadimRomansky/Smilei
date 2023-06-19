@@ -47,6 +47,7 @@ def plot_smilei_fields1d_animated(ntot, file_name, parameter_name, Nmin, Nmax, s
     ax.plot(x, V1, linewidth = 4)
     ax.set_xlabel(r'$X \omega_e/c$', fontsize=40,fontweight='bold')
     ax.set_ylabel(r'$B$', fontsize=40,fontweight='bold')
+    ax.set_ylim([minV, maxV])
 
     def update(frame_number):
         print(frame_number)
