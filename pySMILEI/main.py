@@ -17,7 +17,7 @@ from plot_smilei_spectrum_animated import plot_smilei_spectrum_animated
 
 dx = [0.2,0.2]
 Npatches = [4096, 1]
-Ncells = [1000, 10]
+Ncells = [75, 10]
 grid_length = [0,0]
 samplingPart = 20
 samplingFields = 4
@@ -48,19 +48,19 @@ plot_general(path + "scalars.txt","",2)
 # plot_smilei_fields(ntot, path + "Fields0.h5", "Ey",  0, grid_length[0], 0, grid_length[1])
 # plot_smilei_fields(ntot, path + "Fields0.h5", "Ez",  0, grid_length[0], 0, grid_length[1])
 #
-# plot_smilei_fields1d_animated(ntot, path + "Fields0.h5", "Bx", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
-# plot_smilei_fields1d_animated(ntot, path + "Fields0.h5", "By", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
-# plot_smilei_fields1d_animated(ntot, path + "Fields0.h5", "Bz", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
-# plot_smilei_fields1d(ntot, path + "Fields0.h5", "Bx", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
-# plot_smilei_fields1d(ntot, path + "Fields0.h5", "By", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
-# plot_smilei_fields1d(ntot, path + "Fields0.h5", "Bz", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
-#
-# plot_smilei_fields1d_animated(ntot, path + "Fields0.h5", "Ex", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
-# plot_smilei_fields1d_animated(ntot, path + "Fields0.h5", "Ey", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
-# plot_smilei_fields1d_animated(ntot, path + "Fields0.h5", "Ez", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
-# plot_smilei_fields1d(ntot, path + "Fields0.h5", "Ex", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
-# plot_smilei_fields1d(ntot, path + "Fields0.h5", "Ey", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
-# plot_smilei_fields1d(ntot, path + "Fields0.h5", "Ez", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+plot_smilei_fields1d_animated(ntot, path + "Fields0.h5", "Bx", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+plot_smilei_fields1d_animated(ntot, path + "Fields0.h5", "By", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+plot_smilei_fields1d_animated(ntot, path + "Fields0.h5", "Bz", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+plot_smilei_fields1d(ntot, path + "Fields0.h5", "Bx", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+plot_smilei_fields1d(ntot, path + "Fields0.h5", "By", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+plot_smilei_fields1d(ntot, path + "Fields0.h5", "Bz", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+
+plot_smilei_fields1d_animated(ntot, path + "Fields0.h5", "Ex", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+plot_smilei_fields1d_animated(ntot, path + "Fields0.h5", "Ey", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+plot_smilei_fields1d_animated(ntot, path + "Fields0.h5", "Ez", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+plot_smilei_fields1d(ntot, path + "Fields0.h5", "Ex", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+plot_smilei_fields1d(ntot, path + "Fields0.h5", "Ey", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
+plot_smilei_fields1d(ntot, path + "Fields0.h5", "Ez", int(0.0*Npatches[0]*Ncells[0]/samplingFields), int(1.0*Npatches[0]*Ncells[0]/samplingFields), samplingFields, dx[0])
 
 minEe = 0.00001;
 maxEe = 1000;

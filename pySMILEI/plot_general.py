@@ -46,9 +46,11 @@ def plot_general(file_name, prefix, Nspecies):
     current_values = plt.gca().get_xticks()
     # using format string '{:.0f}' here but you can choose others
     ax.xaxis.set_major_locator(mticker.FixedLocator(current_values))
-    #ax.xaxis.set_major_locator(mticker.ScalarFormatter())
-    new_labels = ['{:,.0g}'.format(x) for x in current_values]
+    new_labels = ['{:g}'.format(x) for x in current_values]
     plt.gca().set_xticklabels(new_labels)
+
+    #ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: '{:g}'.format(x)))
+
     #ax.ticklabel_format(axis = 'x',style = 'sci')
     ax.set_xlabel(r'$t/\omega_e$', fontsize=40,fontweight='bold')
     ax.set_ylabel(r'$E/E_0$', fontsize=40,fontweight='bold')

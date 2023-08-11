@@ -45,7 +45,7 @@ def plot_smilei_momentum_spectrum(ntot, file_name, prefix, minE, maxE, xmin, xma
 
     minF = np.amin(f)
     maxF = 2*np.amax(f)
-    minF = maxF / 1E14
+    minF = maxF / 1E8
 
     ax.plot(momentum, f, linewidth=4)  # plotting fluid data.
     ax.set_ylim([minF, maxF])

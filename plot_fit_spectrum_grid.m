@@ -1,12 +1,12 @@
 clear;
-directory_name = './output/';
+directory_name = './output_theta80_gamma0.5_sigma0.0002_mass25-144/';
 %directory_name = './output/';
-file_name = 'ParticleBinning6';
+file_name = 'ParticleBinning6_64';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
 Ndata = size(info.Datasets,1);
-Ndata = 7;
+Ndata = 5;
 name1 = info.Datasets(1).Name;
 name2 = info.Datasets(Ndata).Name;
 fp1= hdf5read(full_name, name1);
@@ -15,16 +15,16 @@ fp2 = hdf5read(full_name, name2);
 Np=size(fp1,1);
 Nx=size(fp1,2);
 
-minEe = 0.001;
+minEe = 0.00001;
 maxEe = 1000;
-minEp = 0.1;
+minEp = 0.001;
 maxEp = 1000;
 minE = minEe;
 maxE = maxEe;
 factor = (maxE/minE)^(1.0/(Np-1));
 
 mp = 1.67*10^-24;
-mass_ratio = 100;
+mass_ratio = 64;
 me = mp/mass_ratio;
 
 m = me;
@@ -32,8 +32,8 @@ m = me;
 startPowerP = 145;
 endPowerP = 155;
 
-startPowerE = 156;
-endPowerE = 165;
+startPowerE = 150;
+endPowerE = 170;
 
 startPower = startPowerE;
 endPower = endPowerE;
@@ -42,7 +42,7 @@ gam = 1.048;
 beta = sqrt(1 - 1/(gam*gam));
 c = 2.99792458*10^10;
 Te = 2.6*10^9;
-Temin = 10^7;
+Temin = 10^6;
 Temax = 2*10^12;
 Tp = 2*10^11;
 Tpmin = 10^8;
@@ -76,8 +76,8 @@ shockx = 38000;
 startx = fix((shockx - 2560)/samplingFactor)+1;
 endx = fix((shockx - 320)/samplingFactor);
 
-startx = fix(1000/samplingFactor)+1;
-endx = fix(40000/samplingFactor);
+startx = fix(15000/samplingFactor)+1;
+endx = fix(20000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,
@@ -85,6 +85,8 @@ for i=1:Np,
         Fp2(i)=Fp2(i)+fp2(i,j)/de(i);
     end;
 end;
+
+Fp2(1) = Fp2(2);
 
 norm = 1.0;
 normp = 0.0;
@@ -134,8 +136,8 @@ end;
 %    end;
 %end;
 
-index1 = 40;
-index2 = 70;
+index1 = 85;
+index2 =100;
 
 Tleft = Tmin;
 Tright = Tmax;

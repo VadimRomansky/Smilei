@@ -22,8 +22,8 @@ Nx=size(fp,2);
 
 Ns=6;
 
-minEe = 0.001;
-maxEe = 5000;
+minEe = 0.00001;
+maxEe = 1000;
 minEp = 0.1;
 maxEp = 5000;
 minE = minEe;
@@ -37,23 +37,23 @@ samplingFactor = 20;
 startx(1:Ns) = 0; 
 endx(1:Ns) = 0; 
 
-startx(1) = 10000/samplingFactor+1;
-endx(1) = startx(1) + 5000/samplingFactor;
+startx(1) = 100/samplingFactor+1;
+endx(1) = startx(1) + 1000/samplingFactor;
 
-startx(2) = 20000/samplingFactor;
-endx(2) = startx(2) + 5000/samplingFactor;
+startx(2) = 1000/samplingFactor;
+endx(2) = startx(2) + 1000/samplingFactor;
 
-startx(3) = 40000/samplingFactor;
+startx(3) = 2000/samplingFactor;
 endx(3) = startx(3) + 5000/samplingFactor;
 
-startx(4) = 60000/samplingFactor;
+startx(4) = 10000/samplingFactor;
 endx(4) = startx(4) + 5000/samplingFactor;
 
-startx(5) = 80000/samplingFactor;
+startx(5) = 15000/samplingFactor;
 endx(5) = startx(5) + 5000/samplingFactor;
 
-startx(6) = 120000/samplingFactor;
-endx(6) = startx(6) + 5000/samplingFactor;
+startx(6) = 50000/samplingFactor;
+endx(6) = startx(6) + 2000/samplingFactor;
 
 %startx(1)= 5000/samplingFactor;
 %endx(1) = fix(10000/samplingFactor);
@@ -91,10 +91,10 @@ figure(1);
 hold on;
 set(gca, 'YScale', 'log');
 set(gca, 'XScale', 'log');
-xlim([m/me 1000]);
+xlim([0.00001 1000]);
 %ylim([10^-10 10]);
 for k = 1:Ns,
-    plot(energy(1:Np)+m/me,Fp(1:Np,k),'color',Color{k},'LineWidth',2);
+    plot(energy(1:Np),Fp(1:Np,k),'color',Color{k},'LineWidth',2);
 end;
 title('F(E)');
 xlabel('E/me c^2');
