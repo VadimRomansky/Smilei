@@ -1,7 +1,7 @@
 clear;
-directory_name = './output_theta80_gamma0.5_sigma0.0002_mass25-144/';
+directory_name = './output/';
 %directory_name = './output/';
-file_name = 'ParticleBinning0_100';
+file_name = 'ParticleBinning0';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);

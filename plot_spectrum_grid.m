@@ -18,7 +18,7 @@ fp3 = hdf5read(full_name, name3);
 Np=size(fp1,1);
 Nx=size(fp1,2);
 
-minEe = 0.00001;
+minEe = 0.001;
 maxEe = 1000;
 minEp = 0.1;
 maxEp = 5000;
@@ -27,7 +27,7 @@ maxE = maxEe;
 factor = (maxE/minE)^(1.0/(Np-1));
 
 me = 1;
-mp = 100;
+mp = 400;
 m = me;
 
 energy(1:Np) = 0;
@@ -47,8 +47,8 @@ Fp3(1:Np)=0;
 
 samplingFactor = 20;
 
-startx = fix(100/samplingFactor)+1;
-endx = fix(60000/samplingFactor);
+startx = fix(5000/samplingFactor)+1;
+endx = fix(15000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,

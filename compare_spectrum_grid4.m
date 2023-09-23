@@ -3,7 +3,7 @@ directory_name = './output_theta80_gamma0.5_sigma0.0002_mass25-144/';
 file_name = 'ParticleBinning6';
 file_ending = '.h5';
 
-Suffix = {'_25','_64','_100','_144'};
+Suffix = {'_25','_64','_100','_144','_400'};
 Color = {'red','blue','green','black','cyan','magenta','yellow',[0.75,0,0.67],[0.5,0.5,0.0],[.98,.5,.44]};
 LegendTitle = {'m = 25', 'm = 64','m = 100', 'm = 144', '{\theta} = 40', '{\theta} = 50','{\theta} = 60', '{\theta} = 70', '{\theta} = 80', '{\theta} = 90'};
 
