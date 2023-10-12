@@ -1,6 +1,6 @@
 clear;
-directory_name = './output/';
-file_name = 'ParticleBinning6';
+directory_name = './output_theta80_gamma0.5_sigma0.0002_mass25-400/';
+file_name = 'ParticleBinning6_400';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
@@ -14,11 +14,11 @@ Color = {'red','blue','green','black','magenta', [1.0,0.6,0]};
 Np=size(fp,1);
 Nx=size(fp,2);
 
-Ns=6;
+Ns=5;
 Nt(1:Ns) = 0;
-Nt = [1,5,10,15,20,24];
+Nt = [3,4,5,6,7,24];
 %xsw from plot concentration time series
-xsw = [0,11801,28351,40744,52786,61527];
+xsw = [16000,24000,33000,41500,50000,61527];
 
 Fp(1:Np,1:Ns)=0;
 
@@ -50,10 +50,10 @@ endx(5) = 62000/samplingFactor;
 %   endx(i) = endx(1);
 %end;
 
-startx(1) = 1;
+startx(1) = 6000;
 endx(1) = startx(1) + 5000/samplingFactor;
 for i = 2:Ns,
-    endx(i) = fix((xsw(i) - 2000)/samplingFactor);
+    endx(i) = fix((xsw(i) - 5000)/samplingFactor);
     startx(i) = endx(i) - 5000/samplingFactor;
 end;
 

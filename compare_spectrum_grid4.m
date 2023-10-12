@@ -1,5 +1,5 @@
 clear;
-directory_name = './output_theta80_gamma0.5_sigma0.0002_mass25-144/';
+directory_name = './output_theta80_gamma0.5_sigma0.0002_mass25-400/';
 file_name = 'ParticleBinning6';
 file_ending = '.h5';
 

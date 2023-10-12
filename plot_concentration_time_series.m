@@ -1,11 +1,11 @@
 clear;
-directory_name = './output/';
-file_name = 'ParticleBinning1';
+directory_name = './output_theta80_gamma0.5_sigma0.0002_mass25-400/';
+file_name = 'ParticleBinning0_400';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
 Ndata = size(info.Datasets,1);
-%Ndata = 20;
+Ndata = 6;
 name = info.Datasets(Ndata).Name;
 fp= hdf5read(full_name, name);
 
