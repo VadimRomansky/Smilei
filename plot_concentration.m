@@ -1,12 +1,12 @@
 clear;
-directory_name = './output_theta0-90_gamma1.5_sigma0.004/';
+directory_name = './output_theta0-90_gamma0.5_sigma0.0002/';
 %directory_name = './output/';
-file_name = 'ParticleBinning03';
+file_name = 'ParticleBinning08';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
 Ndata = size(info.Datasets,1);
-%Ndata = 7;
+Ndata = 7;
 name1 = info.Datasets(1).Name;
 name2 = info.Datasets(fix(Ndata/2)+1).Name;
 name3 = info.Datasets(Ndata).Name;
