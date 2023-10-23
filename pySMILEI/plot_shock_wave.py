@@ -44,14 +44,19 @@ def plot_shock_wave(ntot, file_name, treshold, dx, sampling, dt, Nt):
     plt.close()
 
     v = np.zeros(ntot-1)
+    v2 = np.zeros(ntot-1)
     for i in range(ntot-1):
         v[i] = (swpoints[i+1] - swpoints[i])/(dt*Nt)
+        v2[i] = swpoints[i+1]/((i+1)*dt*Nt)
     f1 = plt.figure(figsize=[10, 10])
     ax = f1.add_subplot(111)
     ax.tick_params(axis='x', size=10, width=4)
     ax.tick_params(axis='y', size=10, width=4)
     ax.minorticks_on()
-    ax.plot(time[0:ntot-1], v, linewidth=4)
+    ax.plot(time[0:ntot-1], v, linewidth=4, color = 'blue')
+    ax.plot(time[0:ntot-1], v2, linewidth=4, color  = 'red')
+    for i in range(ntot-1):
+        print("vsh/c = ", v2[i])
     ax.set_xlabel(r'$t/\omega_e$', fontsize=40, fontweight='bold')
     ax.set_ylabel(r'$V_{sh}/c$', fontsize=40, fontweight='bold')
     ax.minorticks_on()
