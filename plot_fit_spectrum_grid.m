@@ -18,7 +18,7 @@ Nx=size(fp1,2);
 minEe = 0.1;
 maxEe = 1000;
 minEp = 0.1;
-maxEp = 5000;
+maxEp = 1000;
 minE = minEp;
 maxE = maxEp;
 factor = (maxE/minE)^(1.0/(Np-1));
@@ -48,9 +48,9 @@ Tp = 2*10^11;
 Tpmin = 10^8;
 Tpmax = 10^12;
 
-T = Te;
-Tmax = Temax;
-Tmin = Temin;
+T = Tp;
+Tmax = Tpmax;
+Tmin = Tpmin;
 kB = 1.3806488*10^-16;
 theta = kB*T/(m*c*c);
 
@@ -76,7 +76,7 @@ shockx = 38000;
 startx = fix((shockx - 2560)/samplingFactor)+1;
 endx = fix((shockx - 320)/samplingFactor);
 
-startx = fix(10000/samplingFactor)+1;
+startx = fix(20000/samplingFactor)+1;
 endx = fix(40000/samplingFactor);
 
 for i=1:Np,
@@ -231,12 +231,12 @@ set(gca, 'YScale', 'log');
 set(gca, 'XScale', 'log');
 xlim([1.0 10000]);
 ylim([10^-10 1]);
-plot(me*energy(1:Np)/m+1,Fp2(1:Np),'red','LineWidth',2);
-plot(me*energy(1:Np)/m+1, Fjuttner(1:Np),'blue','LineWidth',2);
-plot(me*energy(1:Np)/m+1,Fpa(1:Np),'green','LineWidth',2);
-plot(me*energy(1:Np)/m+1, Fshifted(1:Np), 'black', 'LineWidth',2);
-plot(me*energy(startPower)/m + 1,Fp2(startPower),'o','Color','red');
-plot(me*energy(endPower)/m + 1,Fp2(endPower),'o','Color','red');
+plot(me*energy(1:Np)/m,Fp2(1:Np),'red','LineWidth',2);
+plot(me*energy(1:Np)/m, Fjuttner(1:Np),'blue','LineWidth',2);
+plot(me*energy(1:Np)/m,Fpa(1:Np),'green','LineWidth',2);
+plot(me*energy(1:Np)/m, Fshifted(1:Np), 'black', 'LineWidth',2);
+plot(me*energy(startPower)/m,Fp2(startPower),'o','Color','red');
+plot(me*energy(endPower)/m,Fp2(endPower),'o','Color','red');
 
 %plot(energy(1:Np),Fp2(1:Np),'red','LineWidth',2);
 %plot(energy(1:Np), Fjuttner(1:Np),'blue','LineWidth',2);
@@ -244,7 +244,7 @@ plot(me*energy(endPower)/m + 1,Fp2(endPower),'o','Color','red');
 %plot(energy(startPower),Fp2(startPower),'o','Color','red');
 %plot(energy(endPower),Fp2(endPower),'o','Color','red');
 title('F(E)');
-xlabel('E/me c^2');
+xlabel('\gamma');
 ylabel('F(E)');
 name = strcat('powerlaw \gamma = ',num2str(p(1)));
 %legend('Fe', 'maxwell-juttner',name,'Location','southeast');
