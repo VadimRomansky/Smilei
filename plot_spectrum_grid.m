@@ -1,12 +1,12 @@
 clear;
-directory_name = './output_theta0-90_gamma1.5_sigma0.004/';
-%directory_name = './output/';
-file_name = 'ParticleBinning73';
+%directory_name = './output_theta0-90_gamma1.5_sigma0.004/';
+directory_name = './B30mass100/';
+file_name = 'ParticleBinning6';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
 Ndata = size(info.Datasets,1);
-%Ndata = 30;
+Ndata = 11;
 name1 = info.Datasets(1).Name;
 name2 = info.Datasets(fix(Ndata/2)+1).Name;
 name3 = info.Datasets(Ndata).Name;
@@ -19,16 +19,16 @@ Np=size(fp1,1);
 Nx=size(fp1,2);
 
 minEe = 0.1;
-maxEe = 1000;
+maxEe = 5000;
 minEp = 0.1;
-maxEp = 1000;
-minE = minEp;
-maxE = maxEp;
+maxEp = 5000;
+minE = minEe;
+maxE = maxEe;
 factor = (maxE/minE)^(1.0/(Np-1));
 
 me = 1;
 mp = 100;
-m = mp;
+m = me;
 
 energy(1:Np) = 0;
 de(1:Np) = 0;
@@ -47,8 +47,8 @@ Fp3(1:Np)=0;
 
 samplingFactor = 20;
 
-startx = fix(100/samplingFactor)+1;
-endx = fix(10000/samplingFactor);
+startx = fix(10000/samplingFactor)+1;
+endx = fix(20000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,

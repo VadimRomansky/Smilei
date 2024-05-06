@@ -1,13 +1,13 @@
 clear;
-%directory_name = './output_theta0-90_gamma1.5_sigma0.004/';
+%directory_name = './output_gamma1.5_theta0-90_sigma0.004/';
 %directory_name = './output_shock_gamma0.3_theta0-90_sigma0.0002_T0.02_dx0.2_outplane/';
-directory_name = './output/';
-file_name = 'ParticleBinning0';
+directory_name = './B30mass100/';
+file_name = 'ParticleBinning1';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
 Ndata = size(info.Datasets,1);
-%Ndata = 30;
+Ndata = 11;
 name1 = info.Datasets(1).Name;
 name2 = info.Datasets(fix(Ndata/2)+1).Name;
 name3 = info.Datasets(Ndata).Name;
@@ -16,7 +16,7 @@ fp2 = hdf5read(full_name, name2);
 fp3 = hdf5read(full_name, name3);
 N=size(fp1,1);
 
-dx = 0.1;
+dx = 0.2;
 factor = 1.0/(dx*dx);
 Ny = 200;
 

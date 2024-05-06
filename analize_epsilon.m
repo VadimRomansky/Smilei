@@ -1,5 +1,5 @@
 clear;
-directory_name = './output/';
+directory_name = './B30mass100/';
 file_electron_name = 'ParticleBinning6';
 file_proton_name = 'ParticleBinning7';
 file_number = '';
@@ -31,8 +31,8 @@ c = 2.99792458*10^10;
 
 samplingFactor = 20;
 fieldsSamplingFactor = 4;
-start = 23000;
-fin = 28000;
+start = 10000;
+fin = 20000;
 startFieldx = fix(start/fieldsSamplingFactor)+1;
 endFieldx = fix(fin/fieldsSamplingFactor);
 startx = fix(start/samplingFactor)+1;
@@ -42,8 +42,8 @@ Np=size(fp1,1);
 Nx=size(fp1,2);
 Ny1 = 200;
 
-minElectronE = 0.001;
-maxElectronE = 1000;
+minElectronE = 0.1;
+maxElectronE = 5000;
 factorElectron = (maxElectronE/minElectronE)^(1.0/(Np-1));
 
 energyElectron(1:Np) = 0;
@@ -73,7 +73,7 @@ for i = 2:Np,
 end;
 
 mprotonreal = 1.67*10^-24;
-melectronreal = mprotonreal/100;
+melectronreal = 0.91*10^-27;
 Fproton(1:Np)=0;
 Felectron(1:Np)=0;
 FprotonMaxwell(1:Np) = 0;
@@ -233,11 +233,15 @@ for i=1:Np,
     end;
 end;
 
-epsilonB = magneticEnergy/fluxTotalEnergy;
+massFactor2 = (mprotonreal/massFactor)/melectronreal;
+
+totalEnergy = (magneticEnergy + electronKineticEnergy/massFactor2 + protonKineticEnergy);
+
+epsilonB = magneticEnergy/totalEnergy;
 epsilonE = electricEnergy/fluxTotalEnergy;
-epsilon_e = electronTotalEnergy/fluxTotalEnergy;
+epsilon_e = (electronKineticEnergy/totalEnergy)/massFactor2;
 epsilon_e_accelerated = electronAcceleratedTotalEnergy/fluxTotalEnergy;
-epsilon_p = protonTotalEnergy/fluxTotalEnergy;
+epsilon_p = protonKineticEnergy/totalEnergy;
 epsilon_p_accelerated = protonAcceleratedTotalEnergy/fluxTotalEnergy;
 
 epsilonBnonrel = magneticEnergy/fluxKineticEnergy;
