@@ -1,12 +1,12 @@
 clear;
-directory_name = './output_theta0-90_gamma1.5_sigma0.004/';
-%directory_name = './output/';
-file_name = 'ParticleBinning73';
+%directory_name = './output_theta0-90_gamma1.5_sigma0.004/';
+directory_name = './output/';
+file_name = 'ParticleBinning7';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
 Ndata = size(info.Datasets,1);
-%Ndata = 5;
+%Ndata = 6;
 name1 = info.Datasets(1).Name;
 name2 = info.Datasets(Ndata).Name;
 fp1= hdf5read(full_name, name1);
@@ -15,10 +15,10 @@ fp2 = hdf5read(full_name, name2);
 Np=size(fp1,1);
 Nx=size(fp1,2);
 
-minEe = 0.1;
+minEe = 0.001;
 maxEe = 1000;
 minEp = 0.1;
-maxEp = 1000;
+maxEp = 5000;
 minE = minEp;
 maxE = maxEp;
 factor = (maxE/minE)^(1.0/(Np-1));
@@ -29,11 +29,11 @@ me = mp/mass_ratio;
 
 m = mp;
 
-startPowerP = 175;
-endPowerP = 185;
+startPowerP = 65;
+endPowerP = 75;
 
-startPowerE = 141;
-endPowerE = 151;
+startPowerE = 120;
+endPowerE = 130;
 
 startPower = startPowerP;
 endPower = endPowerP;
@@ -76,8 +76,8 @@ shockx = 38000;
 startx = fix((shockx - 2560)/samplingFactor)+1;
 endx = fix((shockx - 320)/samplingFactor);
 
-startx = fix(20000/samplingFactor)+1;
-endx = fix(40000/samplingFactor);
+startx = fix(100/samplingFactor)+1;
+endx = fix(80000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,
@@ -136,8 +136,8 @@ end;
 %    end;
 %end;
 
-index1 = 85;
-index2 =100;
+index1 = 40;
+index2 =50;
 
 Tleft = Tmin;
 Tright = Tmax;
@@ -190,14 +190,14 @@ for i = 1:Np,
     normShifted = normShifted + Fshifted(i)*de(i)*me/m;
 end;
 
-x0(1:2)=[0.1,0.1];
-error = evaluate_error(Fp2, 0.127, sqrt(1.0 - 1.0/2.25), gam, Np, index1, index2);
-fun = @(x)evaluate_error(Fp2,x(1),x(2), gam, Np, index1, index2);
-[x,fval] = fminunc(fun,x0);
-for i = 1:Np,   
-    Fshifted(i) = juttner_shifted_integrated(gam(i), x(1), x(2));
-end;
-T3=x(1)*m*c*c/kB;
+%x0(1:2)=[0.1,0.1];
+%error = evaluate_error(Fp2, 0.127, sqrt(1.0 - 1.0/2.25), gam, Np, index1, index2);
+%fun = @(x)evaluate_error(Fp2,x(1),x(2), gam, Np, index1, index2);
+%[x,fval] = fminunc(fun,x0);
+%for i = 1:Np,   
+%    Fshifted(i) = juttner_shifted_integrated(gam(i), x(1), x(2));
+%end;
+%T3=x(1)*m*c*c/kB;
 
 Fpa(1:Np) = 0;
 
@@ -210,7 +210,7 @@ polyfitx(1:endPower-startPower + 1) = 0;
 polyfity(1:endPower-startPower + 1) = 0;
 
 for i = 1:endPower-startPower + 1,
-    polyfitx(i) = log((me*energy(i+startPower - 1)+m));
+    polyfitx(i) = log((me*energy(i+startPower - 1)));
     %polyfitx(i) = log((me*energy(i+startPower - 1)));
     polyfity(i) = log(Fp2(i+startPower - 1));
 end;
@@ -219,7 +219,7 @@ p = polyfit(polyfitx, polyfity, 1);
 %ap = exp(log(Fpa(startPower)) - gammap*log((me*energy(startPower)+m)));
 
 for i = startPower-5:endPower+5,
-    Fpa(i) = exp(polyval(p, log(me*energy(i)+m)));
+    Fpa(i) = exp(polyval(p, log(me*energy(i))));
     %Fpa(i) = exp(polyval(p, log(me*energy(i))));
 end;
 
@@ -229,12 +229,12 @@ figure(1);
 hold on;
 set(gca, 'YScale', 'log');
 set(gca, 'XScale', 'log');
-xlim([1.0 10000]);
-ylim([10^-10 1]);
+%xlim([1.0 10000]);
+%ylim([10^-10 1]);
 plot(me*energy(1:Np)/m,Fp2(1:Np),'red','LineWidth',2);
 plot(me*energy(1:Np)/m, Fjuttner(1:Np),'blue','LineWidth',2);
 plot(me*energy(1:Np)/m,Fpa(1:Np),'green','LineWidth',2);
-plot(me*energy(1:Np)/m, Fshifted(1:Np), 'black', 'LineWidth',2);
+%plot(me*energy(1:Np)/m, Fshifted(1:Np), 'black', 'LineWidth',2);
 plot(me*energy(startPower)/m,Fp2(startPower),'o','Color','red');
 plot(me*energy(endPower)/m,Fp2(endPower),'o','Color','red');
 
@@ -248,7 +248,7 @@ xlabel('\gamma');
 ylabel('F(E)');
 name = strcat('powerlaw \gamma = ',num2str(p(1)));
 %legend('Fe', 'maxwell-juttner',name,'Location','southeast');
-name2 = strcat('juttner \theta = ', num2str(x(1)),' \beta = ', num2str(x(2)));
+%name2 = strcat('juttner \theta = ', num2str(x(1)),' \beta = ', num2str(x(2)));
 legend('Fe', 'maxwell-juttner',name, name2,'Location','southeast');
 grid;
 
