@@ -14,30 +14,34 @@ def plot_smilei_concentration1d_animated(ntot, file_name, sampling, dx, prefix='
     ax.tick_params(axis='y', size=10, width=4)
     ax.minorticks_on()
 
+    #todo
+    V0 = 8.0
+
     file = h5py.File(file_name, 'r')
     print("Keys: %s" % file.keys())
     l = list(file.keys())
 
     V = np.array(file.get(l[ntot-1])).T
     Nx = V.shape[0]
-    minV = np.min(V);
-    maxV = np.max(V);
+    minV = np.min(V)/V0;
+    maxV = np.max(V)/V0;
     minV=0
     for i in range(ntot):
-        V = np.array(file.get(l[i])).T
+        V = np.array(file.get(l[i])).T/V0
         if (np.amin(V) < minV):
             minV = np.amin(V)
         if (np.amax(V) > maxV):
             maxV = np.amax(V)
 
     maxV = 1.5*maxV
+    maxV = 10
     x = np.zeros([Nx])
     for i in range(Nx):
         x[i] = i*sampling*dx
 
     ax.plot(x, V, linewidth=4)
     ax.set_xlabel(r'$X \omega_e/c$', fontsize=40,fontweight='bold')
-    ax.set_ylabel(r'$n$', fontsize=40,fontweight='bold')
+    ax.set_ylabel(r'$n/n_0$', fontsize=40,fontweight='bold')
     ax.set_ylim([minV, maxV])
     ax.minorticks_on()
 
@@ -45,8 +49,10 @@ def plot_smilei_concentration1d_animated(ntot, file_name, sampling, dx, prefix='
         print(frame_number)
         ax.clear()
         ax.set_ylim([minV, maxV])
-        V = np.array(file.get(l[frame_number])).T
+        V = np.array(file.get(l[frame_number])).T/V0
         im2 = ax.plot(x, V, linewidth=4)
+        ax.set_xlabel(r'$X \omega_e/c$', fontsize=40, fontweight='bold')
+        ax.set_ylabel(r'$n/n_0$', fontsize=40, fontweight='bold')
         return im2
 
     anim = FuncAnimation(f1, update, interval=10, frames=ntot)

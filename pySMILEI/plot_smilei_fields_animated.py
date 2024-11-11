@@ -31,7 +31,7 @@ def plot_smilei_fields_animated(ntot, file_name, parameter_name, xmin, xmax, ymi
 
     im2 = ax.imshow(V, origin='lower', aspect='auto',
                     extent=[xmin, xmax, ymin, ymax])  # plotting fluid data.
-    im2.set_clim(minV, maxV)
+    im2.set_clim(0.5*minV, 0.5*maxV)
     plt.colorbar(im2, cax=cax2, orientation='horizontal')  # vertical colorbar for fluid data.
     ax.set_xlabel(r'R', fontsize=18)
     ax.set_ylabel(r'Z', fontsize=18)
@@ -46,7 +46,7 @@ def plot_smilei_fields_animated(ntot, file_name, parameter_name, xmin, xmax, ymi
         V = np.array(file[str][:]).T
         im2 = ax.imshow(V, origin='upper', aspect = 'auto',
                         extent=[xmin, xmax, ymin, ymax])  # plotting fluid data.
-        im2.set_clim(minV, maxV)
+        im2.set_clim(0.5*minV, 0.5*maxV)
         plt.colorbar(im2, cax=cax2, orientation='horizontal')  # vertical colorbar for fluid data.
         #time.sleep(1)
         return im2

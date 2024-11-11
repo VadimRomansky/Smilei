@@ -5,7 +5,7 @@ file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
 Ndata = size(info.Datasets,1);
-%Ndata = 10;
+Ndata = 10;
 %Ndata = 100;
 %Ndata = 1;
 name = info.Datasets(Ndata).Name;
@@ -22,7 +22,7 @@ Nx=size(fp,2);
 
 Ns=6;
 
-minEe = 0.00001;
+minEe = 0.001;
 maxEe = 1000;
 minEp = 0.1;
 maxEp = 5000;
@@ -37,23 +37,23 @@ samplingFactor = 20;
 startx(1:Ns) = 0; 
 endx(1:Ns) = 0; 
 
-startx(1) = 100/samplingFactor+1;
-endx(1) = startx(1) + 1000/samplingFactor;
+startx(1) = 40000/samplingFactor+1;
+endx(1) = startx(1) + 10000/samplingFactor;
 
-startx(2) = 1000/samplingFactor;
-endx(2) = startx(2) + 1000/samplingFactor;
+startx(2) = 50000/samplingFactor;
+endx(2) = startx(2) + 10000/samplingFactor;
 
-startx(3) = 2000/samplingFactor;
-endx(3) = startx(3) + 5000/samplingFactor;
+startx(3) = 60000/samplingFactor;
+endx(3) = startx(3) + 10000/samplingFactor;
 
-startx(4) = 10000/samplingFactor;
-endx(4) = startx(4) + 5000/samplingFactor;
+startx(4) = 70000/samplingFactor;
+endx(4) = startx(4) + 10000/samplingFactor;
 
-startx(5) = 15000/samplingFactor;
-endx(5) = startx(5) + 5000/samplingFactor;
+startx(5) = 80000/samplingFactor;
+endx(5) = startx(5) + 10000/samplingFactor;
 
-startx(6) = 50000/samplingFactor;
-endx(6) = startx(6) + 2000/samplingFactor;
+startx(6) = 90000/samplingFactor;
+endx(6) = startx(6) + 10000/samplingFactor;
 
 %startx(1)= 5000/samplingFactor;
 %endx(1) = fix(10000/samplingFactor);
@@ -91,7 +91,7 @@ figure(1);
 hold on;
 set(gca, 'YScale', 'log');
 set(gca, 'XScale', 'log');
-xlim([0.00001 1000]);
+xlim([0.001 1000]);
 %ylim([10^-10 10]);
 for k = 1:Ns,
     plot(energy(1:Np),Fp(1:Np,k),'color',Color{k},'LineWidth',2);

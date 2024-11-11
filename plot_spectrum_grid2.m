@@ -78,13 +78,13 @@ endx = fix(40000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,
-        Fe1(i)=Fe1(i)+fe1(i,j)/de1(i);
-        Fe2(i)=Fe2(i)+fe2(i,j)/de1(i);
-        Fe3(i)=Fe3(i)+fe3(i,j)/de1(i);
+        Fe1(i)=Fe1(i)+fe1(i,j)*energy1(i)*energy1(i)/de1(i);
+        Fe2(i)=Fe2(i)+fe2(i,j)*energy1(i)*energy1(i)/de1(i);
+        Fe3(i)=Fe3(i)+fe3(i,j)*energy1(i)*energy1(i)/de1(i);
         
-        Fp1(i)=Fp1(i)+fp1(i,j)/de2(i);
-        Fp2(i)=Fp2(i)+fp2(i,j)/de2(i);
-        Fp3(i)=Fp3(i)+fp3(i,j)/de2(i);
+        Fp1(i)=Fp1(i)+fp1(i,j)*energy2(i)*energy2(i)/de2(i);
+        Fp2(i)=Fp2(i)+fp2(i,j)*energy2(i)*energy2(i)/de2(i);
+        Fp3(i)=Fp3(i)+fp3(i,j)*energy2(i)*energy2(i)/de2(i);
     end;
 end;
 
@@ -105,7 +105,7 @@ plot(energy2(1:Np),Fp3(1:Np),'blue');
 title('F(E)');
 %xlabel('Ekin/me c^2');
 xlabel('E/me c^2');
-ylabel('F(E)');
+ylabel('F(E)E^2');
 set(gca, 'YScale', 'log');
 set(gca, 'XScale', 'log');
 %legend('Fe', name,'Location','southeast');

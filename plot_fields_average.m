@@ -57,9 +57,9 @@ for k=1:Ns,
     Ez= hdf5read(full_name, name3z);
     for i = 1:Nx,
         for j = 1:Ny,
-            Bxa(i,k) = Bxa(i,k) + Bx(j,i)/Ny;
-            Bya(i,k) = Bya(i,k) + By(j,i)/Ny;
-            Bza(i,k) = Bza(i,k) + Bz(j,i)/Ny;
+            Bxa(i,k) = Bxa(i,k) + Bx(j,i)*Bx(j,i);
+            Bya(i,k) = Bya(i,k) + By(j,i)*By(j,i);
+            Bza(i,k) = Bza(i,k) + Bz(j,i)*Bz(j,i);
             Exa(i,k) = Exa(i,k) + Ex(j,i)/Ny;
             Eya(i,k) = Eya(i,k) + Ey(j,i)/Ny;
             Eza(i,k) = Eza(i,k) + Ez(j,i)/Ny;
@@ -73,6 +73,9 @@ for k=1:Ns,
             Bnorma(i,k) = Bnorma(i,k) + By(j,i)*By(j,i) + Bz(j,i)*Bz(j,i);
         end;
         Bnorma(i,k) = sqrt(Bnorma(i,k)/Ny);
+        Bxa(i,k) = sqrt(Bxa(i,k)/Ny);
+        Bya(i,k) = sqrt(Bya(i,k)/Ny);
+        Bza(i,k) = sqrt(Bza(i,k)/Ny);
     end;
 end;
 
