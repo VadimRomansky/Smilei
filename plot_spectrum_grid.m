@@ -1,12 +1,16 @@
 clear;
 %directory_name = './output_gamma0.3_sigma0.0002_dx0.2_theta0-90/';
 directory_name = './output/';
-file_name = 'ParticleBinning7';
+file_name = 'ParticleBinning6';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
 Ndata = size(info.Datasets,1);
+<<<<<<< HEAD
 %Ndata = 10;
+=======
+Ndata = 10;
+>>>>>>> a20194666d8315ed0adc456b2063cc0475b72fc6
 name1 = info.Datasets(1).Name;
 name2 = info.Datasets(fix(Ndata/2)+1).Name;
 name3 = info.Datasets(Ndata).Name;
@@ -47,8 +51,13 @@ Fp3(1:Np)=0;
 
 samplingFactor = 20;
 
+<<<<<<< HEAD
 startx = fix(100/samplingFactor)+1;
 endx = fix(Nx);
+=======
+startx = fix(70000/samplingFactor)+1;
+endx = fix(80000/samplingFactor);
+>>>>>>> a20194666d8315ed0adc456b2063cc0475b72fc6
 
 for i=1:Np,
     for j=startx:endx,
@@ -83,7 +92,7 @@ for i=1:Np,
 end;
 
 set(0, 'DefaultLineLineWidth', 2);
-figure(1);
+figure(2);
 %plot(energy(1:Np),Fp2(1:Np),'red', energy(startPowerP:endPowerP), Fpa(startPowerP:endPowerP),'blue');
 %loglog(energy(1:Np),Fp2(1:Np),'red');
 %loglog(me*energy(1:Np)+m,Fp1(1:Np),'red', me*energy(1:Np)+m,Fp2(1:Np),'green',me*energy(1:Np)+m,Fp3(1:Np),'blue');

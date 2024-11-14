@@ -34,19 +34,24 @@ for i in range(2):
 #path = "../output_shear_jet_gamma1.5_nj0.01_n1_sigma6/"
 path = "../output/"
 #path = "../output_theta0-90_gamma1.5_sigma0.004/"
+<<<<<<< HEAD
 ntot = get_smilei_number(path + "ParticleBinning5.h5")
+=======
+ntot = get_smilei_number(path + "ParticleBinning0.h5")
+>>>>>>> a20194666d8315ed0adc456b2063cc0475b72fc6
 #ntot = 0
 print("ntot = ",ntot)
+#ntot = 95
 #lot_general(path + "scalars.txt","",2)
 
 #plot_smilei_fields_animated(ntot, path + "Fields03.h5", "Bx", 0, grid_length[0], 0, grid_length[1])
 #plot_smilei_fields_animated(ntot, path + "Fields03.h5", "By", 0, grid_length[0], 0, grid_length[1])
-#plot_smilei_fields_animated(ntot, path + "Fields03.h5", "Bz", 0, grid_length[0], 0, grid_length[1])
+plot_smilei_fields_animated(ntot, path + "Fields0.h5", "Bz", 0, grid_length[0], 0, grid_length[1])
 #plot_smilei_fields(ntot, path + "Fields03.h5", "Bx",  0, grid_length[0], 0, grid_length[1])
 #plot_smilei_fields(ntot, path + "Fields03.h5", "By",  0, grid_length[0], 0, grid_length[1])
 #plot_smilei_fields(ntot, path + "Fields03.h5", "Bz",  0, grid_length[0], 0, grid_length[1])
 
-#plot_smilei_fields_animated(ntot, path + "Fields03.h5", "Ex", 0, grid_length[0], 0, grid_length[1])
+#plot_smilei_fields_animated(ntot, path + "Fields0.h5", "Ex", 0, grid_length[0], 0, grid_length[1])
 #plot_smilei_fields_animated(ntot, path + "Fields03.h5", "Ey", 0, grid_length[0], 0, grid_length[1])
 #plot_smilei_fields_animated(ntot, path + "Fields03.h5", "Ez", 0, grid_length[0], 0, grid_length[1])
 #plot_smilei_fields(ntot, path + "Fields03.h5", "Ex",  0, grid_length[0], 0, grid_length[1])
@@ -93,14 +98,24 @@ maxE = maxEp;
 #plot_smilei_momentum_spectrum_animated(ntot, path + "ParticleBinning6.h5","electrons", minEe, maxEe, spectrumStartX, spectrumEndX, 1)
 
 
+<<<<<<< HEAD
 #plot_smilei_concentration2d(ntot,path + "ParticleBinning3.h5","electrons", 0, grid_length[0], 0, grid_length[1])
 plot_smilei_concentration2d_animated(ntot,path + "ParticleBinning2.h5","electrons", 0, grid_length[0], 0, grid_length[1])
+=======
+#plot_smilei_concentration2d(ntot,path + "ParticleBinning0.h5","electrons", 0, grid_length[0], 0, grid_length[1])
+#plot_smilei_concentration2d_animated(ntot,path + "ParticleBinning0.h5","electrons", 0, grid_length[0], 0, grid_length[1])
+>>>>>>> a20194666d8315ed0adc456b2063cc0475b72fc6
 #plot_smilei_concentration2d(ntot,path + "ParticleBinning5.h5","positrons", 0, grid_length[0], 0, grid_length[1])
 #plot_smilei_concentration2d_animated(ntot,path + "ParticleBinning5.h5","positrons", 0, grid_length[0], 0, grid_length[1])
 #plot_smilei_concentration2d(ntot,path + "ParticleBinning3.h5","protons", 0, grid_length[0], 0, grid_length[1])
 #plot_smilei_concentration2d_animated(ntot,path + "ParticleBinning3.h5","protons", 0, grid_length[0], 0, grid_length[1])
 
+<<<<<<< HEAD
 plot_smilei_concentration1d(ntot,path + "ParticleBinning0.h5", 1, dx[0], "electrons")
 #plot_smilei_concentration1d_animated(ntot,path + "ParticleBinning03.h5", 1, dx[0],"electrons")
+=======
+#plot_smilei_concentration1d(ntot,path + "ParticleBinning03.h5", 1, dx[0], "electrons")
+plot_smilei_concentration1d_animated(ntot,path + "ParticleBinning0.h5", 1, dx[0],"electrons")
+>>>>>>> a20194666d8315ed0adc456b2063cc0475b72fc6
 #plot_smilei_concentration1d(ntot,path + "ParticleBinning13.h5", 1, dx[0], "protons")
 #plot_smilei_concentration1d_animated(ntot,path + "ParticleBinning13.h5", 1, dx[0], "protons")
