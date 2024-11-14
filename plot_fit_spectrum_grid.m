@@ -1,7 +1,7 @@
 clear;
 %directory_name = './output_theta0-90_gamma1.5_sigma0.004/';
 directory_name = './output/';
-file_name = 'ParticleBinning7';
+file_name = 'ParticleBinning6';
 file_number = '.h5';
 full_name = strcat(directory_name, file_name, file_number);
 info = h5info(full_name);
@@ -19,24 +19,24 @@ minEe = 0.001;
 maxEe = 1000;
 minEp = 0.1;
 maxEp = 5000;
-minE = minEp;
-maxE = maxEp;
+minE = minEe;
+maxE = maxEe;
 factor = (maxE/minE)^(1.0/(Np-1));
 
 mp = 1.67*10^-24;
 mass_ratio = 100;
 me = mp/mass_ratio;
 
-m = mp;
+m = me;
 
 startPowerP = 65;
 endPowerP = 75;
 
-startPowerE = 120;
-endPowerE = 130;
+startPowerE = 130;
+endPowerE = 160;
 
-startPower = startPowerP;
-endPower = endPowerP;
+startPower = startPowerE;
+endPower = endPowerE;
 
 gam = 1.048;
 beta = sqrt(1 - 1/(gam*gam));
@@ -76,8 +76,8 @@ shockx = 38000;
 startx = fix((shockx - 2560)/samplingFactor)+1;
 endx = fix((shockx - 320)/samplingFactor);
 
-startx = fix(100/samplingFactor)+1;
-endx = fix(80000/samplingFactor);
+startx = fix(50000/samplingFactor)+1;
+endx = fix(90000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,

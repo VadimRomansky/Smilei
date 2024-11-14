@@ -8,7 +8,7 @@ full_name1 = strcat(directory_name, file_name1, file_number);
 full_name2 = strcat(directory_name, file_name2, file_number);
 info = h5info(full_name1);
 Ndata = size(info.Datasets,1);
-%Ndata = 11;
+Ndata = 4;
 name1 = info.Datasets(1).Name;
 name2 = info.Datasets(fix(Ndata/2)+1).Name;
 name3 = info.Datasets(Ndata).Name;
@@ -29,10 +29,10 @@ fp3 = hdf5read(full_name2, name3);
 Np=size(fe1,1);
 Nx=size(fe1,2);
 
-minEe = 0.001;
-maxEe = 1000;
+minEe = 0.1;
+maxEe = 10000;
 minEp = 0.1;
-maxEp = 5000;
+maxEp = 50000;
 minE1 = minEe;
 maxE1 = maxEe;
 factor1 = (maxE1/minE1)^(1.0/(Np-1));
@@ -73,18 +73,18 @@ Fp3(1:Np)=0;
 
 samplingFactor = 20;
 
-startx = fix(100/samplingFactor)+1;
-endx = fix(40000/samplingFactor);
+startx = fix(10000/samplingFactor)+1;
+endx = fix(80000/samplingFactor);
 
 for i=1:Np,
     for j=startx:endx,
-        Fe1(i)=Fe1(i)+fe1(i,j)/de1(i);
-        Fe2(i)=Fe2(i)+fe2(i,j)/de1(i);
-        Fe3(i)=Fe3(i)+fe3(i,j)/de1(i);
+        Fe1(i)=Fe1(i)+fe1(i,j)*energy1(i)*energy1(i)/de1(i);
+        Fe2(i)=Fe2(i)+fe2(i,j)*energy1(i)*energy1(i)/de1(i);
+        Fe3(i)=Fe3(i)+fe3(i,j)*energy1(i)*energy1(i)/de1(i);
         
-        Fp1(i)=Fp1(i)+fp1(i,j)/de2(i);
-        Fp2(i)=Fp2(i)+fp2(i,j)/de2(i);
-        Fp3(i)=Fp3(i)+fp3(i,j)/de2(i);
+        Fp1(i)=Fp1(i)+fp1(i,j)*energy2(i)*energy2(i)/de2(i);
+        Fp2(i)=Fp2(i)+fp2(i,j)*energy2(i)*energy2(i)/de2(i);
+        Fp3(i)=Fp3(i)+fp3(i,j)*energy2(i)*energy2(i)/de2(i);
     end;
 end;
 
@@ -105,7 +105,7 @@ plot(energy2(1:Np),Fp3(1:Np),'blue');
 title('F(E)');
 %xlabel('Ekin/me c^2');
 xlabel('E/me c^2');
-ylabel('F(E)');
+ylabel('F(E)E^2');
 set(gca, 'YScale', 'log');
 set(gca, 'XScale', 'log');
 %legend('Fe', name,'Location','southeast');

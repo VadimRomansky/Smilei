@@ -2,7 +2,7 @@ clear;
 directory_name = './output/';
 file_name1 = 'ParticleBinning0';
 file_name2 = 'ParticleBinning1';
-file_name3 = 'ParticleBinning2';
+file_name3 = 'ParticleBinning3';
 file_number = '.h5';
 full_name1 = strcat(directory_name, file_name1, file_number);
 full_name2 = strcat(directory_name, file_name2, file_number);
